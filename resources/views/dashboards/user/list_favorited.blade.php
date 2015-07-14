@@ -4,10 +4,13 @@
 	<h1>Favortited</h1>
 	
 	<table class="table">
-		@foreach($favorited as $favorite)
+		@foreach($favorited as $video)
 			<tr>
-				<td></td>
+				
 			</tr>
 		@endforeach
+		<pre>
+			{{ var_dump($favorited) }}
+		</pre>
 	</table>
 @stop

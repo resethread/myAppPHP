@@ -116,7 +116,7 @@ class UserController extends Controller {
 					exec("ffmpeg -i $filename -vf 'select=gte(n\,$val)' -vframes 1 thumb_$random_string-$key.jpg");
 				}
 
-				return redirect()->back()->with('message_success', 'tout fonctionne au poil');
+				return redirect()->back()->with('message_success', 'Your video has been successfully uploaded and is waiting for admin validation');
 				
 			} 
 			else {
@@ -141,9 +141,27 @@ class UserController extends Controller {
 
 		$auth_user_id = Auth::user()->id;
 
-		$favorited = DB::table('favorited')->where('user_id', $auth_user_id)->paginate(20);
+		$favorited = DB::table('favorited')->where('user_id', $auth_user_id)->get();
 
-		var_dump($favorited);
+		$list_videos = [];
+
+		foreach($favorited as $fav) {
+			echo "<pre>";
+			var_dump($fav);
+			echo "</pre>";
+			array_push($list_videos, 
+				DB::table('videos')->where('id', $fav->video_id)->first()
+			);
+		}
+
+		echo "<hr>";
+
+		echo "<pre>";
+		var_dump($list_videos);
+		echo "</pre>";
+
+
+
 
 		//return view('dashboards.user.list_favorited')->with(compact('favorited'));
 	}
