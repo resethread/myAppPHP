@@ -253,10 +253,37 @@ class PublicController extends Controller {
 
 		$login = Request::input('login');
 		$password = Request::input('password');
+
+		$authenticate_user_by_name = [
+			'name' => $login,
+			'password' => $password,
+			'status' => 'user'
+		];
+
+		$authenticate_user_by_email = [
+			'email' => $login,
+			'password' => $password,
+			'status' => 'user' 
+		];
+
+		$authenticate_admin_by_name = [
+			'name' => $login,
+			'password' => $password,
+			'status' => 'admin'
+		];
+
+		$authenticate_admin_by_email = [
+			'email' => $login,
+			'password' => $password,
+			'status' => 'admin' 
+		];
 		
-		if ( Auth::attempt(['name' => $login, 'password' => $password]) || Auth::attempt(['email' => $login, 'password' => $password]) ) {
+		if ( Auth::attempt($authenticate_user_by_name) || Auth::attempt($authenticate_user_by_email) ) {
 			
 			return redirect('/user');
+		}
+		else if ( Auth::attempt($authenticate_admin_by_name) || Auth::attempt($authenticate_admin_by_email) ) {
+			return redirect('/admin');
 		}
 		else {
 			return 'pas loged';

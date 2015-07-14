@@ -143,27 +143,15 @@ class UserController extends Controller {
 
 		$favorited = DB::table('favorited')->where('user_id', $auth_user_id)->get();
 
-		$list_videos = [];
+		$videos = [];
 
 		foreach($favorited as $fav) {
-			echo "<pre>";
-			var_dump($fav);
-			echo "</pre>";
-			array_push($list_videos, 
+			array_push($videos, 
 				DB::table('videos')->where('id', $fav->video_id)->first()
 			);
 		}
 
-		echo "<hr>";
-
-		echo "<pre>";
-		var_dump($list_videos);
-		echo "</pre>";
-
-
-
-
-		//return view('dashboards.user.list_favorited')->with(compact('favorited'));
+		return view('dashboards.user.list_favorited')->with(compact('videos'));
 	}
 
 	public function getSettings() {

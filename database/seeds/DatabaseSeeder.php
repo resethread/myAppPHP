@@ -31,31 +31,17 @@ class AppSeeder extends Seeder {
                     'id' => 1,
                     'name' => 'test',
                     'email' => 'test@test.com',
-                    'password' => bcrypt('testtest')
+                    'password' => bcrypt('testtest'),
+                    'status' => 'user'
                 ],
                 [
                     'id' => 2,
-                    'name' => 'test2',
-                    'email' => 'test2@test.com',
-                    'password' => bcrypt('testtest2')
-                ],
-                [
-                    'id' => 3,
-                    'name' => 'test3',
-                    'email' => 'test32@test.com',
-                    'password' => bcrypt('testtest3')
+                    'name' => 'admin',
+                    'email' => 'admin@admin.com',
+                    'password' => bcrypt('admin'),
+                    'status' => 'admin',
                 ]
-            ]
-        );
-
-        DB::table('videos')->delete();
-        DB::table('videos')->insert(
-            [
-                [
-                    'name' => 'lorem ipsum',
-                    'slug' => 'lorem-ipsum',
-                    'user_id' => 1
-                ]
+              
             ]
         );
     }
