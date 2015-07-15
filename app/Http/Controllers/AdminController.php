@@ -3,7 +3,7 @@
 class AdminController extends Controller {
 
 	public function getIndex() {
-		echo "welcome admin";
+		return view('dashboards.admin.index');
 	}
 
 	public function getValidate($id) {
