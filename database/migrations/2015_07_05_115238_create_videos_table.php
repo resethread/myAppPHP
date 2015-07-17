@@ -27,7 +27,7 @@ class CreateVideosTable extends Migration
             $table->integer('nb_views')->default(0);
             $table->integer('nb_favorited')->default(0);
             $table->integer('nb_comments')->default(0);
-            $table->boolean('confirmed')->default(false);
+            $table->boolean('validated')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });
