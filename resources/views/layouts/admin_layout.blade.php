@@ -20,8 +20,8 @@
 					</ul>
 
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="#">Public</a></li>
-						<li><a href="#">Logout</a></li>
+						<li><a href="/">Public</a></li>
+						<li><a href="/logout">Logout</a></li>
 					</ul>
 				</div>
 			</div>
@@ -30,11 +30,12 @@
 			<div class="row">
 				<div class="col-md-3">
 					<div class="list-group">
-						<a href="/admin/videos-to-validate" class="list-group-item">Videos in wait<span class="badge">30 today</span></a>
+						<a href="/admin/videos-to-validate" class="list-group-item">Videos to validate<span class="badge">30 today</span></a>
 						<a href="/admin/videos-online" class="list-group-item">Videos online</a>
-						<a href="/admin/test" class="list-group-item">Users</a>
+						<a href="/admin/users" class="list-group-item">Users</a>
 						<a href="/admin/comments" class="list-group-item">Comments</a>
-						
+						<br>
+						<a href="/admin/fast-delete" class="list-group-item">Fast delete</a>
 					</div>
 				</div>
 				<div class="col-md-9">

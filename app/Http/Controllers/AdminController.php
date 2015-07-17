@@ -2,6 +2,7 @@
 
 use DB;
 use Carbon;
+use Log;
 
 
 class AdminController extends Controller {
@@ -23,11 +24,24 @@ class AdminController extends Controller {
 		return view('dashboards.admin.videos_to_validate');
 	}
 
+	public function getVideosOnline() {
+		return view('dashboards.admin.videos_online');
+	}
+
+	public function getUsers() {
+		return view('dashboards.admin.users');
+	}
+
+	public function  getComments() {
+		return view('dashboards.admin.comments');
+	}
+
 	public function postValidate($id) {
 
 	}
 
-	public function getFastDelete($elements) {
+	public function getFastDelete() {
+		return view('dashboards.admin.fast_delete');
 
 	}
 
@@ -41,5 +55,9 @@ class AdminController extends Controller {
 
 	public function getListVideos() {
 		
+	}
+
+	public function getLogs() {
+
 	}
 }
