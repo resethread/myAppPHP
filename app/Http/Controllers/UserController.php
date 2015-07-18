@@ -113,7 +113,7 @@ class UserController extends Controller {
 				sort($numbers);
 
 				foreach ($numbers as $key => $val) {
-					exec("ffmpeg -i $filename -vf 'select=gte(n\,$val)' -vframes 1 thumb_$random_string-$key.jpg");
+					exec("ffmpeg -i $filename -vf 'select=gte(n\,$val)' -vframes 1 $random_string-$key.jpg");
 				}
 
 				return redirect()->back()->with('message_success', 'Your video has been successfully uploaded and is waiting for admin validation');

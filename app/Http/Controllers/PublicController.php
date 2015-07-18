@@ -394,10 +394,10 @@ class PublicController extends Controller {
 	
 
 	public function getTest() {
-		chdir(public_path());
-		
-		
-		var_dump(bcrypt(Request::ip()));
+		$myArray = [
+			compact('toto')
+		];
+		dd($myArray);
 		
 	}
 

@@ -39,6 +39,15 @@
 					</div>
 				</div>
 				<div class="col-md-9">
+					@if(Session::has('message_success'))
+						<div class="alert alert-success">
+							{{ Session::get('message_success') }}
+						</div>
+					@elseif(Session::has('message_error'))
+						<div class="alert alert-danger">
+							{{ Session::get('message_error') }}
+						</div>
+					@endif
 					@yield('content')
 				</div>
 			</div>

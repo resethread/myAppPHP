@@ -3,6 +3,7 @@
 use DB;
 use Carbon;
 use Log;
+use Request;
 
 
 class AdminController extends Controller {
@@ -21,7 +22,28 @@ class AdminController extends Controller {
 	}
 
 	public function getVideosToValidate() {
-		return view('dashboards.admin.videos_to_validate');
+
+		$videos = DB::table('videos')->where('validated', false)->get();
+
+		return view('dashboards.admin.videos_to_validate', compact('videos'));
+	}
+
+	public function getVideoToValidate($id) {
+
+		$video = DB::table('videos')->where('id', $id)->first();
+
+		return view('dashboards.admin.video_to_validate', compact('video'));
+	}
+
+	public function postVideoToValidate($id) {
+		$validate = Request::input('validate');
+		if ($validate == 'yes') {
+			DB::table('videos')->where('id', $id)->update(['validated' => true]);
+			return redirect('/admin/videos-to-validate')->with('message_success', 'the video has been validated');
+		}
+		else {
+			echo "no";
+		}
 	}
 
 	public function getVideosOnline() {
@@ -46,7 +68,26 @@ class AdminController extends Controller {
 	}
 
 	public function postFastDelete($elements) {
+		switch ($elements) {
+			case 'videos':
+				$elements = Request::input('elements');
+				$elements = explode(' ', $elements);
+				foreach($elements as $element) {
+					$elem = DB::table('videos')->where('id', $element)->first();
+					if( !is_null($elem)) {
+						$elem->delete();
+					}
+				}		
+			break;
 
+			case 'users':
+				return 'users';
+			break;	
+			
+			default:
+				# code...
+				break;
+		}
 	}
 
 	public function getListUsers() {
