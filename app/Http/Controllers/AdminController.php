@@ -8,6 +8,17 @@ use Request;
 
 class AdminController extends Controller {
 
+	public function __construct() {  
+
+		function getRecordsToday() {
+			$today = Carbon\Carbon::toDay()->toDateTimeString();
+
+			$videos_today_count = DB::table('videos')->where('created_at', $today)->where('validated', false)->count();
+		
+
+		}
+	}
+
 	public function getIndex() {
 
 		$today = Carbon\Carbon::toDay()->toDateTimeString();
@@ -16,9 +27,7 @@ class AdminController extends Controller {
 
 		$count_videos_uploaded_today = DB::table('videos')->where('created_at', $today)->count();
 
-		$count_comments_posted_today = DB::table('comments')->where('created_at', $today)->count();
-
-		return view('dashboards.admin.index', compact('count_users_registered_today', 'count_videos_uploaded_today', 'count_comments_posted_today'));
+		return view('dashboards.admin.index', compact('count_users_registered_today', 'count_videos_uploaded_today'));
 	}
 
 	public function getVideosToValidate() {
@@ -42,16 +51,29 @@ class AdminController extends Controller {
 			return redirect('/admin/videos-to-validate')->with('message_success', 'the video has been validated');
 		}
 		else {
-			echo "no";
+			return redirect('/admin/videos-to-validate')->with('message_error', 'Something is wrong');
 		}
 	}
 
 	public function getVideosOnline() {
-		return view('dashboards.admin.videos_online');
+
+		$videos = DB::table('videos')->paginate(10);
+
+		return view('dashboards.admin.videos_online', compact('videos'));
 	}
 
 	public function getUsers() {
-		return view('dashboards.admin.users');
+
+		$users = DB::table('users')->paginate(10);
+
+		return view('dashboards.admin.users', compact('users'));
+	}
+
+	public function getUser($id) {
+
+		$user = DB::table('users')->where('id', $id)->first();
+
+		return view('dashboards.admin.user', compact('user'));
 	}
 
 	public function  getComments() {

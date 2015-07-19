@@ -9,9 +9,7 @@ use Redirect;
 use Image;
 use App\Models\Video;
 use App\Models\Comment;
-
-
-
+use Log;
 
 
 class PublicController extends Controller {
@@ -394,11 +392,8 @@ class PublicController extends Controller {
 	
 
 	public function getTest() {
-		$myArray = [
-			compact('toto')
-		];
-		dd($myArray);
-		
+
+		return view('front.test');
 	}
 
 	public function postTest() {
