@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<link rel="stylesheet" href="/assets/css/app.css">
-		<link rel="stylesheet" href="/assets/css/site.css">
+		<link rel="stylesheet" href="assets/css/site.css">
 		<title>Project</title>
 		@if(isset($fullMain))
 		<style>
