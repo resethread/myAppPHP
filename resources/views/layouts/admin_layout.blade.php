@@ -14,9 +14,7 @@
 				</div>
 				<div class="navbar-collapse collapse">
 					<ul class="nav navbar-nav">
-						<li><a href="#" class="btn">azaaz</a></li>
-						<li><a href="#" class="btn">azaaz</a></li>
-						<li><a href="#" class="btn">azaaz</a></li>
+						<li><a href="/admin" class="btn">ADMIN PANEL</a></li>
 					</ul>
 
 					<ul class="nav navbar-nav navbar-right">

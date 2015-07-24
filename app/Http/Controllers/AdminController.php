@@ -62,6 +62,17 @@ class AdminController extends Controller {
 		return view('dashboards.admin.videos_online', compact('videos'));
 	}
 
+	public function getVideosOnlineSearch() {
+
+		$searchZone = Request::input('search-zone');
+
+		dd($searchZone);
+
+		$videos = Video::where('name', 'LIKE', '%'.$searchZone.'%')->get();
+
+		return view('dashboards.admin.videos_online')->with(compact('videos', 'searchZone'));
+	}
+
 	public function getUsers() {
 
 		$users = DB::table('users')->paginate(10);
@@ -77,7 +88,10 @@ class AdminController extends Controller {
 	}
 
 	public function  getComments() {
-		return view('dashboards.admin.comments');
+
+		$comments = DB::table('comments')->paginate(10);
+
+		return view('dashboards.admin.comments', compact('comments'));
 	}
 
 	public function postValidate($id) {
