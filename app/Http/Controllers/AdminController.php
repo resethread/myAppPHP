@@ -9,7 +9,7 @@ use Request;
 class AdminController extends Controller {
 
 	public function __construct() {  
-
+		/*
 		function getRecordsToday() {
 			$today = Carbon\Carbon::toDay()->toDateTimeString();
 
@@ -17,6 +17,7 @@ class AdminController extends Controller {
 		
 
 		}
+		*/
 	}
 
 	public function getIndex() {
