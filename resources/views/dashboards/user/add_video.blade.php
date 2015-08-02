@@ -40,7 +40,7 @@
 		<input type="file" id="file" name="file" accept="video/*" style="">
 		<button type="submit">OK</button>
 	</div>
-	</form>
+	{!! Form::close() !!}
 <hr>
 <div class="progress">
 	<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="" id="progress_bar">
