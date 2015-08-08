@@ -27,18 +27,18 @@
 </style>
 <h1 class="text-center">UPLOAD VIDEO HERE </h1>
 @if(Session::has('message_success'))
-	<div class="alert alert-success">
+	<div class="message green">
 		{{ Session::get('message_success') }}
 	</div>
 @elseif(Session::has('message_error'))
-	<div class="alert alert-danger">
+	<div class="message red">
 		{{ Session::get('message_error') }}
 	</div>
 @endif
 	{!! Form::open(['method' => 'POST', 'files' => true]) !!}
 	<div class="fallback">				
 		<input type="file" id="file" name="file" accept="video/*" style="">
-		<button type="submit">OK</button>
+		<button type="submit" class="button blue">OK</button>
 	</div>
 	{!! Form::close() !!}
 <hr>

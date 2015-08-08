@@ -1,4 +1,4 @@
-header {
+#header {
 	margin-top: 16px;
 	position: relative;	
 
@@ -35,28 +35,12 @@ header {
 		top: 0;
 		right: 12px;	
 	}
-
-	button {
-		font-size: 1em;
-		border: 1px solid transparent;
-		padding: 0.4em 0.6em;
-		border-radius: 4px;
-
-		a {
-			display: block;
-			width: 100%;
-			height: 100%;
-			color: #000;
-			text-decoration: none;
-		}
-	}
 }
 
 #navTop {
 	background: #212121;
 
 	ul {
-		margin: 0 0 10px 0;
 		font-size: 0;
 		text-align: center;
 
@@ -98,9 +82,10 @@ header {
 			list-style-type: none;
 
 			a {
+				font-size: 0.8em;
 				display: block;
 				background: linear-gradient(to bottom, #4b4746 0%,#3b3736 100%);
-				padding: 6px 0 6px 10px;
+				padding: 8px 0 8px 10px;
 				box-sising: border-box;
 				color: #fff;
 				border-bottom: 1px solid #777;
@@ -127,9 +112,35 @@ header {
 
 }
 
+/*	------------------------------------------
+	TEMPLATE : Overview: ;					 
+--------------------------------------------*/
 
+.videoOvw {
+	display: inline-block;
+	width: 200px;
+	height: 150px;
+	margin: 10px;
+	border: 1px solid #ccc;
+	font-size: 0;
+	overflow: hidden;
+	text-transform: lowercase;
 
+	.ovwTitle {
+		font-size: 13px;
+		margin: 0 0 0 8px;
+		padding: 0;
+	}
 
+	.owwNbViews {
+		font-size: 11px;
+		margin: 0 0 0 8px;
+	}
+}
+
+/*	------------------------------------------
+	TEMPLATE : Video: ;					 
+--------------------------------------------*/
 
 
 

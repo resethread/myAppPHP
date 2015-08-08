@@ -343,11 +343,6 @@ class PublicController extends Controller {
 		return view('front.overviews')
 			->with(compact('videos'));
 	}
-	
-	public function getBestOf() {
-		return view('front.overviews')
-			->with(compact('videos'));
-	}
 
 	public function getTags() {
 		/*

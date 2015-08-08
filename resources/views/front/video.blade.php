@@ -48,12 +48,15 @@
 				{!! Form::close() !!}
 			@endif
 			
+			<div class="message green">
+				Ceci est un message de success ou d'avertissement : lorem ipsum
+			</div>
 			@if(Session::has('message_error'))
-				<div class="alert alert-danger">
+				<div class="message red">
 					{{ Session::get('message_error') }}
 				</div>
 			@elseif(Session::has('message_success'))
-				<div class="alert alert-success">
+				<div class="message green">
 					{{ Session::get('message_success') }}
 				</div>	
 			@endif

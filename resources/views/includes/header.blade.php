@@ -11,8 +11,9 @@
 
 <div id="btn-space">
 	@if(Auth::guest())
-		<div class="button"><a href="/new-account">create new account</a></div>
-		<div class="button"><a href="/login">login</a></div>
+		<div class="button green"><a href="/new-account">Upload videos now</a></div>
+		<div class="button blue"><a href="/login">Register</a></div>
+		<div class="button "><a href="/login">Login</a></div>
 	@else
 		<div class="button"><a href="/user">{{ Auth::user()->name }}</a></div>
 		<div class="button"><a href="/logout">Logout</a></div>
@@ -26,7 +27,6 @@
 		<li><a href="/top-rated">top rated</a></li>
 		<li><a href="/most-favorited">most favorited</a></li>
 		<li><a href="/most-commented">most commented</a></li>
-		<li><a href="/best-of">best of</a></li>
 		<li><a href="/tags">tags</a></li>
 		<li><a href="/random">random</a></li>
 		<li><a href="/stars">stars</a></li>
