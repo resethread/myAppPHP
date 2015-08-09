@@ -1,13 +1,14 @@
 <div id="logo">
 	<a href="/"><img src="/assets/img/logo.jpg" alt="logo" width="160" height="90"></a>
 </div>
-<div id="search">
-	<form method="GET" action="/search">
-		<input type="search" placeholder="Search a video here" class="input" id="search-zone" name="search-zone">
+
+	<form method="GET" action="/search" id="search_bar">
 		<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
+		<input type="search" placeholder="Search a video here" class="input" id="search-zone" name="search-zone">
+		
 		<button type="submit" class="button" id="search_btn">Search</button>
 	</form>
-</div>
+
 
 <div id="btn-space">
 	@if(Auth::guest())

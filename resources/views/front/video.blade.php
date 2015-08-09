@@ -22,7 +22,7 @@
 			@if (Auth::check())
 				<form action="/add-favorite/{{ Auth::user()->id }}/{{ $video->id }}" method="POST">
 					<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
-					<button type="submit" class="button">Favorite</button>
+					<button type="submit" class="button orange">Favorite</button>
 				</form>
 			@else
 				<form action="/add-favorite/guest/guest" method="POST">
@@ -48,9 +48,6 @@
 				{!! Form::close() !!}
 			@endif
 			
-			<div class="message green">
-				Ceci est un message de success ou d'avertissement : lorem ipsum
-			</div>
 			@if(Session::has('message_error'))
 				<div class="message red">
 					{{ Session::get('message_error') }}
@@ -60,22 +57,22 @@
 					{{ Session::get('message_success') }}
 				</div>	
 			@endif
-			<hr>
+
 			<div id="commentZone">
 				<h3>Post a comment</h3>	
 				<form action="/video/{{ $video->id }}/{{ $video->slug }}" method="POST" id="form_comment" class="">
 					<textarea name="content" id="content" cols="30" rows="4" class="input"></textarea>
 					<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-					<button type="submit" class="button">Send</button>
+					<button type="submit" class="button m1_0 olive">Send</button>
 				</form>
-				<hr>
 				@if(isset($comments))
 					@forelse($comments as $comment)
-						<div class="commentUser"> 
+						<div class="message"> 
 							<a href="/channel/{{ str_slug($comment->user_name) }}">{{ $comment->user_name }}</a> {{ date("F j, Y, g:i a",strtotime($comment->created_at)) }} <br>
-							{{ $comment->content }}
+							{{ $comment->content }} <br>
+							<a href="#" class="button mini grey">Answer</a>
+							<a href="#" class="button mini red">Report</a>
 						</div>
-						<hr>
 					@empty
 						No comment yet	
 					@endforelse

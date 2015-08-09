@@ -1378,6 +1378,9 @@ th {
   background-image: none;
   border-radius: .2857rem;
   box-shadow: 0 0 0 1px transparent inset, 0 0 0 0 rgba(39, 41, 43, 0.15) inset;
+  /*	------------------------------------------
+		Colors				 
+	--------------------------------------------*/
 }
 .button a {
   color: #fff;
@@ -1412,6 +1415,52 @@ th {
 .button.blue:focus,
 .button.blue:active {
   background: #1a69a4;
+}
+.button.olive {
+  background: #a5ba16;
+}
+.button.olive:hover {
+  background: #b5cc18;
+}
+.button.olive:focus,
+.button.olive:active {
+  background: #8d9e13;
+}
+.button.yellow {
+  background: #c69400;
+}
+.button.yellow:hover {
+  background: #daa300;
+}
+.button.yellow:focus,
+.button.yellow:active {
+  background: #a77d00;
+}
+.button.orange {
+  background: #ec660e;
+}
+.button.orange:hover {
+  background: #f2711c;
+}
+.button.orange:focus,
+.button.orange:active {
+  background: #cf590c;
+}
+.button.grey {
+  background: #6c6c6c;
+}
+.button.grey:hover {
+  background: #767676;
+}
+.button.grey:focus,
+.button.grey:active {
+  background: #5d5d5d;
+}
+.button.tiny {
+  font-size: 0.857143rem;
+}
+.button.mini {
+  font-size: 0.714286rem;
 }
 .input {
   padding: 0.5em 0.6em;
@@ -1465,4 +1514,46 @@ textarea {
   color: #31708F;
   background-color: #D9EDF7;
   border-color: #BCE8F1;
+}
+.form {
+  margin: 1rem 0;
+  padding: 30px;
+  box-sizing: border-box;
+}
+.form .field {
+  margin: 1rem 0;
+}
+.form.rounded {
+  border-radius: 7px;
+  border: 1px solid #ccc;
+}
+.form.centered {
+  width: 60%;
+  margin: 1rem auto;
+}
+hr {
+  color: #f0f0f0;
+}
+a {
+  color: #4183c4;
+  text-decoration: none;
+}
+.clear {
+  clear: both;
+}
+.centered {
+  text-align: center;
+}
+.absolute {
+  position: absolute;
+}
+.absolute.right {
+  right: 1rem;
+  top: 1rem;
+}
+.transparent {
+  opacity: 0.4;
+}
+.m1_0 {
+  margin: 1rem 0;
 }

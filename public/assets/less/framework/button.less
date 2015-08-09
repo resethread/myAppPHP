@@ -1,0 +1,122 @@
+@button: {
+	cursor: pointer;
+	display: inline-block;
+	min-height: 1em;
+	outline: 0;
+	border: none;
+	background-color: #e0e0e0;
+	vertical-align: baseline;
+	color: rgba(255,255,255,1);
+	margin: 0 .25em 0 0;
+	padding: .7857em 1.5em;
+	text-shadow: none;
+	font-weight: 700;
+	line-height: 1;
+	font-style: normal;
+	text-align: center;
+	background-image: none;
+	border-radius: .2857rem;
+	box-shadow: 0 0 0 1px transparent inset,0 0 0 0 rgba(39,41,43,.15)inset;
+
+	a {
+		color: #fff;
+		text-decoration: none;
+	}
+
+	/*	------------------------------------------
+		Colors				 
+	--------------------------------------------*/
+
+	@green: #21BA45;
+	&.green {
+		background: darken(@green, 4%);
+	}
+	&.green:hover {
+		background: @green;
+	}
+	&.green:focus, &.green:active {
+		background: darken(@green, 10%);
+	}
+	
+	@red: #DB2828;
+	&.red {
+		background: darken(@red, 4%);
+	}
+	&.red:hover {
+		background: @red;
+	}
+	&.red:focus, &.red:active {
+		background: darken(@red, 10%);
+	}
+	
+	@blue: #2185D0;
+	&.blue {
+		background: darken(@blue, 4%);
+	}
+	&.blue:hover {
+		background: @blue;
+	}
+	&.blue:focus, &.blue:active {
+		background: darken(@blue, 10%);
+	}
+
+	@olive: #B5CC18;
+	&.olive {
+		background: darken(@olive, 4%);
+	}
+	&.olive:hover {
+		background: @olive;
+	}
+	&.olive:focus, &.olive:active {
+		background: darken(@olive, 10%);
+	}
+
+	@yellow: #DAA300;
+	&.yellow {
+		background: darken(@yellow, 4%);
+	}
+	&.yellow:hover {
+		background: @yellow;
+	}
+	&.yellow:focus, &.yellow:active {
+		background: darken(@yellow, 10%);
+	}
+
+	@orange: #F2711C;
+	&.orange {
+		background: darken(@orange, 4%);
+	}
+	&.orange:hover {
+		background: @orange;
+	}
+	&.orange:focus, &.orange:active {
+		background: darken(@orange, 10%);
+	}
+	
+	@grey: #767676;
+	&.grey {
+		background: darken(@grey, 4%);
+	}
+	&.grey:hover {
+		background: @grey;
+	}
+	&.grey:focus, &.grey:active {
+		background: darken(@grey, 10%);
+	}
+
+
+
+	&.tiny {
+		font-size: 0.857143rem;
+	}
+
+	&.mini {
+		font-size: 0.714286rem;
+	}
+
+
+};
+
+.button {
+	@button();
+}
