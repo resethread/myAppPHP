@@ -28,6 +28,9 @@
 				</div>
 			</div>
 		</div>
+		<footer id="footer">
+			@include('includes.footer')
+		</footer>
 		<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
 		@if (isset($scripts))
 			@foreach($scripts as $script)	

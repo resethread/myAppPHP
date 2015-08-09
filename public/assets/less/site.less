@@ -1,4 +1,4 @@
-header {
+#header {
 	margin-top: 16px;
 	position: relative;	
 
@@ -12,20 +12,23 @@ header {
 		}
 	}
 
-	#search {
+	#search_bar {
 		display: inline-block;
 		vertical-align: top;
 		margin-right: 2em;
 		margin-left: 6%;
-		
+		position: relative;
 
 		#search-zone {
-			width: 400px;
-		}
+			width: 460px;
+			padding: 0.68em 1.5em;
 
+		}
+	
 		#search_btn {
-			position: relative;
-			right: 12px;
+			position: absolute;
+			margin: 0;
+			right: 0px;
 			top: 1px;
 		}
 	}
@@ -35,28 +38,12 @@ header {
 		top: 0;
 		right: 12px;	
 	}
-
-	button {
-		font-size: 1em;
-		border: 1px solid transparent;
-		padding: 0.4em 0.6em;
-		border-radius: 4px;
-
-		a {
-			display: block;
-			width: 100%;
-			height: 100%;
-			color: #000;
-			text-decoration: none;
-		}
-	}
 }
 
 #navTop {
 	background: #212121;
 
 	ul {
-		margin: 0 0 10px 0;
 		font-size: 0;
 		text-align: center;
 
@@ -98,9 +85,10 @@ header {
 			list-style-type: none;
 
 			a {
+				font-size: 0.8em;
 				display: block;
 				background: linear-gradient(to bottom, #4b4746 0%,#3b3736 100%);
-				padding: 6px 0 6px 10px;
+				padding: 8px 0 8px 10px;
 				box-sising: border-box;
 				color: #fff;
 				border-bottom: 1px solid #777;
@@ -120,6 +108,37 @@ header {
 }
 
 
+#user_sidebar {
+	background: #2a2a2a;
+	min-height: 600px;
+	padding: 0;
+
+	ul {
+		margin: 0;
+		padding-left: 15px;
+
+		li {
+			list-style-type: none;
+
+			a {
+				font-size: 0.8em;
+				display: block;
+				background: linear-gradient(to bottom, #4b4746 0%,#3b3736 100%);
+				padding: 15px 0 15px 10px;
+				box-sising: border-box;
+				color: #fff;
+				border-bottom: 1px solid #777;
+				text-decoration: none;
+			}
+			a:hover {
+				background: linear-gradient(to bottom, #5A5756 0%,#4B4847 100%);
+				text-decoration: none;
+			}
+		}
+	}
+}
+
+
 #main {
 	width: 86%;
 	float: left;
@@ -127,6 +146,37 @@ header {
 
 }
 
+/*	------------------------------------------
+	TEMPLATE : Overview: ;					 
+--------------------------------------------*/
+
+.videoOvw {
+	display: inline-block;
+	width: 200px;
+	height: 150px;
+	margin: 10px;
+	border: 1px solid #ccc;
+	font-size: 0;
+	overflow: hidden;
+	text-transform: lowercase;
+
+	.ovwTitle {
+		font-size: 13px;
+		margin: 0 0 0 8px;
+		padding: 0;
+	}
+
+	.owwNbViews {
+		font-size: 11px;
+		margin: 0 0 0 8px;
+	}
+}
+
+
+
+/*	------------------------------------------
+	TEMPLATE : Video: ;					 
+--------------------------------------------*/
 
 
 
@@ -135,4 +185,28 @@ header {
 
 
 
+
+
+/*	------------------------------------------
+	Footer			 
+--------------------------------------------*/
+
+#footer {
+	background: #000;
+	margin-top: 3rem;
+	color: #fff;
+	height: 50px;
+	line-height: 3;
+	position: absolute;
+	width: 100%;
+	bottom: 0;
+	font-size: 14px;
+	text-align: center;
+
+	a {
+		color: #fff;
+		text-decoration: none;
+		margin: 0 1rem;
+	}
+}
 

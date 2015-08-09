@@ -1366,9 +1366,10 @@ th {
   outline: 0;
   border: none;
   background-color: #e0e0e0;
-  color: rgba(0, 0, 0, 0.6);
+  vertical-align: baseline;
+  color: #ffffff;
   margin: 0 .25em 0 0;
-  padding: .78571em 1.5em;
+  padding: .7857em 1.5em;
   text-shadow: none;
   font-weight: 700;
   line-height: 1;
@@ -1377,6 +1378,89 @@ th {
   background-image: none;
   border-radius: .2857rem;
   box-shadow: 0 0 0 1px transparent inset, 0 0 0 0 rgba(39, 41, 43, 0.15) inset;
+  /*	------------------------------------------
+		Colors				 
+	--------------------------------------------*/
+}
+.button a {
+  color: #fff;
+  text-decoration: none;
+}
+.button.green {
+  background: #1ea93f;
+}
+.button.green:hover {
+  background: #21ba45;
+}
+.button.green:focus,
+.button.green:active {
+  background: #198f35;
+}
+.button.red {
+  background: #cc2222;
+}
+.button.red:hover {
+  background: #db2828;
+}
+.button.red:focus,
+.button.red:active {
+  background: #b21e1e;
+}
+.button.blue {
+  background: #1e7abe;
+}
+.button.blue:hover {
+  background: #2185d0;
+}
+.button.blue:focus,
+.button.blue:active {
+  background: #1a69a4;
+}
+.button.olive {
+  background: #a5ba16;
+}
+.button.olive:hover {
+  background: #b5cc18;
+}
+.button.olive:focus,
+.button.olive:active {
+  background: #8d9e13;
+}
+.button.yellow {
+  background: #c69400;
+}
+.button.yellow:hover {
+  background: #daa300;
+}
+.button.yellow:focus,
+.button.yellow:active {
+  background: #a77d00;
+}
+.button.orange {
+  background: #ec660e;
+}
+.button.orange:hover {
+  background: #f2711c;
+}
+.button.orange:focus,
+.button.orange:active {
+  background: #cf590c;
+}
+.button.grey {
+  background: #6c6c6c;
+}
+.button.grey:hover {
+  background: #767676;
+}
+.button.grey:focus,
+.button.grey:active {
+  background: #5d5d5d;
+}
+.button.tiny {
+  font-size: 0.857143rem;
+}
+.button.mini {
+  font-size: 0.714286rem;
 }
 .input {
   padding: 0.5em 0.6em;
@@ -1403,4 +1487,73 @@ textarea {
   font-size: 14px;
   color: #000;
   width: 180px;
+}
+.message {
+  position: relative;
+  min-height: 1em;
+  margin: 1em 0em;
+  background: #F8F8F9 none repeat scroll 0% 0%;
+  padding: 1em 1.5em;
+  line-height: 1.4285em;
+  color: rgba(0, 0, 0, 0.87);
+  transition: opacity 0.1s ease 0s, color 0.1s ease 0s, #f2f1f0 0.1s ease 0s, box-shadow 0.1s ease 0s;
+  border-radius: 0.285714rem;
+  box-shadow: 0px 0px 0px 1px rgba(34, 36, 38, 0.22) inset, 0px 0px 0px 0px transparent;
+}
+.message.red {
+  color: #A94442;
+  background-color: #F2DEDE;
+  border-color: #EBCCD1;
+}
+.message.green {
+  color: #3C763D;
+  background-color: #DFF0D8;
+  border-color: #D6E9C6;
+}
+.message.blue {
+  color: #31708F;
+  background-color: #D9EDF7;
+  border-color: #BCE8F1;
+}
+.form {
+  margin: 1rem 0;
+  padding: 30px;
+  box-sizing: border-box;
+}
+.form .field {
+  margin: 1rem 0;
+}
+.form.rounded {
+  border-radius: 7px;
+  border: 1px solid #ccc;
+}
+.form.centered {
+  width: 60%;
+  margin: 1rem auto;
+}
+hr {
+  color: #f0f0f0;
+}
+a {
+  color: #4183c4;
+  text-decoration: none;
+}
+.clear {
+  clear: both;
+}
+.centered {
+  text-align: center;
+}
+.absolute {
+  position: absolute;
+}
+.absolute.right {
+  right: 1rem;
+  top: 1rem;
+}
+.transparent {
+  opacity: 0.4;
+}
+.m1_0 {
+  margin: 1rem 0;
 }

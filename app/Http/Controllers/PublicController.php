@@ -16,9 +16,9 @@ class PublicController extends Controller {
 
 	public function getIndex() {
 
-		 $videos = DB::table('videos')->orderBy('id', 'desc')->get();
+		 $videos = DB::table('videos')->where('validated', true)->orderBy('id', 'desc')->get();
 
-		 $scripts = ['application'];
+		 $scripts = ['overviews'];
 
 		return view('front.overviews')
 			->with(compact('videos', 'scripts'));
@@ -343,11 +343,6 @@ class PublicController extends Controller {
 		return view('front.overviews')
 			->with(compact('videos'));
 	}
-	
-	public function getBestOf() {
-		return view('front.overviews')
-			->with(compact('videos'));
-	}
 
 	public function getTags() {
 		/*
@@ -402,6 +397,28 @@ class PublicController extends Controller {
 		settype($rate, 'int');
 		var_dump($rate);
 		
+	}
+
+	#----------------------------
+	#	FOOTER
+	#----------------------------
+
+	public function getContact() {
+
+		$fullMain = true;
+
+		$options = [
+			'Question about advertising',
+			"Question about a video's copyright"
+
+		];
+
+		return view('front.contact')->with(compact('fullMain', 'options'));
+	}
+
+	public function postContact(Request $request) {
+
+
 	}
 }
 
