@@ -36,7 +36,7 @@ class UserController extends Controller {
 	}
 
 	public function getAddVideo() {
-		$scripts = ['dropzone', 'logged'];
+		$scripts = ['dropzone', 'add_video'];
 		return view('dashboards.user.add_video')->with(compact('scripts'));
 	}
 

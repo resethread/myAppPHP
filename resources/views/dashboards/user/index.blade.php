@@ -16,7 +16,7 @@
 	</div>
 	<hr>
 	<h2>Last videos</h2>
-	<table class="table table-bordered">
+	<table class="table">
 		<thead>
 			<th>Overview</th>
 			<th>Informations</th>
@@ -26,16 +26,16 @@
 		<tbody>
 		@forelse($last_videos as $video) 
 			<tr>
-				<td><a href="/video/{{ $video->id }}/{{ $video->slug }}"><img src="/users_content/videos/{{ $video->id }}/thumbs/thumb_1.jpg" alt="" width="100"></a></td>
+				<td><a href="/video/{{ $video->id }}/{{ $video->slug }}"><img src="{{ $video->path }}-3.jpg" alt="" width="100"></a></td>
 				<td>{{ $video->name }} <br>
 					{{ $video->nb_comments }} comments	<br>
 					{{ $video->nb_views }} views
 	
 				</td>
-				<td><a href="/user/edit-video/{{ $video->id }}">Edit</a></td>
+				<td><a href="/user/edit-video/{{ $video->id }}" class="button mini blue">Edit</a></td>
 				<td>
 					{!! Form::open(['url' => '/user/delete-video/'.$video->id, 'method' => 'POST']) !!}
-						<input type="submit" value="Delete">
+						<input type="submit" class="button mini red" value="Delete">
 					{!! Form::close() !!}
 				</td>
 			</tr>
@@ -48,7 +48,7 @@
 	</table>
 	<hr>
 	<h2>Last favorited</h2>
-	<table class="table table-bordered">
+	<table class="table">
 		<thead>
 			<tr>
 				<th></th>

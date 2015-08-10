@@ -182,7 +182,7 @@ class PublicController extends Controller {
 		
 		$searchZone = Request::input('search-zone');
 
-		$videos = Video::where('name', 'LIKE', '%'.$searchZone.'%')->get();
+		$videos = Video::where('name', 'LIKE', '%'.$searchZone.'%')->where('validated', true)->get();
 
 		$searchZoneWords = explode(' ', $searchZone);
 		$videos_by_tag = Video::withAnyTag($searchZoneWords)->get();
@@ -301,7 +301,7 @@ class PublicController extends Controller {
 	// navTop
 	public function getNewsVideos() {
 
-		$videos = DB::table('videos')->orderBy('created_at', 'desc')->get();
+		$videos = DB::table('videos')->where('validated', true)->orderBy('created_at', 'desc')->get();
 
 		$scripts = ['application'];
 
@@ -311,7 +311,7 @@ class PublicController extends Controller {
 	
 	public function getMostViewed() {
 
-		$videos = DB::table('videos')->orderBy('nb_views', 'desc')->get();
+		$videos = DB::table('videos')->where('validated', true)->orderBy('nb_views', 'desc')->get();
 
 		$scripts = ['application'];
 
@@ -320,7 +320,7 @@ class PublicController extends Controller {
 	}
 	
 	public function getTopRated() {
-		$videos = DB::table('videos')->orderBy('rate', 'desc')->get();
+		$videos = DB::table('videos')->where('validated', true)->orderBy('rate', 'desc')->get();
 
 		return view('front.overviews')
 			->with(compact('videos'));
@@ -332,14 +332,14 @@ class PublicController extends Controller {
 		// id, user_id, video_id
 
 		//	à chaque fois qu'un user like une video, nb_favorited++
-		$videos = DB::table('videos')->orderBy('nb_favorited', 'desc')->get();
+		$videos = DB::table('videos')->where('validated', true)->orderBy('nb_favorited', 'desc')->get();
 		return view('front.overviews')
 			->with(compact('videos'));
 	}
 
 	public function getMostCommented() {
 
-		$videos = DB::table('videos')->orderBy('nb_comments', 'desc')->get();
+		$videos = DB::table('videos')->where('validated', true)->orderBy('nb_comments', 'desc')->get();
 		return view('front.overviews')
 			->with(compact('videos'));
 	}
@@ -371,7 +371,7 @@ class PublicController extends Controller {
 
 	public function getRandom() {
 		
-		$videos = DB::table('videos')->orderByRaw("RAND()")->get();		
+		$videos = DB::table('videos')->where('validated', true)->orderByRaw("RAND()")->get();		
 
 		return view('front.overviews')
 			->with(compact('videos'));
