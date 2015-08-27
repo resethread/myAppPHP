@@ -4,7 +4,7 @@ use DB;
 use Carbon;
 use Log;
 use Request;
-
+use File;
 
 class AdminController extends Controller {
 
@@ -52,7 +52,11 @@ class AdminController extends Controller {
 			return redirect('/admin/videos-to-validate')->with('message_success', 'the video has been validated');
 		}
 		else {
-			return redirect('/admin/videos-to-validate')->with('message_error', 'Something is wrong');
+			$destination = public_path()."/users_content/videos";
+			chdir($destination);
+			File::deleteDirectory($id);
+			DB::table('videos')->where('id', $id)->delete();
+			return redirect('/admin/videos-to-validate')->with('message_error', 'the video has been deleted');
 		}
 	}
 

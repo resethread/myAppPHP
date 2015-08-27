@@ -292,7 +292,7 @@ class PublicController extends Controller {
 	
 	public function getTag($name) {
 		
-		$videos = Video::withAnyTag($name)->get();
+		$videos = Video::withAnyTag($name)->where('validated', true)->get();
 		
 		return view('front.overviews')
 			->with(compact('videos'));
