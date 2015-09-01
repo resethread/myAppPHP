@@ -6,6 +6,10 @@ use Log;
 use Request;
 use File;
 
+use App\Models\Video;
+use App\Models\Comment;
+use App\Users;
+
 class AdminController extends Controller {
 
 	public function __construct() {  
@@ -48,8 +52,27 @@ class AdminController extends Controller {
 	public function postVideoToValidate($id) {
 		$validate = Request::input('validate');
 		if ($validate == 'yes') {
-			DB::table('videos')->where('id', $id)->update(['validated' => true]);
-			return redirect('/admin/videos-to-validate')->with('message_success', 'the video has been validated');
+
+			$video = Video::find($id);
+
+			//	$video->update(['validated' => true]);
+
+			$destination = public_path('users_content/videos/'.$id);
+			chdir($destination);
+
+			$file_path = public_path("$video->path.mp4");
+			$file_name = substr($file_path, strrpos($file_path, '/'));
+			$real_file_name_mp4 = ltrim($file_name, '/');
+			$real_file_no_extension = rtrim($real_file_name_mp4, '.mp4');
+
+			$extensions = ['webm'];
+
+			
+				$command = "ffmpeg -i $real_file_name_mp4 $real_file_no_extension.webm";
+				exec($command);
+		
+
+			//return redirect('/admin/videos-to-validate')->with('message_success', 'the video has been validated');
 		}
 		else {
 			$destination = public_path()."/users_content/videos";
@@ -114,20 +137,42 @@ class AdminController extends Controller {
 				$elements = Request::input('elements');
 				$elements = explode(' ', $elements);
 				foreach($elements as $element) {
-					$elem = DB::table('videos')->where('id', $element)->first();
-					if( !is_null($elem)) {
-						$elem->delete();
+					$elemId = Video::find($element);
+					if( !is_null($elemId)) {
+						$elemId->delete();
+
+						$destination = public_path()."/users_content/videos/$elemId";
+						if (File::exists($destination)) {
+							File::deleteDirectory($destination);
+						}
 					}
-				}		
+				}
+				return redirect()->back()->with('message_success', 'Elements has been deleted');		
 			break;
 
 			case 'users':
-				return 'users';
+				$elements = Request::input('elements');
+				$elements = explode(' ', $elements);
+				foreach($elements as $element) {
+					$elem = User::find($element);
+					if( !is_null($elem)) {
+						$elem->delete();
+					}
+				}
+				return redirect()->back()->with('message_success', 'Elements has been deleted');
 			break;	
 			
 			default:
-				# code...
-				break;
+				$elements = Request::input('elements');
+				$elements = explode(' ', $elements);
+				foreach($elements as $element) {
+					$elem = Comment::find($element);
+					if( !is_null($elem)) {
+						$elem->delete();
+					}
+				}
+				return redirect()->back()->with('message_success', 'Elements has been deleted');	
+			break;
 		}
 	}
 

@@ -106,6 +106,8 @@ class UserController extends Controller {
 				$video->duration = getDuration($file->getClientOriginalName());
 				$video->save();
 
+
+				/*
 				$total_frames = shell_exec("ffprobe -show_streams '$filename' 2> /dev/null | grep nb_frames | head -n1 | sed 's/.*=//'");
 				$numbers = range(10, $total_frames);
 				shuffle($numbers);
@@ -115,6 +117,7 @@ class UserController extends Controller {
 				foreach ($numbers as $key => $val) {
 					exec("ffmpeg -i $filename -vf 'select=gte(n\,$val)' -vframes 1 $random_string-$key.jpg");
 				}
+				*/
 
 				return redirect()->back()->with('message_success', 'Your video has been successfully uploaded and is waiting for admin validation');
 				

@@ -5,8 +5,22 @@ Dropzone.options.myAwesomeDropzone = {
 	maxFilesize: 50,
 	acceptedFiles: 'video/*',
 	init: function() {
-		console.log('loaded')
+		console.log('initalised')
 	},	
+	addedfile: function(file) {
+		console.log("file added");
+	},
+	error: function(e) {
+		console.log('error : ' + e)
+	},
+	uploadprogress: function(file, progress, bytesSent) {
+		console.log(file);
+		console.log(progress);
+		console.log(bytesSent);
+	},
+	complete: function() {
+		location.reload(); 
+	}
 };
 
 (function diplayClassicForm() {

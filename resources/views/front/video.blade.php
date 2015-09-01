@@ -8,6 +8,7 @@
 			<div class="player">
 				<video id="really-cool-video" class="video-js vjs-default-skin" controls preload="auto" width="640" height="480" poster="<?= "/users_content/videos/$video->id/thumbs/thumb_2.jpg" ?>" data-setup='{}'>
 					<source src="{{ $video->path }}.mp4" type="video/mp4">
+					<source src="{{ $video->path }}.webm" type="video/webm">
 					
 					old browser...
 				</video>

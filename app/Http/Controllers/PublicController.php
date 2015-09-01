@@ -388,7 +388,12 @@ class PublicController extends Controller {
 
 	public function getTest() {
 
-		return view('front.test');
+		$destination = public_path('videos/1/eazeazsqsdq97897.mp4');
+		$file_name = substr($destination, strrpos($destination, '/'));
+		$new = ltrim($file_name, '/');
+		dd($new);
+
+		//return view('front.test');
 	}
 
 	public function postTest() {
