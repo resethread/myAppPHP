@@ -19,7 +19,11 @@ Dropzone.options.myAwesomeDropzone = {
 		console.log(bytesSent);
 	},
 	complete: function() {
-		location.reload(); 
+	//	location.reload(); 
+	console.log('complete');
+	},
+	success: function() {
+		console.log('success');
 	}
 };
 
