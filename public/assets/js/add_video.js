@@ -13,6 +13,9 @@ Dropzone.options.myAwesomeDropzone = {
 	error: function(e) {
 		console.log('error : ' + e)
 	},
+	sending: function() {
+		console.log('start sending');
+	},
 	uploadprogress: function(file, progress, bytesSent) {
 		console.log(file);
 		console.log(progress);
@@ -24,6 +27,9 @@ Dropzone.options.myAwesomeDropzone = {
 	},
 	success: function() {
 		console.log('success');
+	},
+	canceled: function() {
+		console.log('cancelled');
 	}
 };
 

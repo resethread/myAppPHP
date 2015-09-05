@@ -10,6 +10,8 @@ use Image;
 use App\Models\Video;
 use App\Models\Comment;
 use Log;
+use File;
+
 
 
 class PublicController extends Controller {
@@ -388,12 +390,11 @@ class PublicController extends Controller {
 
 	public function getTest() {
 
-		$destination = public_path('videos/1/eazeazsqsdq97897.mp4');
-		$file_name = substr($destination, strrpos($destination, '/'));
-		$new = ltrim($file_name, '/');
-		dd($new);
+		$destination = public_path("users_content/videos/30");
+		chdir($destination);
 
-		//return view('front.test');
+	//	$img = Image::make($destination."z_img_toto001.jpg");
+
 	}
 
 	public function postTest() {

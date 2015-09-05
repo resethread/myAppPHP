@@ -1,8 +1,9 @@
 {
   "dependencies": {
     "gulp": "~3.9.0",
-    "gulp-less": "~3.0.3",
-    "socketio-file-upload": "~0.4.2",
-    "express": "~4.13.3"
+    "socket.io": "~1.3.6",
+    "gulp-param": "~0.6.3",
+    "fluent-ffmpeg": "~2.0.1",
+    "gulp-fluent-ffmpeg": "~1.0.2"
   }
 }

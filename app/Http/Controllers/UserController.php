@@ -64,14 +64,9 @@ class UserController extends Controller {
 				$video->save();
 
 				//create folders if not exist 
-				$destination = public_path()."/users_content/videos/$video->id";	
+				$destination = public_path("/users_content/videos/$video->id");	
 				if (!File::exists($destination)) {
 					File::makeDirectory($destination);
-
-					$folder_thumb = $destination.'/thumbs';
-					if (!File::exists($folder_thumb)) {
-						File::makeDirectory($folder_thumb);
-					}
 				}
 
 				// rename file
@@ -92,10 +87,12 @@ class UserController extends Controller {
 				chdir($destination);
 
 				// if file is not mp4
-				if ($extension != 'mp4') {
-					exec("ffmpeg -i $filename $random_string.mp4");
-					$filename = "$random_string.mp4";
+				/*
+				if ($extension != 'webm') {
+					exec("ffmpeg -i $filename $random_string.webm");
+					$filename = "$random_string.webm";
 				}
+				*/
 				
 				// get duration and save
 				function getDuration($media) {
@@ -103,7 +100,7 @@ class UserController extends Controller {
 					$duration = $total_seconds / 60;
 					return number_format($duration, '1', ':', ',');
 				}
-				$video->duration = getDuration($file->getClientOriginalName());
+				$video->duration = getDuration(File::files($destination)[0]);
 				$video->save();
 
 
@@ -111,7 +108,7 @@ class UserController extends Controller {
 				$total_frames = shell_exec("ffprobe -show_streams '$filename' 2> /dev/null | grep nb_frames | head -n1 | sed 's/.*=//'");
 				$numbers = range(10, $total_frames);
 				shuffle($numbers);
-				$numbers = array_slice($numbers, 0, 16);
+				$numbers = array_slice($numbers, 0, 16);Ô
 				sort($numbers);
 
 				foreach ($numbers as $key => $val) {

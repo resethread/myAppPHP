@@ -5,6 +5,7 @@ use Carbon;
 use Log;
 use Request;
 use File;
+use Image;
 
 use App\Models\Video;
 use App\Models\Comment;
@@ -50,37 +51,104 @@ class AdminController extends Controller {
 	}
 
 	public function postVideoToValidate($id) {
+
+		$video = Video::find($id);
+
 		$validate = Request::input('validate');
+
+		$destination = public_path('users_content/videos/'.$id);
+
+
 		if ($validate == 'yes') {
+			# update status
+			//$video->update(['validated' => true]);
 
-			$video = Video::find($id);
+			# convert formats
+			$file = File::files($destination)[0];
+			$file = substr($file, strrpos($file, '/'));
+			$file = ltrim($file, '/');
+			$file_no_extension = substr($file, 0, -3);
 
-			//	$video->update(['validated' => true]);
-
-			$destination = public_path('users_content/videos/'.$id);
-			chdir($destination);
-
-			$file_path = public_path("$video->path.mp4");
-			$file_name = substr($file_path, strrpos($file_path, '/'));
-			$real_file_name_mp4 = ltrim($file_name, '/');
-			$real_file_no_extension = rtrim($real_file_name_mp4, '.mp4');
-
-			$extensions = ['webm'];
-
+			$extension = substr($file, -3);
 			
-				$command = "ffmpeg -i $real_file_name_mp4 $real_file_no_extension.webm";
-				exec($command);
-		
+			if ($extension != 'webm') {
 
-			//return redirect('/admin/videos-to-validate')->with('message_success', 'the video has been validated');
+				chdir($destination);
+
+				$command = "ffmpeg -i $file $file_no_extension.webm > /dev/null &";
+
+				exec($command);
+			}
+			
+
+			return redirect('/admin/videos-to-validate')->with('message_success', 'the video has been validated');
+
 		}
-		else {
-			$destination = public_path()."/users_content/videos";
-			chdir($destination);
-			File::deleteDirectory($id);
+		elseif ($validate == 'no') {
+
+			File::deleteDirectory($destination);
+
 			DB::table('videos')->where('id', $id)->delete();
+
 			return redirect('/admin/videos-to-validate')->with('message_error', 'the video has been deleted');
 		}
+		else {
+			return redirect()->back();
+		}
+	}
+
+	public function postCreateThumbnails($id) {
+
+		$nb_thumbnails = 12;
+		
+		$destination = public_path("/users_content/videos/$id");
+	
+		$file = File::files($destination)[0];
+		$file = substr($file, strrpos($file, '/'));
+		$file = ltrim($file, '/');
+
+		$extension = substr($file, -3);
+
+		if ($extension == 'mp4' || $extension == 'webm' || $extension == 'avi') {
+			chdir($destination);
+
+			$total_seconds = shell_exec("ffprobe -i $file -show_format -v quiet | sed -n 's/duration=//p'");
+			$total_seconds = floor($total_seconds);
+
+			$fps = $total_seconds / $nb_thumbnails;
+			$fps = floor($fps);
+			
+			$command = "ffmpeg -i $file -vf fps=1/$fps z_img_toto%03d.jpg; ffmpeg -i z_img_toto%03d.jpg -vf scale=200:100 z_img_toto%03d.jpg";
+
+			exec($command);
+		
+			return redirect()->back()->with('message_success', 'Thumbnails created');
+		}
+		else {
+			return redirect()->back()->with('message_error', 'this is not a video file');
+		}
+	}
+
+	public function postConvertFormats($id) {
+
+		$command = base_path('sudo node sv.js');
+		exec($command);
+		return redirect()->back()->with('message_success', 'ça à l air bon');
+		/*
+		$destination = public_path("/users_content/videos/$id");
+		
+		$file = File::files($destination)[0];
+		$file = substr($file, strrpos($file, '/'));
+		$file = ltrim($file, '/');
+
+		$extension = substr($file, -3);
+
+		if ($extension == 'mp4' || $extension == 'webm' || $extension == 'avi') {
+			chdir($destination);
+
+			$command = "ffmpeg -i $file "
+		}	
+		*/
 	}
 
 	public function getVideosOnline() {
