@@ -200,11 +200,6 @@ class PublicController extends Controller {
 		return view('front.new-account')->with(compact('fullMain'));
 	}
 
-	public function getTermsAndConditions() {
-		$fullMain = true;
-		return view('front.conditions')->with(compact('fullMain'));
-	}
-
 	public function postNewAccount() {
 
 		$name = Request::input('name');	
@@ -277,6 +272,7 @@ class PublicController extends Controller {
 			'password' => $password,
 			'status' => 'admin' 
 		];
+		sleep(4);
 		
 		if ( Auth::attempt($authenticate_user_by_name) || Auth::attempt($authenticate_user_by_email) ) {
 			
@@ -408,6 +404,16 @@ class PublicController extends Controller {
 	#----------------------------
 	#	FOOTER
 	#----------------------------
+
+	public function getTermsAndConditions() {
+		$fullMain = true;
+		return view('front.conditions')->with(compact('fullMain'));
+	}
+
+	public function getHowTo() {
+		$fullMain = true;
+		return view('front.how-to')->with(compact('fullMain'));
+	}
 
 	public function getContact() {
 

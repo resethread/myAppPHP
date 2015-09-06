@@ -1466,16 +1466,20 @@ th {
   padding: 0.5em 0.6em;
   display: inline-block;
   border: 1px solid #CCC;
-  box-shadow: 0px 1px 3px #f9f9f9 inset;
+  box-shadow: 0px 1px 3px #ccc inset;
   border-radius: 4px;
   vertical-align: middle;
   box-sizing: border-box;
+}
+.input:focus {
+  box-shadow: 0px 1px 3px #ccc inset;
+  border: 1px solid #ccc;
 }
 textarea {
   padding: 0.5em 0.6em;
   display: inline-block;
   border: 1px solid #CCC;
-  box-shadow: 0px 1px 3px #f9f9f9 inset;
+  box-shadow: 0px 1px 3px #ccc inset;
   border-radius: 4px;
   vertical-align: middle;
   box-sizing: border-box;
@@ -1559,6 +1563,22 @@ textarea {
   border-left: 1px solid rgba(34, 36, 38, 0.1);
   padding: 1em;
   text-align: inherit;
+}
+.progress_bar {
+  width: 80%;
+  position: relative;
+  border: none;
+  margin: 1em 0 2.5em;
+  padding: 0;
+  border-radius: .28571429rem;
+}
+.progress_bar .bar {
+  height: 1.75em;
+  line-height: 1;
+  position: relative;
+  border-radius: .28571429rem;
+  background: #b5cc18;
+  transition: 0.4s ease all;
 }
 hr {
   color: #f0f0f0;

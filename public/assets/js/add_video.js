@@ -17,6 +17,13 @@ Dropzone.options.myAwesomeDropzone = {
 		console.log('start sending');
 	},
 	uploadprogress: function(file, progress, bytesSent) {
+
+		var progress = progress;
+
+		document.getElementById('bar').style.width = progress + '%';
+
+		document.getElementById('progress').innerHTML = progress + ' %'
+
 		console.log(file);
 		console.log(progress);
 		console.log(bytesSent);

@@ -36,6 +36,13 @@
 		</div>
 		<div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>
 	</form>
+
+	<span id="progress"></span>
+	<div class="progress_bar">
+		<div class="bar" id="bar" style="width:0">
+			
+		</div>
+	</div>
 	
 	If you meet trouble to upload your files with the drag and drop system, you can use the <a href="#" id="to_classic_form">classic form</a> <br>
 

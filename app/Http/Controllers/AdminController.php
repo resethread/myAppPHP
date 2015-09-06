@@ -14,15 +14,7 @@ use App\Users;
 class AdminController extends Controller {
 
 	public function __construct() {  
-		/*
-		function getRecordsToday() {
-			$today = Carbon\Carbon::toDay()->toDateTimeString();
 
-			$videos_today_count = DB::table('videos')->where('created_at', $today)->where('validated', false)->count();
-		
-
-		}
-		*/
 	}
 
 	public function getIndex() {
@@ -52,7 +44,7 @@ class AdminController extends Controller {
 
 	public function postVideoToValidate($id) {
 
-		$video = Video::find($id);
+		$video =DB::table('videos')->where('id', $id);
 
 		$validate = Request::input('validate');
 
@@ -61,7 +53,8 @@ class AdminController extends Controller {
 
 		if ($validate == 'yes') {
 			# update status
-			//$video->update(['validated' => true]);
+			$video->update(['validated' => true]);
+		
 
 			# convert formats
 			$file = File::files($destination)[0];
