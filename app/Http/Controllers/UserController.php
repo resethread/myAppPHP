@@ -11,6 +11,7 @@ use Log;
 use Image;
 
 use App\Models\Video;
+use Elasticsearch\ClientBuilder;
 
 class UserController extends Controller {
 	public function __construct() {  
@@ -271,6 +272,7 @@ class UserController extends Controller {
 	public function postEditVideo($id) {
 
 		$video = Video::find($id);
+		$client = ClientBuilder::create()->build();
 
 		// manage keywords
 		if (Request::has('keywords')) {
@@ -289,7 +291,10 @@ class UserController extends Controller {
 				$video->tag($tag);
 			}
 		}
-		return redirect('/user')->with('message_success', 'Your video has been edited');
+
+		
+
+		//return redirect('/user')->with('message_success', 'Your video has been edited');
 	}
 
 	public function postDeleteVideo($id) {
@@ -299,6 +304,10 @@ class UserController extends Controller {
 		$video->delete();
 		$video->untag();
 
+		# delete the video from the table favorited
+		DB::table('favorited')->where('video_id', $id)->delete();
+
+		# delete the directory
 		$destination = public_path()."/users_content/videos/$id";
 		if (File::exists($destination)) {
 			File::deleteDirectory($destination);

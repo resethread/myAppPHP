@@ -26,7 +26,6 @@
 			{{ Session::get('message_error') }}
 		</div>
 	@endif
-
 	
 
 	<form action="/user/add-video" class="dropzone" id="my-awesome-dropzone" enctype="multipart/form-data">

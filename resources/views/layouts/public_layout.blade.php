@@ -16,17 +16,19 @@
 		<header id="header">
 			@include('includes.header')
 		</header>
-		<div id="sidebar">
-			<ul id="tagsList">
-				@for($i = 0; $i < 20; $i++)
-					<li><a href="/tag/voyage">voyage</a></li>
-				@endfor
-			</ul>
+		<div id="central">
+			<div id="sidebar">
+				<ul id="tagsList">
+					@for($i = 0; $i < 20; $i++)
+						<li><a href="/tag/voyage">voyage</a></li>
+					@endfor
+				</ul>
+			</div>
+			<main id="main">
+				@yield('content')
+			</main>
+			<div class="clear"></div>
 		</div>
-		<main id="main">
-			@yield('content')
-		</main>
-		<div class="clear"></div>
 		<footer id="footer" style="{{ str_contains(Request::url(), 'video/') ? 'position:relative;' : 'tata' }}">
 			@include('includes.footer')
 		</footer>

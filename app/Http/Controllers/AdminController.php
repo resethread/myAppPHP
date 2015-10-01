@@ -60,7 +60,7 @@ class AdminController extends Controller {
 			$file = File::files($destination)[0];
 			$file = substr($file, strrpos($file, '/'));
 			$file = ltrim($file, '/');
-			$file_no_extension = substr($file, 0, -3);
+			$file_no_extension = substr($file, 0, -4);
 
 			$extension = substr($file, -3);
 			
@@ -146,7 +146,7 @@ class AdminController extends Controller {
 
 	public function getVideosOnline() {
 
-		$videos = DB::table('videos')->paginate(10);
+		$videos = DB::table('videos')->where('validated', true)->paginate(10);
 
 		return view('dashboards.admin.videos_online', compact('videos'));
 	}
@@ -183,10 +183,6 @@ class AdminController extends Controller {
 		return view('dashboards.admin.comments', compact('comments'));
 	}
 
-	public function postValidate($id) {
-
-	}
-
 	public function getFastDelete() {
 		return view('dashboards.admin.fast_delete');
 
@@ -208,7 +204,7 @@ class AdminController extends Controller {
 						}
 					}
 				}
-				return redirect()->back()->with('message_success', 'Elements has been deleted');		
+				return redirect()->back()->with('message_success', 'Elements have been deleted');		
 			break;
 
 			case 'users':
@@ -220,7 +216,7 @@ class AdminController extends Controller {
 						$elem->delete();
 					}
 				}
-				return redirect()->back()->with('message_success', 'Elements has been deleted');
+				return redirect()->back()->with('message_success', 'Elements have been deleted');
 			break;	
 			
 			default:
@@ -232,17 +228,9 @@ class AdminController extends Controller {
 						$elem->delete();
 					}
 				}
-				return redirect()->back()->with('message_success', 'Elements has been deleted');	
+				return redirect()->back()->with('message_success', 'Elements have been deleted');	
 			break;
 		}
-	}
-
-	public function getListUsers() {
-
-	}
-
-	public function getListVideos() {
-		
 	}
 
 	public function getLogs() {

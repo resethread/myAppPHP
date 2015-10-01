@@ -1,9 +1,9 @@
 @extends('layouts.public_layout')
 @section('content')
 <link href="//vjs.zencdn.net/4.12/video-js.css" rel="stylesheet">
-<div class="container-fluid">
+<div class="container-fluid" style="margin-top: 30px;">
 	<div class="row">
-		<div class="col-md-9" id="video_side">
+		<div class="col-md-8" id="video_side">
 			
 			<div class="player">
 				<video id="really-cool-video" class="video-js vjs-default-skin" controls preload="auto" width="640" height="480" poster="<?= "/users_content/videos/$video->id/thumbs/thumb_2.jpg" ?>" data-setup='{}'>
@@ -80,7 +80,7 @@
 				@endif
 			</div>
 		</div>
-		<div class="col-md-3" id="suggest_videos_zone">
+		<div class="col-md-4" id="suggest_videos_zone">
 			<h5>You may like</h5>
 				@if(isset($lateral_last_author_public))
 					@foreach($lateral_last_author_public as $author_video)

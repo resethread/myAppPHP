@@ -10,13 +10,13 @@
 		<tbody>
 			@foreach($videos as $video)
 				<tr>
-					<td><img src="/users_content/videos/{{ $video->id }}/thumbs/thumb_1.jpg" alt="video overview" width="100"></td>
+					<td><img src="/users_content/videos/{{ $video->id }}/thumbs/thumb_1.jpg" alt="" width="100"></td>
 					<td>{{ $video->name }}</td>
 					<td>{{ $video->nb_views }}</td>
 					<td><a href="/user/edit-video/{{ $video->id }}">Edit</a></td>
 					<td>
 						{!! Form::open(['url' => '/user/delete-video/'.$video->id, 'method' => 'POST']) !!}
-							<input type="submit" value="Delete">
+							<input type="submit" class="button mini red" value="Delete">
 						{!! Form::close() !!}
 					</td>
 				</tr>

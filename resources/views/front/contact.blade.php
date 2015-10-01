@@ -2,6 +2,21 @@
 @section('content')
 	<div class="container">
 	<h1 class="centered">Contact</h1>
+		
+		@if($errors->has())
+			<div class="message red">
+				<ul>
+					@foreach($errors->all() as $error)
+						<li>{{ $error }}</li>
+					@endforeach
+				</ul>
+			</div>
+		@elseif( Session::has('message_success') )
+			<div class="message green">
+				{{ Session::get('message_success') }}
+			</div>
+		@endif
+
 		{!! Form::open(['class' => 'form rounded']) !!}
 			
 			<div class="field">
@@ -15,8 +30,8 @@
 			</div>
 			
 			<div class="field">
-				<label for="Suject" class="label">Suject</label>
-				<select name="suject" id="">
+				<label for="subject" class="label">Suject</label>
+				<select name="subject" id="">
 					@foreach($options as $option)
 						<option value="{{ str_slug($option, '_') }}">{{ $option }}</option>
 					@endforeach
@@ -24,8 +39,8 @@
 			</div>
 
 			<div class="field">
-				<label for="message" class="label">Message</label>
-				<textarea name="message" rows="10" class="input" placeholder="message"></textarea>
+				<label for="text" class="label">Message</label>
+				<textarea name="text" rows="10" class="input" placeholder="message"></textarea>
 			</div>
 
 			<div class="field">

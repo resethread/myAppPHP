@@ -11,8 +11,10 @@ use App\Models\Video;
 use App\Models\Comment;
 use Log;
 use File;
+use Crypt;
 
 
+use Elasticsearch\ClientBuilder;
 
 class PublicController extends Controller {
 
@@ -384,23 +386,6 @@ class PublicController extends Controller {
 	}
 	
 
-	public function getTest() {
-
-		$destination = public_path("users_content/videos/30");
-		chdir($destination);
-
-	//	$img = Image::make($destination."z_img_toto001.jpg");
-
-	}
-
-	public function postTest() {
-
-		$rate = Request::input('rate');
-		settype($rate, 'int');
-		var_dump($rate);
-		
-	}
-
 	#----------------------------
 	#	FOOTER
 	#----------------------------
@@ -428,9 +413,75 @@ class PublicController extends Controller {
 		return view('front.contact')->with(compact('fullMain', 'options'));
 	}
 
-	public function postContact(Request $request) {
+	public function postContact() {
+
+		//sleep(3);
+
+		$rules = [
+			'name' => 'required|min:3|max:20',
+			'email' => 'required|email',
+			'subject' => 'required',
+			'text' => 'required|min:10|max:100'
+		];	
+
+		$validator = Validator::make(Request::all(), $rules);
+
+		if ($validator->fails()) {
+
+			return redirect()->back()->withErrors($validator);
+		}
+		else {
+
+			$message = [
+				'name' => Crypt::encrypt(Request::input('name')),
+				'email' => Crypt::encrypt(Request::input('email')),
+				'subject' => Crypt::encrypt(Request::input('subject')),
+				'text' => Crypt::encrypt(Request::input('text')),
+				'ip' => Request::ip()
+			];
+
+	
+
+			return redirect()->back()->with('message_success', 'Your message has been successfully sent');
+		}
+
+		
+	
+		
+	}
+
+	#----------------------------
+	#	TEST
+	#----------------------------
+
+	public function getTest() {
+
+		$client = ClientBuilder::create()->build();
+
+		$params = [
+			'index' => 'bdd',
+			'type' => 'video',
+			'id' => 1,
+			'body' => [
+				'title' => 'toto ipsum amet sit',
+				'tags' => ['toto', 'ipsum']
+			]
+		];
+		$response = $client->index($params);
 
 
+		echo "<pre>";
+		var_dump($response);
+		echo "</pre>";
+	
+	}
+
+	public function postTest() {
+
+		$rate = Request::input('rate');
+		settype($rate, 'int');
+		var_dump($rate);
+		
 	}
 }
 

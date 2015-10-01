@@ -9,6 +9,7 @@ Dropzone.options.myAwesomeDropzone = {
 	},	
 	addedfile: function(file) {
 		console.log("file added");
+		document.getElementById('bar').style.width = '0%';
 	},
 	error: function(e) {
 		console.log('error : ' + e)
