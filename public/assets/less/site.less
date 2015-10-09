@@ -1,11 +1,9 @@
 #header {
 	margin-top: 16px;
 	position: relative;	
+	display: flex;
 
 	#logo {
-		display: inline-block;
-		vertical-align: top;
-		margin-left: 6px;
 
 		img {
 
@@ -13,8 +11,7 @@
 	}
 
 	#search_bar {
-		display: inline-block;
-		vertical-align: top;
+
 		margin-right: 2em;
 		margin-left: 6%;
 		position: relative;
@@ -22,7 +19,6 @@
 		#search-zone {
 			width: 460px;
 			padding: 0.68em 1.5em;
-
 		}
 	
 		#search_btn {
@@ -30,6 +26,7 @@
 			margin: 0;
 			right: 0px;
 			top: 1px;
+			
 		}
 	}
 	
@@ -214,6 +211,21 @@
 		color: #fff;
 		text-decoration: none;
 		margin: 0 1rem;
+	}
+}
+
+/*	------------------------------------------
+	Media queries			 
+--------------------------------------------*/
+
+@media screen and (max-width: 640px) {
+
+	#header {
+		flex-direction: column;
+
+		#btn-space {
+			position: relative;
+		}
 	}
 }
 

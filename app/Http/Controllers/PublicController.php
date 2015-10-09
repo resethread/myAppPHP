@@ -12,6 +12,7 @@ use App\Models\Comment;
 use Log;
 use File;
 use Crypt;
+use Carbon\Carbon;
 
 
 use Elasticsearch\ClientBuilder;
@@ -384,6 +385,13 @@ class PublicController extends Controller {
 		return view('front.channels')
 			->with(compact('channels'));
 	}
+
+	public function getStars() {
+
+		$videos = DB::table('videos')->where('validated', true)->orderByRaw("RAND()")->get();
+
+		return view('front.stars')->with(compact('videos'));
+	}
 	
 
 	#----------------------------
@@ -437,16 +445,18 @@ class PublicController extends Controller {
 				'email' => Crypt::encrypt(Request::input('email')),
 				'subject' => Crypt::encrypt(Request::input('subject')),
 				'text' => Crypt::encrypt(Request::input('text')),
+				'instant' => Carbon::now(),
+				'created_at' => Carbon::now(),
 				'ip' => Request::ip()
 			];
 
-	
+			DB::table('messages')->insert($message);
 
 			return redirect()->back()->with('message_success', 'Your message has been successfully sent');
 		}
 
 		
-	
+		
 		
 	}
 

@@ -16,6 +16,19 @@
 		<header id="header">
 			@include('includes.header')
 		</header>
+		<nav id="navTop">
+			<ul>
+				<li><a href="/news-videos">news videos</a></li>
+				<li><a href="/most-viewed">most viewed</a></li>
+				<li><a href="/top-rated">top rated</a></li>
+				<li><a href="/most-favorited">most favorited</a></li>
+				<li><a href="/most-commented">most commented</a></li>
+				<li><a href="/tags">tags</a></li>
+				<li><a href="/random">random</a></li>
+				<li><a href="/stars">stars</a></li>
+				<li><a href="/channels">channels</a></li>
+			</ul>
+		</nav>
 		<div id="central">
 			<div id="sidebar">
 				<ul id="tagsList">
@@ -29,7 +42,7 @@
 			</main>
 			<div class="clear"></div>
 		</div>
-		<footer id="footer" style="{{ str_contains(Request::url(), 'video/') ? 'position:relative;' : 'tata' }}">
+		<footer id="footer">
 			@include('includes.footer')
 		</footer>
 		<script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>

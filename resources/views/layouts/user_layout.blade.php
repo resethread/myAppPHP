@@ -11,7 +11,19 @@
 		<header id="header">
 			@include('includes.header')
 		</header>
-		
+		<nav id="navTop">
+			<ul>
+				<li><a href="/news-videos">news videos</a></li>
+				<li><a href="/most-viewed">most viewed</a></li>
+				<li><a href="/top-rated">top rated</a></li>
+				<li><a href="/most-favorited">most favorited</a></li>
+				<li><a href="/most-commented">most commented</a></li>
+				<li><a href="/tags">tags</a></li>
+				<li><a href="/random">random</a></li>
+				<li><a href="/stars">stars</a></li>
+				<li><a href="/channels">channels</a></li>
+			</ul>
+		</nav>
 		<div class="cotnainer-fluid">
 			<div class="row">
 				<div class="col-md-2" id="user_sidebar">
@@ -23,7 +35,7 @@
 						<li><a href="/user/settings">Setting</a></li>
 					</ul>
 				</div>
-				<div class="col-md-10" id="main_user">
+				<div class="col-md-9" id="main_user">
 					@yield('content')
 				</div>
 			</div>

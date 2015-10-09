@@ -21,17 +21,5 @@
 	@endif
 </div>
 
-<nav id="navTop">
-	<ul>
-		<li><a href="/news-videos">news videos</a></li>
-		<li><a href="/most-viewed">most viewed</a></li>
-		<li><a href="/top-rated">top rated</a></li>
-		<li><a href="/most-favorited">most favorited</a></li>
-		<li><a href="/most-commented">most commented</a></li>
-		<li><a href="/tags">tags</a></li>
-		<li><a href="/random">random</a></li>
-		<li><a href="/stars">stars</a></li>
-		<li><a href="/channels">channels</a></li>
-	</ul>
-</nav>
+
 

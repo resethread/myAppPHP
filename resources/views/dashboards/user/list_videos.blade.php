@@ -1,6 +1,6 @@
 @extends('layouts.user_layout')
 @section('content')
-	<h1>Your videos</h1>
+	<h1 class="text-center">Your videos</h1>
 	<table class="table">
 		<thead>
 			<th>Overview</th>

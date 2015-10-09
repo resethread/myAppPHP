@@ -34,7 +34,10 @@
 						<a href="/admin/comments" class="list-group-item">Comments</a>
 						<br>
 						<a href="/admin/fast-delete" class="list-group-item">Fast delete</a>
+						<a href="/admin/messages" class="list-group-item">Messages</a>
 						<a href="/admin/logs" class="list-group-item">Logs</a>
+						<br>
+						<a href="/admin/banners" class="list-group-item">Banners</a>
 					</div>
 				</div>
 				<div class="col-md-9">
