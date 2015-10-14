@@ -12,10 +12,9 @@
 					{{ $video->nb_views }} views
 	
 				</td>
-				<td><a href="/user/edit-video/{{ $video->id }}">Edit</a></td>
 				<td>
-					{!! Form::open(['url' => '/user/delete-video/'.$video->id, 'method' => 'POST']) !!}
-						<input type="submit" value="Delete">
+					{!! Form::open(['url' => '/user/delete-favorite/'.$video->id, 'method' => 'POST']) !!}
+						<input type="submit" value="Delete" class="button red mini">
 					{!! Form::close() !!}
 				</td>
 			</tr>

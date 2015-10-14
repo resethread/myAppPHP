@@ -125,6 +125,10 @@ class PublicController extends Controller {
 		}
 	}
 
+	public function postReportComment($video_id, $comment_id) {
+		
+	}
+
 	public function postAddFavorite($user_id, $video_id) {
 		if (Auth::guest()) {
 			return redirect()->back()->with('message_error', 'You must to be logged to have favorited');

@@ -46,7 +46,7 @@ class UserController extends Controller {
 		$file = Request::file('file');
 
 		$rules = [
-			'file'  => 'required|mimes:mp4,mov,ogg,avi|max:60000'
+			'file'  => 'required|mimes:mp4,mov,ogg,avi|max:50000'
 		];
 		$validator = Validator::make(Request::all(), $rules);
 	
@@ -84,16 +84,8 @@ class UserController extends Controller {
 					return 'erreur dans le transfert du fichier';
 				}
 
-				// ffmpeg
+				// change dir
 				chdir($destination);
-
-				// if file is not mp4
-				/*
-				if ($extension != 'webm') {
-					exec("ffmpeg -i $filename $random_string.webm");
-					$filename = "$random_string.webm";
-				}
-				*/
 				
 				// get duration and save
 				function getDuration($media) {
@@ -153,6 +145,14 @@ class UserController extends Controller {
 		}
 
 		return view('dashboards.user.list_favorited')->with(compact('videos'));
+	}
+
+	public function postDeleteFavorite($id) {
+		$user_id = Auth::user()->id;
+
+		DB::table('favorited')->where('user_id', $user_id)->where('video_id', $id)->delete();
+
+		return redirect()->back()->with('message_success', 'the favoried has been deleted');
 	}
 
 	public function getSettings() {

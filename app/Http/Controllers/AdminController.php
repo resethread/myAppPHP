@@ -39,12 +39,16 @@ class AdminController extends Controller {
 
 		$video = DB::table('videos')->where('id', $id)->first();
 
-		return view('dashboards.admin.video_to_validate', compact('video'));
+		$file = $video->path;
+		$file = substr($file, strrpos($file, '/'));
+		$file = ltrim($file, '/');
+		
+		return view('dashboards.admin.video_to_validate', compact('video', 'file'));
 	}
 
 	public function postVideoToValidate($id) {
 
-		$video =DB::table('videos')->where('id', $id);
+		$video = DB::table('videos')->where('id', $id);
 
 		$validate = Request::input('validate');
 
@@ -99,6 +103,7 @@ class AdminController extends Controller {
 		$file = File::files($destination)[0];
 		$file = substr($file, strrpos($file, '/'));
 		$file = ltrim($file, '/');
+		$only_name = substr($file, 0, strrpos($file, '.'));
 
 		$extension = substr($file, -3);
 
@@ -111,9 +116,18 @@ class AdminController extends Controller {
 			$fps = $total_seconds / $nb_thumbnails;
 			$fps = floor($fps);
 			
-			$command = "ffmpeg -i $file -vf fps=1/$fps z_img_toto%03d.jpg; ffmpeg -i z_img_toto%03d.jpg -vf scale=200:100 z_img_toto%03d.jpg";
+			$command = "ffmpeg -i $file -vf fps=1/$fps z_img__$only_name%03d.jpg;";
 
 			exec($command);
+
+			// resize images with Intervention.io
+			$images = File::files($destination);
+			array_shift($images);
+			foreach ($images as $image) {
+				$img = Image::make($image);
+				$img->resize(180, 75);
+				$img->save($image);
+			}
 		
 			return redirect()->back()->with('message_success', 'Thumbnails created');
 		}
@@ -151,11 +165,8 @@ class AdminController extends Controller {
 		return view('dashboards.admin.videos_online', compact('videos'));
 	}
 
-	public function getVideosOnlineSearch() {
-
+	public function getVideosSearch() {
 		$searchZone = Request::input('search-zone');
-
-		dd($searchZone);
 
 		$videos = Video::where('name', 'LIKE', '%'.$searchZone.'%')->get();
 
@@ -194,14 +205,18 @@ class AdminController extends Controller {
 				$elements = Request::input('elements');
 				$elements = explode(' ', $elements);
 				foreach($elements as $element) {
+
+					// delete video from database
 					$elemId = Video::find($element);
 					if( !is_null($elemId)) {
 						$elemId->delete();
+					}
 
-						$destination = public_path()."/users_content/videos/$elemId";
-						if (File::exists($destination)) {
-							File::deleteDirectory($destination);
-						}
+					// delete folder
+					$destination =  public_path("users_content/videos/$element");
+					if (File::exists($destination)) {
+						File::deleteDirectory($destination);
+						
 					}
 				}
 				return redirect()->back()->with('message_success', 'Elements have been deleted');		

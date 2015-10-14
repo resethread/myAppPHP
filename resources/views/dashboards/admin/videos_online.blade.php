@@ -1,11 +1,12 @@
 @extends('layouts.admin_layout')
 @section('content')
 	<h1 class="page-header">Videos online</h1>
-	<form method="GET" action="/admin/videos-online/search" class="form-inline">
+	<form method="GET" action="/admin/videos-search/" class="form-inline">
 		<input type="search" class="form-control" placeholder="Search videos" style="width: 82%;" id="search-zone" name="search-zone"> 
 		<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
 		<button type="submit" class="btn btn-success">Search</button>
 	</form>
+	<br>
 	@if(isset($videos))
 		<table class="table table-striped table-hover ">
 			<thead>

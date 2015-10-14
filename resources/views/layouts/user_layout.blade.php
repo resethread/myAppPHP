@@ -31,7 +31,6 @@
 						<li><a href="/user">{{ Auth::user()->name }}</a></li>
 						<li><a href="/user/videos">Videos</a></li>
 						<li><a href="/user/favorites">Favorites</a></li>
-						<li><a href="/user/comments">Comments</a></li>
 						<li><a href="/user/settings">Setting</a></li>
 					</ul>
 				</div>

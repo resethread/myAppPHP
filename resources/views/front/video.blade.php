@@ -1,14 +1,15 @@
 @extends('layouts.public_layout')
 @section('content')
-<link href="//vjs.zencdn.net/4.12/video-js.css" rel="stylesheet">
+
 <div class="container-fluid" style="margin-top: 30px;">
 	<div class="row">
-		<div class="col-md-8" id="video_side">
+		<div class="col-md-7" id="video_side">
 			
 			<div class="player">
 				<video id="really-cool-video" class="video-js vjs-default-skin" controls preload="auto" width="640" height="480" poster="<?= "/users_content/videos/$video->id/thumbs/thumb_2.jpg" ?>" data-setup='{}'>
-					<source src="{{ $video->path }}.mp4" type="video/mp4">
 					<source src="{{ $video->path }}.webm" type="video/webm">
+					<source src="{{ $video->path }}.mp4" type="video/mp4">
+					
 					
 					old browser...
 				</video>
@@ -69,10 +70,12 @@
 				@if(isset($comments))
 					@forelse($comments as $comment)
 						<div class="message"> 
-							<a href="/channel/{{ str_slug($comment->user_name) }}">{{ $comment->user_name }}</a> {{ date("F j, Y, g:i a",strtotime($comment->created_at)) }} <br>
+							<a href="/channel/{{ str_slug($comment->user_name) }}">{{ $comment->user_name }}</a> <small>{{ date("F j, Y, g:i a",strtotime($comment->created_at)) }}</small> <br>
 							{{ $comment->content }} <br>
-							<a href="#" class="button mini grey">Answer</a>
-							<a href="#" class="button mini red">Report</a>
+							
+							{!! Form::open(['url' => "/report-comment/$video->id/$comment->id" ,'class' => 'button_report']) !!}
+								<button type="submit" class="button mini red">Report</button>
+							{!! Form::close() !!}
 						</div>
 					@empty
 						No comment yet	
@@ -80,41 +83,28 @@
 				@endif
 			</div>
 		</div>
-		<div class="col-md-4" id="suggest_videos_zone">
+		<div class="col-md-5" id="suggest_videos_zone">
 			<h5>You may like</h5>
-				@if(isset($lateral_last_author_public))
-					@foreach($lateral_last_author_public as $author_video)
-						<div class="suggested">	
+			@if(isset($lateral_last_author_public))
+				@foreach($lateral_last_author_public as $author_video)
+					<div class="suggested">	
+						<div class="suggested_image">
 							<a href="{{ $author_video['link'] }}">
 								<img src="{{ $author_video['img'] }}" class="suggested_img" width="150" height="100">
 							</a>
-							
-							<div class="suggested_desciption">
-								<span class="suggested_title">{{ $author_video['name'] }}</span>
-								<span class="suggest_author"><a href="#">{{ $author_video['user'] }}</a></span>
-								<span class="suggested_nb_views">{{ $author_video['nb_views'] }} views</span>
-								<span class="suggested_duration">{{ $author_video['duration'] }}</span>
-							</div>
-						</div>		
-					@endforeach
-				@endif
-
-				@if(isset($tags_videos))
-					@foreach($tags_videos as $tags_video)
+						</div>
 						
-					@endforeach
-				@endif
-
-				@if(isset($random_videos))
-					@foreach($random_videos as $random_video)
-
-					@endforeach
-				@endif
-			
+						<div class="suggested_description">
+							<span class="suggested_title">{{ $author_video['name'] }}</span>
+							<span class="suggest_author"><a href="#">{{ $author_video['user'] }}</a></span>
+							<span class="suggested_nb_views">{{ $author_video['nb_views'] }} views</span>
+							<span class="suggested_duration">{{ $author_video['duration'] }}</span>
+						</div>
+					</div>		
+				@endforeach
+			@endif
 		</div>
 	</div>
 </div>
-<script src="//vjs.zencdn.net/4.12/video.js"></script>
-
 @stop
 	

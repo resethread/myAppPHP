@@ -14,7 +14,7 @@
 	@if(isset($avatar_src))
 		<img src="{{ $avatar_src }}" alt="avatar" width="50">
 	@endif
-	{!! Form::open(['url' => '/user/settings/avatar', 'files' => true, 'class' => 'form rounded centered']) !!}
+	{!! Form::open(['url' => '/user/settings/avatar', 'files' => true, 'class' => 'form rounded']) !!}
 		<h3>Avatar</h3>
 		<div class="field">
 			<input type="file" name="avatar" id="avatar" accept="image/jpeg, image/png"> 
@@ -26,7 +26,7 @@
 	{!! Form::close() !!}
 
 	
-	{!! Form::open(['url' => '/user/settings/email', 'class' => 'form rounded centered']) !!}
+	{!! Form::open(['url' => '/user/settings/email', 'class' => 'form rounded']) !!}
 		<h3>Change email</h3>
 		<div class="field">
 			<input type="email" name="email" id="email" class="input" placeholder="email"> 
@@ -40,7 +40,7 @@
 	{!! Form::close() !!}
 
 	
-	{!! Form::open(['url' => '/user/settings/password']) !!}
+	{!! Form::open(['url' => '/user/settings/password', 'class' => 'form rounded']) !!}
 		<h3>Change password</h3>
 		<div class="field">
 			<input type="password" name="password" id="password" class="input" placeholder="password">

@@ -37,7 +37,13 @@
 	
 	<hr>
 	<h4>Thumbs</h4>
-	@for($i = 0; $i <= 14; $i++)
-		<img src="/users_content/videos/1/z_img_toto00{{ $i }}.jpg" alt="" width="250">
+	@for($i = 1; $i <= 14; $i++)
+		<?php  
+			if ($i >= 10 ) 
+				$path = "/users_content/videos/$video->id/z_img__$file"."0".$i.".jpg";
+			else 
+				$path = "/users_content/videos/$video->id/z_img__$file"."00".$i.".jpg";	
+		?>
+		<img src="{{ $path }}" alt="" width="250">
 	@endfor
 @stop
