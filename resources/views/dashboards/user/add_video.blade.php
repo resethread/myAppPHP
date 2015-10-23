@@ -82,44 +82,56 @@
 		</div>
 	@endif
 	
-	{!! Form::open(['method' => 'POST', 'files' => true, 'id' => 'cl']) !!}
+	{!! Form::open(['method' => 'POST', 'files' => true, 'id' => 'cl', 'class' => '']) !!}
 		<div class="input-file-container">
 		  	<input class="input-file" id="my-file" type="file" name="file">
 			<label for="my-file" class="input-file-trigger" tabindex="0">Select a video...</label>
 		</div>
 		<p class="file-return"></p>
 		<br>
-		<textarea name="" class="input" id="" cols="4" rows="4"></textarea>
-		<button type="submit" class="button orange">Upload</button>
+		<h2>Add description</h2>
+		<div class="field">
+			<textarea name="description" class="input" id="" rows="4" placeholder="Describe your video here"></textarea>
+		</div>
+		<h2>Add tags and keywords</h2>
+		<div class="field">
+			<textarea name="tags" class="input" id="" rows="4" placeholder="Add some tags here"></textarea>	
+		</div>
+		<h2>Starring</h2>
+		<div class="field">
+			<textarea name="stars" class="input" id="" rows="2" placeholder="Starring"></textarea>
+		</div>
+		<br>
+		<button type="submit" class="button blue">Upload</button>
 	{!! Form::close() !!}	
 
 
 	<script>
-// ajout de la classe JS à HTML
-document.querySelector("html").classList.add('js');
- 
-// initialisation des variables
-var fileInput  = document.querySelector( ".input-file" ),  
-    button     = document.querySelector( ".input-file-trigger" ),
-    the_return = document.querySelector(".file-return");
- 
-// action lorsque la "barre d'espace" ou "Entrée" est pressée
-button.addEventListener( "keydown", function( event ) {
-    if ( event.keyCode == 13 || event.keyCode == 32 ) {
-        fileInput.focus();
-    }
-});
- 
-// action lorsque le label est cliqué
-button.addEventListener( "click", function( event ) {
-   fileInput.focus();
-   return false;
-});
- 
-// affiche un retour visuel dès que input:file change
-fileInput.addEventListener( "change", function( event ) {  
-    the_return.innerHTML = this.value;  
-});
+		// ajout de la classe JS à HTML
+		document.querySelector("html").classList.add('js');
+		 
+		// initialisation des variables
+		var fileInput  = document.querySelector( ".input-file" ),  
+		    button     = document.querySelector( ".input-file-trigger" ),
+		    the_return = document.querySelector(".file-return");
+		 
+		// action lorsque la "barre d'espace" ou "Entrée" est pressée
+		button.addEventListener( "keydown", function( event ) {
+		    if ( event.keyCode == 13 || event.keyCode == 32 ) {
+		        fileInput.focus();
+		    }
+		});
+		 
+		// action lorsque le label est cliqué
+		button.addEventListener( "click", function( event ) {
+		   fileInput.focus();
+		   return false;
+		});
+		 
+		// affiche un retour visuel dès que input:file change
+		fileInput.addEventListener( "change", function( event ) {  
+		    the_return.innerHTML = this.value;  
+		});
 	</script>
 
 	

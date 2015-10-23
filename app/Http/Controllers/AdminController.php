@@ -194,6 +194,12 @@ class AdminController extends Controller {
 		return view('dashboards.admin.comments', compact('comments'));
 	}
 
+	public function getCommentsReported() {
+		$comments = DB::table('comments_reported')->get();
+
+		return view('dashboards.admin.comments', compact('comments'));
+	}
+
 	public function getFastDelete() {
 		return view('dashboards.admin.fast_delete');
 

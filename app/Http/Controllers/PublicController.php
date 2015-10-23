@@ -297,10 +297,31 @@ class PublicController extends Controller {
 	
 	public function getTag($name) {
 		
-		$videos = Video::withAnyTag($name)->where('validated', true)->get();
-		
-		return view('front.overviews')
-			->with(compact('videos'));
+		//$videos = Video::withAnyTag($name)->where('validated', true)->get();
+
+		$client = ClientBuilder::create()->build();
+		$params = [
+			'index' => 'bdd',
+			'type' => 'video',
+			'body' => [
+				'query' => [
+					'match' => [
+						'tags' => 'ost'
+					]
+				]
+			]
+		];
+		$response = $client->search($params);
+
+		$id = [];
+
+		foreach ($response['hits']['hits'] as $hit) {
+			array_push($id, $hit['_id']);
+		}
+
+		$videos = DB::table('videos')->whereIn('id', $id)->where('validated', true)->get();
+	
+		return view('front.overviews')->with(compact('videos'));
 	}
 
 	// navTop
@@ -470,31 +491,32 @@ class PublicController extends Controller {
 
 	public function getTest() {
 
-		$client = ClientBuilder::create()->build();
+		// $client = ClientBuilder::create()->build();
 
-		$params = [
-			'index' => 'bdd',
-			'type' => 'video',
-			'id' => 1,
-			'body' => [
-				'title' => 'toto ipsum amet sit',
-				'tags' => ['toto', 'ipsum']
-			]
-		];
-		$response = $client->index($params);
+		// // Ma quande lingues coalesce, li simplic qua
 
+		// $params = [
+		// 	'index' => 'bdd',
+		// 	'type' => 'video',
+		// 	'body' => [
+		// 		'query' => [
+		// 			'match_all' => []
+		// 		]
+		// 	]
+		// ];
 
-		echo "<pre>";
-		var_dump($response);
-		echo "</pre>";
+		// $response = $client->search($params);
+
+		// dd($response);
 	
+		return view('front.test');	
 	}
 
 	public function postTest() {
 
-		$rate = Request::input('rate');
-		settype($rate, 'int');
-		var_dump($rate);
+		$tags = Request::input('tags');
+		$tags = explode(' ', $tags);
+		dd($tags);
 		
 	}
 }

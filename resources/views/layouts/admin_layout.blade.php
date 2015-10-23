@@ -33,6 +33,7 @@
 						<a href="/admin/users" class="list-group-item">Users</a>
 						<a href="/admin/comments" class="list-group-item">Comments</a>
 						<br>
+						<a href="/admin/comments-reported" class="list-group-item">Comments reported</a>
 						<a href="/admin/fast-delete" class="list-group-item">Fast delete</a>
 						<a href="/admin/messages" class="list-group-item">Messages</a>
 						<a href="/admin/logs" class="list-group-item">Logs</a>

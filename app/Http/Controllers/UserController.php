@@ -97,6 +97,37 @@ class UserController extends Controller {
 				$video->save();
 
 
+				# ES
+				$client = ClientBuilder::create()->build();
+				$params = [
+					'index' => 'bdd',
+					'type' => 'video',
+					'id' => $video->id,
+					'body' => [
+						'name' => $video->name,
+						'description' => '',
+						'tags' => [],
+						'stars' => []
+					]
+				];
+
+				if (Request::has('description')) {
+					$description = Request::input('description');
+					$params['body']['description'] = $description;
+				}
+				if (Request::has('tags')) {
+					$tags = Request::input('tags');
+					$tags = explode(' ', $tags);
+					$params['body']['tags'] = $tags;
+				}
+				if (Request::has('stars')) {
+					$stars = Request::input('stars');
+					$stars = explode(' ', $stars);
+					$params['body']['stars'] = $stars;
+				}
+				$client->index($params);
+				# /ES
+
 				/*
 				$total_frames = shell_exec("ffprobe -show_streams '$filename' 2> /dev/null | grep nb_frames | head -n1 | sed 's/.*=//'");
 				$numbers = range(10, $total_frames);
