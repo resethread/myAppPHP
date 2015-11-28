@@ -23,6 +23,7 @@
 				<tr>
 					<td>{{ $video->id }}</td>
 					<td><a href="/video/{{ $video->id }}/{{ $video->slug }}" target="_blank">{{ $video->name }}</a></td>
+					<td><a href="#" class="btn btn-info">Edit</a></td>
 					<td><a href="/admin/user/{{ $video->user_id }}">{{ $video->user_id }}</a></td>
 					<td>{{ $video->duration }}</td>
 					<td>{{ date('F j, Y, g:i a', strtotime($video->created_at)) }}</td>

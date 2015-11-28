@@ -33,7 +33,7 @@
 			<div id="sidebar">
 				<ul id="tagsList">
 					@for($i = 0; $i < 20; $i++)
-						<li><a href="/tag/voyage">voyage</a></li>
+						<li><a href="/tag/voyage">test</a></li>
 					@endfor
 				</ul>
 			</div>
@@ -45,7 +45,6 @@
 		<footer id="footer">
 			@include('includes.footer')
 		</footer>
-		<script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
 		@if(isset($scripts))
 			@foreach($scripts as $script)
 				<script src="/assets/js/{{ $script }}.js"></script>

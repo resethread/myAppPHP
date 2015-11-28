@@ -94,7 +94,7 @@ class UserController extends Controller {
 					return number_format($duration, '1', ':', ',');
 				}
 				$video->duration = getDuration(File::files($destination)[0]);
-				$video->save();
+				
 
 
 				# ES
@@ -105,6 +105,7 @@ class UserController extends Controller {
 					'id' => $video->id,
 					'body' => [
 						'name' => $video->name,
+						'user' => Auth::user()->name,
 						'description' => '',
 						'tags' => [],
 						'stars' => []
@@ -126,6 +127,9 @@ class UserController extends Controller {
 					$params['body']['stars'] = $stars;
 				}
 				$client->index($params);
+
+				# mysql
+				$video->save();
 				# /ES
 
 				/*
@@ -181,7 +185,18 @@ class UserController extends Controller {
 	public function postDeleteFavorite($id) {
 		$user_id = Auth::user()->id;
 
+		# Mysql
 		DB::table('favorited')->where('user_id', $user_id)->where('video_id', $id)->delete();
+
+		#Elastic
+		$client = ClientBuilder::create()->build();
+		$params = [
+		    'index' => 'bdd',
+		    'type' => 'video',
+		    'id' => $id
+		];
+
+		$response = $client->delete($params);
 
 		return redirect()->back()->with('message_success', 'the favoried has been deleted');
 	}

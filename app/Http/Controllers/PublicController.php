@@ -38,20 +38,9 @@ class PublicController extends Controller {
 
 			$fullMain = true;
 
-			$scripts = ['application'];
+			$scripts = ['vue', 'vue-resource','video_tpl'];
 
-			// get comments
-			$comments = DB::table('videos')->join('comments', function($join) {
-				$url = Request::url();
-				$url_exploded = explode('/', $url);
-				$i = array_search('video', $url_exploded);
-				$i++;
-				$id = $url_exploded[$i];
-				
-				$join->on('videos.id', '=', 'comments.video_id')
-				->where('comments.video_id', '=', $id); 
-			})->get();
-			
+
 			// check videos in session and increment the number views
 			$video_session = Session::get('video_session');
 			if (empty($video_session)) {
@@ -71,30 +60,56 @@ class PublicController extends Controller {
 			*/
 			$nb_suggested = 12;
 
-			// lateral author
-			$lateral_last_author = DB::table('videos')->where('user_id', $video->user_id)->take(3)->get();
-			$lateral_last_author_public = [];
-			foreach ($lateral_last_author as $video_lat) {
-				array_push($lateral_last_author_public, 
-					[
-						'name' => $video_lat->name,
-						'img' => "/users_content/videos/$video_lat->id/thumbs/thumb_1.jpg",
-						'link' => "/video/$video_lat->id/$video_lat->slug", // cette merde à débugger après manger
-						'user' => DB::table('users')->where('id', $video_lat->user_id)->first()->name,
-						'duration' => $video_lat->duration,
-						'nb_views' => $video_lat->nb_views
+			$client = ClientBuilder::create()->build();
+
+			$params = [
+				'index' => 'bdd',
+				'type' => 'video',
+				'body' => [
+					'query' => [
+						'match' => [
+							'tags' => ''
+						]
 					]
-				);
+				]
+			];
+			$response = $client->search($params);
+			
+			$id = [];
+
+			foreach ($response['hits']['hits'] as $hit) {
+				array_push($id, $hit['_id']);
 			}
 
+			$videos = DB::table('videos')->whereIn('id', $id)->where('validated', true)->get();
 			// lateral 
 
-			return view('front.video')->with(compact('video', 'fullMain', 'comments', 'lateral_last_author_public', 'scripts'));	
+			return view('front.video')->with(compact('video', 'fullMain', 'scripts'));	
 		}
 		else {
 			echo "pb dans l'url";
 		}
 			
+	}
+
+	public function getComments($id) {
+
+		// get comments
+		/*
+		$comments = DB::table('videos')->join('comments', function($join) {
+			$url = Request::url();
+			$url_exploded = explode('/', $url);
+			$i = array_search('video', $url_exploded);
+			$i++;
+			$id = $url_exploded[$i];
+			
+			$join->on('videos.id', '=', 'comments.video_id')
+			->where('comments.video_id', '=', $id); 
+		})->get();
+		*/
+		$comments = DB::table('comments')->where('video_id', $id)->get();
+		
+		return $comments;
 	}
 
 	public function postVideo($id) {
@@ -295,7 +310,7 @@ class PublicController extends Controller {
 	}
 
 	
-	public function getTag($name) {
+	public function getTag($tag) {
 		
 		//$videos = Video::withAnyTag($name)->where('validated', true)->get();
 
@@ -306,7 +321,7 @@ class PublicController extends Controller {
 			'body' => [
 				'query' => [
 					'match' => [
-						'tags' => 'ost'
+						'tags' => $tag
 					]
 				]
 			]
@@ -491,25 +506,22 @@ class PublicController extends Controller {
 
 	public function getTest() {
 
-		// $client = ClientBuilder::create()->build();
+		$client = ClientBuilder::create()->build();
 
-		// // Ma quande lingues coalesce, li simplic qua
+		$params = [
+		    'index' => 'bdd',
+		    'type' => 'video',
+		    'body' => [
+		    	'query' => [
+		    		'match_all' => []
+		    	]
+		    ]
+		];
 
-		// $params = [
-		// 	'index' => 'bdd',
-		// 	'type' => 'video',
-		// 	'body' => [
-		// 		'query' => [
-		// 			'match_all' => []
-		// 		]
-		// 	]
-		// ];
-
-		// $response = $client->search($params);
-
-		// dd($response);
-	
-		return view('front.test');	
+		$response = $client->search($params);
+		dd($response);
+			
+		//return view('front.test');	
 	}
 
 	public function postTest() {
