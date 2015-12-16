@@ -224,6 +224,10 @@ class AdminController extends Controller {
 						File::deleteDirectory($destination);
 						
 					}
+
+					// delete comments from database
+					Comment::where('video_id', $element)->delete();
+					
 				}
 				return redirect()->back()->with('message_success', 'Elements have been deleted');		
 			break;

@@ -9,9 +9,11 @@ use Redirect;
 use File;
 use Log;
 use Image;
+use Storage;
 
 use App\Models\Video;
 use Elasticsearch\ClientBuilder;
+
 
 class UserController extends Controller {
 	public function __construct() {  
@@ -56,6 +58,7 @@ class UserController extends Controller {
 		else {
 			if (Request::file('file')->isValid()) {
 				$file = Request::file('file');
+
 
 				$video = new Video;
 				$video->name = substr($file->getClientOriginalName(), 0, -4);

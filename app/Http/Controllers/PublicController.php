@@ -13,9 +13,9 @@ use Log;
 use File;
 use Crypt;
 use Carbon\Carbon;
-
-
 use Elasticsearch\ClientBuilder;
+use PHPRedis;
+
 
 class PublicController extends Controller {
 
@@ -493,11 +493,11 @@ class PublicController extends Controller {
 			DB::table('messages')->insert($message);
 
 			return redirect()->back()->with('message_success', 'Your message has been successfully sent');
-		}
+		}		
+	}
 
-		
-		
-		
+	public function getIp() {
+		return Request::ip();
 	}
 
 	#----------------------------
@@ -506,21 +506,9 @@ class PublicController extends Controller {
 
 	public function getTest() {
 
-		$client = ClientBuilder::create()->build();
+		$redis = PHPRedis::connection();
 
-		$params = [
-		    'index' => 'bdd',
-		    'type' => 'video',
-		    'body' => [
-		    	'query' => [
-		    		'match_all' => []
-		    	]
-		    ]
-		];
 
-		$response = $client->search($params);
-		dd($response);
-			
 		//return view('front.test');	
 	}
 

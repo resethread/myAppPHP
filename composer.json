@@ -10,7 +10,8 @@
         "laravelcollective/html": "~5.0",
         "rtconner/laravel-tagging": "~1.0.7",
         "intervention/image": "^2.3",
-        "elasticsearch/elasticsearch": "~2.0"
+        "elasticsearch/elasticsearch": "~2.0",
+        "nardev/laravel-5.1-phpredis": "dev-master"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
