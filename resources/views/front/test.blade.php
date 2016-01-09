@@ -1,6 +1,6 @@
-{!! Form::open() !!}
+{!! Form::open(['method' => 'POST', 'files' => true, 'id' => 'cl', 'class' => '']) !!}
 
-<textarea name="tags" id="" cols="30" rows="10"></textarea> <br>
+<input type="file" name="file">
 <input type="submit">
 
 {!! Form::close() !!}

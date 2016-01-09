@@ -26,22 +26,24 @@
 		</div>
 		<div class="container-fluid" style="margin-top: 60px;">
 			<div class="row">
-				<div class="col-md-3">
-					<div class="list-group">
-						<a href="/admin/videos-to-validate" class="list-group-item">Videos to validate<span class="badge">30 today</span></a>
-						<a href="/admin/videos-online" class="list-group-item">Videos online</a>
-						<a href="/admin/users" class="list-group-item">Users</a>
-						<a href="/admin/comments" class="list-group-item">Comments</a>
-						<br>
-						<a href="/admin/comments-reported" class="list-group-item">Comments reported</a>
-						<a href="/admin/fast-delete" class="list-group-item">Fast delete</a>
-						<a href="/admin/messages" class="list-group-item">Messages</a>
-						<a href="/admin/logs" class="list-group-item">Logs</a>
-						<br>
-						<a href="/admin/banners" class="list-group-item">Banners</a>
+				<div class="col-md-2">
+					<div class="row">
+						<div class="list-group">
+							<a href="/admin/videos-to-validate" class="list-group-item">Videos to validate<span class="badge">30 today</span></a>
+							<a href="/admin/videos-online" class="list-group-item">Videos online</a>
+							<a href="/admin/users" class="list-group-item">Users</a>
+							<a href="/admin/comments" class="list-group-item">Comments</a>
+							<br>
+							<a href="/admin/comments-reported" class="list-group-item">Comments reported</a>
+							<a href="/admin/fast-delete" class="list-group-item">Fast delete</a>
+							<a href="/admin/messages" class="list-group-item">Messages</a>
+							<a href="/admin/logs" class="list-group-item">Logs</a>
+							<br>
+							<a href="/admin/banners" class="list-group-item">Banners</a>
+						</div>
 					</div>
 				</div>
-				<div class="col-md-9">
+				<div class="col-md-10">
 					@if(Session::has('message_success'))
 						<div class="alert alert-success">
 							{{ Session::get('message_success') }}

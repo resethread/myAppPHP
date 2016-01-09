@@ -1,6 +1,7 @@
 @extends('layouts.admin_layout')
 @section('content')
 	@if(isset($messages))
+		<h1 class="page-header">Messages</h1>
 		<table class="table">
 			<thead>
 				<tr>

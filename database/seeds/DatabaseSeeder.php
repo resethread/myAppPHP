@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        $this->call(AppSeeder::class);
+        $this->call(StarSeeder::class);
 
         Model::reguard();
     }
@@ -42,6 +42,23 @@ class AppSeeder extends Seeder {
                     'status' => 'admin',
                 ]
               
+            ]
+        );
+    }
+}
+
+class StarSeeder extends Seeder {
+
+    public function run() {
+
+        DB::table('stars')->delete();
+        DB::table('stars')->insert(
+            [
+                [
+                    'id' => 1,
+                    'name' => 'teststar1',
+                    'image' => '/users_content/stars/test.jpg'
+                ]
             ]
         );
     }

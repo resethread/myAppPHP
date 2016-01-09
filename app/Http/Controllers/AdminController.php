@@ -6,6 +6,7 @@ use Log;
 use Request;
 use File;
 use Image;
+use PHPRedis;
 
 use App\Models\Video;
 use App\Models\Comment;
@@ -21,11 +22,13 @@ class AdminController extends Controller {
 
 		$today = Carbon\Carbon::toDay()->toDateTimeString();
 
+		$count_pages = PHPRedis::get('count_pages');
+
 		$count_users_registered_today = DB::table('users')->where('created_at', $today)->count();
 
 		$count_videos_uploaded_today = DB::table('videos')->where('created_at', $today)->count();
 
-		return view('dashboards.admin.index', compact('count_users_registered_today', 'count_videos_uploaded_today'));
+		return view('dashboards.admin.index', compact('count_users_registered_today', 'count_videos_uploaded_today', 'count_pages'));
 	}
 
 	public function getVideosToValidate() {
@@ -177,21 +180,21 @@ class AdminController extends Controller {
 
 		$users = DB::table('users')->paginate(10);
 
-		return view('dashboards.admin.users', compact('users'));
+		return view('dashboards.admin.users.users', compact('users'));
 	}
 
 	public function getUser($id) {
 
 		$user = DB::table('users')->where('id', $id)->first();
 
-		return view('dashboards.admin.user', compact('user'));
+		return view('dashboards.admin.users.user', compact('user'));
 	}
 
 	public function  getComments() {
 
 		$comments = DB::table('comments')->paginate(10);
 
-		return view('dashboards.admin.comments', compact('comments'));
+		return view('dashboards.admin.comments.comments', compact('comments'));
 	}
 
 	public function getCommentsReported() {
@@ -258,7 +261,34 @@ class AdminController extends Controller {
 		}
 	}
 
+	public function getMessages() {
+
+		$messages = DB::table('messages')->get();
+
+		return view('dashboards.admin.messages.messages')->with(compact('messages'));
+	}
+
+	public function getMessage($id) {
+
+		$message = DB::table('messages')->where('id', $id)->first();
+
+		return view('dashboards.admin.messages.message')->with(compact('message'));
+	}
+
+	public function postMessage($id) {
+
+		DB::table('messages')->where('id', $id)->delete();
+
+		return redirect('/admin/messages')->with('message_success', 'Message deleted');
+	}
+
 	public function getLogs() {
 
+		$destination = storage_path('logs');
+		chdir($destination);
+
+		$logs = file_get_contents('laravel.log');
+
+		return view('dashboards.admin.logs')->with(compact('logs'));
 	}
 }

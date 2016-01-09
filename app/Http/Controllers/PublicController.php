@@ -15,22 +15,26 @@ use Crypt;
 use Carbon\Carbon;
 use Elasticsearch\ClientBuilder;
 use PHPRedis;
+use Storage;
 
 
 class PublicController extends Controller {
 
 	public function getIndex() {
 
+		PHPRedis::incr('count_pages');
+
 		 $videos = DB::table('videos')->where('validated', true)->orderBy('id', 'desc')->get();
 
 		 $scripts = ['overviews'];
 
-		return view('front.overviews')
-			->with(compact('videos', 'scripts'));
+		return view('front.overviews')->with(compact('videos', 'scripts'));
 	}
 	
 
 	public function getVideo($id, $slug) {
+
+		PHPRedis::incr('count_pages');
 
 		$video = Video::find($id);
 
@@ -203,6 +207,8 @@ class PublicController extends Controller {
 	}
 
 	public function getSearch() {
+
+		PHPRedis::incr('count_pages');
 		
 		$searchZone = Request::input('search-zone');
 
@@ -311,6 +317,8 @@ class PublicController extends Controller {
 
 	
 	public function getTag($tag) {
+
+		PHPRedis::incr('count_pages');
 		
 		//$videos = Video::withAnyTag($name)->where('validated', true)->get();
 
@@ -342,6 +350,8 @@ class PublicController extends Controller {
 	// navTop
 	public function getNewsVideos() {
 
+		PHPRedis::incr('count_pages');
+
 		$videos = DB::table('videos')->where('validated', true)->orderBy('created_at', 'desc')->get();
 
 		$scripts = ['application'];
@@ -352,6 +362,8 @@ class PublicController extends Controller {
 	
 	public function getMostViewed() {
 
+		PHPRedis::incr('count_pages');
+
 		$videos = DB::table('videos')->where('validated', true)->orderBy('nb_views', 'desc')->get();
 
 		$scripts = ['application'];
@@ -361,6 +373,9 @@ class PublicController extends Controller {
 	}
 	
 	public function getTopRated() {
+
+		PHPRedis::incr('count_pages');
+
 		$videos = DB::table('videos')->where('validated', true)->orderBy('rate', 'desc')->get();
 
 		return view('front.overviews')
@@ -368,6 +383,8 @@ class PublicController extends Controller {
 	}
 	
 	public function getMostFavorited() {
+
+		PHPRedis::incr('count_pages');
 	
 		// creer une table favorited 	
 		// id, user_id, video_id
@@ -379,6 +396,8 @@ class PublicController extends Controller {
 	}
 
 	public function getMostCommented() {
+
+		PHPRedis::incr('count_pages');
 
 		$videos = DB::table('videos')->where('validated', true)->orderBy('nb_comments', 'desc')->get();
 		return view('front.overviews')
@@ -411,6 +430,8 @@ class PublicController extends Controller {
 	}
 
 	public function getRandom() {
+
+		PHPRedis::incr('count_pages');
 		
 		$videos = DB::table('videos')->where('validated', true)->orderByRaw("RAND()")->get();		
 
@@ -419,6 +440,8 @@ class PublicController extends Controller {
 	}
 		
 	public function getChannels() {
+
+		PHPRedis::incr('count_pages');
 		
 		$channels = DB::table('users')->get();
 
@@ -428,9 +451,18 @@ class PublicController extends Controller {
 
 	public function getStars() {
 
-		$videos = DB::table('videos')->where('validated', true)->orderByRaw("RAND()")->get();
+		PHPRedis::incr('count_pages');
 
-		return view('front.stars')->with(compact('videos'));
+		$stars = DB::table('stars')->get();
+
+		return view('front.stars')->with(compact('stars'));
+	}
+
+	public function getStar($star) {
+
+		$star = DB::table('stars')->where('name', $star)->first();
+
+		dd($star);
 	}
 	
 
@@ -439,16 +471,24 @@ class PublicController extends Controller {
 	#----------------------------
 
 	public function getTermsAndConditions() {
+
+		PHPRedis::incr('count_pages');
+		
 		$fullMain = true;
 		return view('front.conditions')->with(compact('fullMain'));
 	}
 
 	public function getHowTo() {
+
+		PHPRedis::incr('count_pages');
+
 		$fullMain = true;
 		return view('front.how-to')->with(compact('fullMain'));
 	}
 
 	public function getContact() {
+
+		PHPRedis::incr('count_pages');
 
 		$fullMain = true;
 
@@ -506,18 +546,25 @@ class PublicController extends Controller {
 
 	public function getTest() {
 
-		$redis = PHPRedis::connection();
-
-
+		//ini_set('memory_limit', '500M');
 		//return view('front.test');	
+		$destination = public_path('/users_content/videos/11');
+		chdir($destination);
+
+		$plaintext = file_get_contents('rvx75eKrs8.mp4');
+	
+
+
 	}
 
 	public function postTest() {
 
-		$tags = Request::input('tags');
-		$tags = explode(' ', $tags);
-		dd($tags);
+		$file = Request::file('file');
+		$file = Storage::get($file);
+		dd($file);
 		
+		$destination = public_path();
+		dd($destination);
 	}
 }
 
