@@ -1,7 +1,7 @@
 <?php namespace App\Http\Controllers;
 
 use DB;
-use Request;
+use Illuminate\Http\Request;
 use Validator;
 use Auth;
 use Session;
@@ -36,7 +36,17 @@ class PublicController extends Controller {
 
 		PHPRedis::incr('count_pages');
 
-		$video = PHPRedis::hLen($id) ? PHPRedis::hGetAll($id) : Video::find($id);
+		if (PHPRedis::hLen($id)) {
+			$video_by_redis = PHPRedis::hGetAll($id);
+			
+			$video = new Video();
+			foreach ($video_by_redis as $key => $value) {
+				$video->$key = $value;
+			}
+		}
+		else {
+			$video = Video::find($id);
+		}
 
 
 		if ($video->slug == $slug) {
@@ -547,9 +557,8 @@ class PublicController extends Controller {
 
 	public function getTest() {
 
-		//return view('front.test');	
+		return view('front.test');	
 
-		dd(PHPRedis::hGetAll('0'));
 	
 
 

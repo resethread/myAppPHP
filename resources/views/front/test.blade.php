@@ -1,6 +1,17 @@
-{!! Form::open(['method' => 'POST', 'files' => true, 'id' => 'cl', 'class' => '']) !!}
+<script>
 
-<input type="file" name="file">
-<input type="submit">
+function closure(x) {
+	var num = x;
+	return function(y) {
+		num += y;
+		return num;
+	}
+}
 
-{!! Form::close() !!}
+var c1 = closure(10);
+
+console.log(c1(1), c1(1), c1(1), c1(1), c1(1));
+
+
+
+</script>

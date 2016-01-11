@@ -3,11 +3,11 @@
 use DB;
 use Carbon;
 use Log;
-use Request;
+use Illuminate\Http\Request;
 use File;
 use Image;
 use PHPRedis;
-
+use Elasticsearch\ClientBuilder;
 use App\Models\Video;
 use App\Models\Comment;
 use App\Users;
@@ -49,18 +49,18 @@ class AdminController extends Controller {
 		return view('dashboards.admin.videos.video_to_validate', compact('video', 'file'));
 	}
 
-	public function postVideoToValidate($id) {
+	public function postVideoToValidate($id, $Request $request) {
 
 		$video = DB::table('videos')->where('id', $id)->first();
 
-		$validate = Request::input('validate');
+		$validate = $request->input('validate');
 
 		$destination = public_path('users_content/videos/'.$id);
 
 		if ($validate == 'yes') {
 
 			# update status
-			$video->update(['validated' => true]);
+			DB::table('videos')->where('id', $id)->update(['validated' => true]);
 		
 
 			# convert formats
@@ -79,7 +79,8 @@ class AdminController extends Controller {
 
 				exec($command);
 			}
-
+			
+			# Redis cache
 			$video_cache = [
 				'name' => $video->name,
 				'slug' => $video->slug,
@@ -94,8 +95,7 @@ class AdminController extends Controller {
 				'nb_favorited' => $video->nb_favorited,
 				'nb_comments' => $video->nb_comments,
 			];
-			
-			//PHPRedis::hmset([$id, $video_cache]);
+			PHPRedis::hMset($id, $video_cache);
 
 
 			return redirect('/admin/videos-to-validate')->with('message_success', 'the video has been validated');
@@ -183,6 +183,29 @@ class AdminController extends Controller {
 		$videos = DB::table('videos')->where('validated', true)->paginate(10);
 
 		return view('dashboards.admin.videos.videos_online', compact('videos'));
+	}
+
+	public function getVideoEdit($id) {
+
+		# Elastic
+		$client = ClientBuilder::create()->build();
+		$params = [
+			'index' => 'bdd',
+			'type' => 'video',
+			'id' => $id
+		];
+		$response = $client->get($params);
+
+		# Eloquent
+		$video = Video::find($id);
+		$video->tags = $response['_source']['tags'];
+		$video->stars = $response['_source']['stars'];
+
+		return view('dashboards.admin.videos.video_edit', compact('video'));
+	}
+
+	public function postVideoEdit($id, Request $request) {
+		dd($request->all());
 	}
 
 	public function getVideosSearch() {

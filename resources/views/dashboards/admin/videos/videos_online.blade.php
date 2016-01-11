@@ -2,7 +2,7 @@
 @section('content')
 	<h1 class="page-header">Videos online</h1>
 	<form method="GET" action="/admin/videos-search/" class="form-inline">
-		<input type="search" class="form-control" placeholder="Search videos" style="width: 82%;" id="search-zone" name="search-zone"> 
+		<input type="search" class="form-control" placeholder="Search videos" style="width: 82%;" id="search-zone" name="search-zone" autofocus> 
 		<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
 		<button type="submit" class="btn btn-success">Search</button>
 	</form>
@@ -23,7 +23,7 @@
 				<tr>
 					<td>{{ $video->id }}</td>
 					<td><a href="/video/{{ $video->id }}/{{ $video->slug }}" target="_blank">{{ $video->name }}</a></td>
-					<td><a href="#" class="btn btn-info">Edit</a></td>
+					<td><a href="/admin/video-edit/{{ $video->id }}" class="btn btn-info">Edit</a></td>
 					<td><a href="/admin/user/{{ $video->user_id }}">{{ $video->user_id }}</a></td>
 					<td>{{ $video->duration }}</td>
 					<td>{{ date('F j, Y, g:i a', strtotime($video->created_at)) }}</td>
