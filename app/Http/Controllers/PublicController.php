@@ -36,7 +36,8 @@ class PublicController extends Controller {
 
 		PHPRedis::incr('count_pages');
 
-		$video = Video::find($id);
+		$video = PHPRedis::hLen($id) ? PHPRedis::hGetAll($id) : Video::find($id);
+
 
 		if ($video->slug == $slug) {
 
@@ -546,12 +547,9 @@ class PublicController extends Controller {
 
 	public function getTest() {
 
-		//ini_set('memory_limit', '500M');
 		//return view('front.test');	
-		$destination = public_path('/users_content/videos/11');
-		chdir($destination);
 
-		$plaintext = file_get_contents('rvx75eKrs8.mp4');
+		dd(PHPRedis::hGetAll('0'));
 	
 
 

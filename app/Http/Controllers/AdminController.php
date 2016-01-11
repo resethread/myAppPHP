@@ -35,7 +35,7 @@ class AdminController extends Controller {
 
 		$videos = DB::table('videos')->where('validated', false)->get();
 
-		return view('dashboards.admin.videos_to_validate', compact('videos'));
+		return view('dashboards.admin.videos.videos_to_validate', compact('videos'));
 	}
 
 	public function getVideoToValidate($id) {
@@ -46,19 +46,19 @@ class AdminController extends Controller {
 		$file = substr($file, strrpos($file, '/'));
 		$file = ltrim($file, '/');
 		
-		return view('dashboards.admin.video_to_validate', compact('video', 'file'));
+		return view('dashboards.admin.videos.video_to_validate', compact('video', 'file'));
 	}
 
 	public function postVideoToValidate($id) {
 
-		$video = DB::table('videos')->where('id', $id);
+		$video = DB::table('videos')->where('id', $id)->first();
 
 		$validate = Request::input('validate');
 
 		$destination = public_path('users_content/videos/'.$id);
 
-
 		if ($validate == 'yes') {
+
 			# update status
 			$video->update(['validated' => true]);
 		
@@ -79,7 +79,24 @@ class AdminController extends Controller {
 
 				exec($command);
 			}
+
+			$video_cache = [
+				'name' => $video->name,
+				'slug' => $video->slug,
+				'poster' => $video->poster,
+				'path' => $video->path,
+				'duration' => $video->duration,
+				'user_id' => $video->user_id,
+				'nb_total_rate' => $video->nb_total_rate,
+				'nb_users_rating' => $video->nb_users_rating,
+				'rate' => $video->rate,
+				'nb_views' => $video->nb_views,
+				'nb_favorited' => $video->nb_favorited,
+				'nb_comments' => $video->nb_comments,
+			];
 			
+			//PHPRedis::hmset([$id, $video_cache]);
+
 
 			return redirect('/admin/videos-to-validate')->with('message_success', 'the video has been validated');
 
@@ -165,7 +182,7 @@ class AdminController extends Controller {
 
 		$videos = DB::table('videos')->where('validated', true)->paginate(10);
 
-		return view('dashboards.admin.videos_online', compact('videos'));
+		return view('dashboards.admin.videos.videos_online', compact('videos'));
 	}
 
 	public function getVideosSearch() {
@@ -173,7 +190,7 @@ class AdminController extends Controller {
 
 		$videos = Video::where('name', 'LIKE', '%'.$searchZone.'%')->get();
 
-		return view('dashboards.admin.videos_online')->with(compact('videos', 'searchZone'));
+		return view('dashboards.admin.videos.videos_online')->with(compact('videos', 'searchZone'));
 	}
 
 	public function getUsers() {
@@ -213,6 +230,7 @@ class AdminController extends Controller {
 			case 'videos':
 				$elements = Request::input('elements');
 				$elements = explode(' ', $elements);
+				PHPRedis::delete($elements);
 				foreach($elements as $element) {
 
 					// delete video from database
@@ -232,6 +250,7 @@ class AdminController extends Controller {
 					Comment::where('video_id', $element)->delete();
 					
 				}
+
 				return redirect()->back()->with('message_success', 'Elements have been deleted');		
 			break;
 
