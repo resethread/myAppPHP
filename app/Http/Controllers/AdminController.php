@@ -8,6 +8,7 @@ use File;
 use Image;
 use PHPRedis;
 use Elasticsearch\ClientBuilder;
+use App\User;
 use App\Models\Video;
 use App\Models\Comment;
 use App\Users;
@@ -49,7 +50,7 @@ class AdminController extends Controller {
 		return view('dashboards.admin.videos.video_to_validate', compact('video', 'file'));
 	}
 
-	public function postVideoToValidate($id, $Request $request) {
+	public function postVideoToValidate($id, Request $request) {
 
 		$video = DB::table('videos')->where('id', $id)->first();
 
@@ -208,8 +209,8 @@ class AdminController extends Controller {
 		dd($request->all());
 	}
 
-	public function getVideosSearch() {
-		$searchZone = Request::input('search-zone');
+	public function getVideosSearch(Request $request) {
+		$searchZone = $request->input('search-zone');
 
 		$videos = Video::where('name', 'LIKE', '%'.$searchZone.'%')->get();
 
@@ -219,6 +220,14 @@ class AdminController extends Controller {
 	public function getUsers() {
 
 		$users = DB::table('users')->paginate(10);
+
+		return view('dashboards.admin.users.users', compact('users'));
+	}
+
+	public function getUsersSearch(Request $request) {
+		$searchZone = $request->input('search-zone');
+
+		$users = User::where('name', 'LIKE', '%'.$searchZone.'%')->get();
 
 		return view('dashboards.admin.users.users', compact('users'));
 	}
@@ -248,10 +257,10 @@ class AdminController extends Controller {
 
 	}
 
-	public function postFastDelete($elements) {
+	public function postFastDelete($elements, Request $request) {
 		switch ($elements) {
 			case 'videos':
-				$elements = Request::input('elements');
+				$elements = $request->input('elements');
 				$elements = explode(' ', $elements);
 				PHPRedis::delete($elements);
 				foreach($elements as $element) {
@@ -278,7 +287,7 @@ class AdminController extends Controller {
 			break;
 
 			case 'users':
-				$elements = Request::input('elements');
+				$elements = $request->input('elements');
 				$elements = explode(' ', $elements);
 				foreach($elements as $element) {
 					$elem = User::find($element);
@@ -290,7 +299,7 @@ class AdminController extends Controller {
 			break;	
 			
 			default:
-				$elements = Request::input('elements');
+				$elements = $request->input('elements');
 				$elements = explode(' ', $elements);
 				foreach($elements as $element) {
 					$elem = Comment::find($element);

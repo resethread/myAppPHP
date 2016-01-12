@@ -127,12 +127,12 @@ class PublicController extends Controller {
 		return $comments;
 	}
 
-	public function postVideo($id) {
+	public function postVideo($id, Request $request) {
 		$rules = [
 			'content' => 'required|between:3,128'
 		];
 
-		$validator = $validator = Validator::make(Request::all(), $rules);
+		$validator = $validator = Validator::make($request->all(), $rules);
 
 		if($validator->fails()) {
 			return redirect()->back()->with('message_error', 'Your message must to be betwenn 3 and 128 characters');
@@ -142,7 +142,7 @@ class PublicController extends Controller {
 				$comment = new Comment;
 				$comment->user_name = Auth::user()->name;
 				$comment->video_id = $id;
-				$comment->content = Request::input('content');
+				$comment->content = $request->input('content');
 				$comment->save();
 
 				DB::table('videos')->where('id', $id)->increment('nb_comments', 1);
@@ -180,7 +180,7 @@ class PublicController extends Controller {
 		}
 	}
 
-	public function postRateVideo($user_id, $video_id) {
+	public function postRateVideo($user_id, $video_id, Request $request) {
 		if (Auth::guest()) {
 			return redirect()->back()->with('message_error', 'You must to be logged to rate a video');
 		}
@@ -192,12 +192,12 @@ class PublicController extends Controller {
 				DB::table('rates')->insert([
 					'user_id' => Auth::user()->id,
 					'video_id' => $video_id,
-					'rate' => Request::input('rate')
+					'rate' => $request->input('rate')
 				]);
 
 				$video = DB::table('videos')->where('id', $video_id);
 
-				$video->increment('nb_total_rate', Request::input('rate'));
+				$video->increment('nb_total_rate', $request->input('rate'));
 				$video->increment('nb_users_rating');
 
 				$nb_total_rate = $video->first()->nb_total_rate;
@@ -217,11 +217,11 @@ class PublicController extends Controller {
 		}
 	}
 
-	public function getSearch() {
+	public function getSearch(Request $request) {
 
 		PHPRedis::incr('count_pages');
 		
-		$searchZone = Request::input('search-zone');
+		$searchZone = $request->input('search-zone');
 
 		$videos = Video::where('name', 'LIKE', '%'.$searchZone.'%')->where('validated', true)->get();
 
@@ -239,12 +239,12 @@ class PublicController extends Controller {
 		return view('front.new-account')->with(compact('fullMain'));
 	}
 
-	public function postNewAccount() {
+	public function postNewAccount(Request $request) {
 
-		$name = Request::input('name');	
-		$email = Request::input('email');	
-		$password = Request::input('password');	
-		$password_confirmation = Request::input('password_confirmation');	
+		$name = $request->input('name');	
+		$email = $request->input('email');	
+		$password = $request->input('password');	
+		$password_confirmation = $request->input('password_confirmation');	
 
 		
 		$rules = [
@@ -255,7 +255,7 @@ class PublicController extends Controller {
 			'accepted' => 'required'
 		];
 
-		$validator = Validator::make(Request::all(), $rules);
+		$validator = Validator::make($request->all(), $rules);
 		
 		if ($validator->fails()) {
 			echo $validator->errors();
@@ -265,7 +265,7 @@ class PublicController extends Controller {
 				'name' => $name,
 				'email' => $email,
 				'password' => bcrypt($password),
-				'ip' => bcrypt(Request::ip())
+				'ip' => bcrypt($request->ip())
 			]);
 
 			return redirect('/');
@@ -283,10 +283,10 @@ class PublicController extends Controller {
 		return redirect('/');
 	}
 
-	public function postLogin() {
+	public function postLogin(Request $request) {
 
-		$login = Request::input('login');
-		$password = Request::input('password');
+		$login = $request->input('login');
+		$password = $request->input('password');
 
 		$authenticate_user_by_name = [
 			'name' => $login,
@@ -512,7 +512,7 @@ class PublicController extends Controller {
 		return view('front.contact')->with(compact('fullMain', 'options'));
 	}
 
-	public function postContact() {
+	public function postContact(Request $request) {
 
 		//sleep(3);
 
@@ -523,7 +523,7 @@ class PublicController extends Controller {
 			'text' => 'required|min:10|max:100'
 		];	
 
-		$validator = Validator::make(Request::all(), $rules);
+		$validator = Validator::make($request->all(), $rules);
 
 		if ($validator->fails()) {
 
@@ -532,13 +532,13 @@ class PublicController extends Controller {
 		else {
 
 			$message = [
-				'name' => Crypt::encrypt(Request::input('name')),
-				'email' => Crypt::encrypt(Request::input('email')),
-				'subject' => Crypt::encrypt(Request::input('subject')),
-				'text' => Crypt::encrypt(Request::input('text')),
+				'name' => Crypt::encrypt($request->input('name')),
+				'email' => Crypt::encrypt($request->input('email')),
+				'subject' => Crypt::encrypt($request->input('subject')),
+				'text' => Crypt::encrypt($request->input('text')),
 				'instant' => Carbon::now(),
 				'created_at' => Carbon::now(),
-				'ip' => Request::ip()
+				'ip' => $request->ip()
 			];
 
 			DB::table('messages')->insert($message);
@@ -547,8 +547,8 @@ class PublicController extends Controller {
 		}		
 	}
 
-	public function getIp() {
-		return Request::ip();
+	public function getIp(Request $request) {
+		return $request->ip();
 	}
 
 	#----------------------------
@@ -566,12 +566,7 @@ class PublicController extends Controller {
 
 	public function postTest() {
 
-		$file = Request::file('file');
-		$file = Storage::get($file);
-		dd($file);
-		
-		$destination = public_path();
-		dd($destination);
+
 	}
 }
 

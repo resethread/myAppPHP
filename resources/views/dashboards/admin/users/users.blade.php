@@ -1,7 +1,7 @@
 @extends('layouts.admin_layout')
 @section('content')
 	<h1 class="page-header">Users</h1>
-	<form method="GET" action="/admin/videos-online/search" class="form-inline">
+	<form method="GET" action="/admin/users-search" class="form-inline">
 		<input type="search" class="form-control" placeholder="Search users" style="width: 82%;" id="search-zone" name="search-zone"> 
 	
 		<button type="submit" class="btn btn-success">Search</button>

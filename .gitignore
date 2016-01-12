@@ -3,3 +3,4 @@
 /public/users_content
 Homestead.yaml
 .env
+/storage/logs
