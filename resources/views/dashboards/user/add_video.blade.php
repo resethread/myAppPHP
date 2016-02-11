@@ -26,6 +26,7 @@
   display: block;
   padding: 14px 45px;
   background: #39D2B4;
+  border-radius: 4px;
   color: #fff;
   font-size: 1em;
   transition: all .4s;
@@ -73,15 +74,15 @@
 	<h1 class="">UPLOAD VIDEO HERE </h1>
 
 	@if(Session::has('message_success'))
-		<div class="message green">
+		<div class="alert alert-success">
 			{{ Session::get('message_success') }}
 		</div>
 	@elseif(Session::has('message_error'))
-		<div class="message red">
+		<div class="alert alert-danger">
 			{{ Session::get('message_error') }}
 		</div>
 	@endif
-	
+	<div class="well">
 	{!! Form::open(['method' => 'POST', 'files' => true, 'id' => 'cl', 'class' => '']) !!}
 		<div class="input-file-container">
 		  	<input class="input-file" id="my-file" type="file" name="file">
@@ -90,20 +91,26 @@
 		<p class="file-return"></p>
 		<br>
 		<h2>Add description</h2>
-		<div class="field">
-			<textarea name="description" class="input" id="" rows="4" placeholder="Describe your video here"></textarea>
+		<div class="form-group">
+			<textarea name="description" class="form-control" id="" rows="4" placeholder="Describe your video here"></textarea>
 		</div>
 		<h2>Add tags and keywords</h2>
-		<div class="field">
-			<textarea name="tags" class="input" id="" rows="4" placeholder="Add some tags here"></textarea>	
+		<div class="form-group">
+			<textarea name="tags" class="form-control" id="" rows="4" placeholder="Add some tags here"></textarea>	
 		</div>
 		<h2>Starring</h2>
-		<div class="field">
-			<textarea name="stars" class="input" id="" rows="2" placeholder="Starring"></textarea>
+		<div class="form-group">
+			<textarea name="stars" class="form-control" id="" rows="2" placeholder="Starring"></textarea>
 		</div>
-		<br>
-		<button type="submit" class="button blue">Upload</button>
+		<div class="form-group">
+			<div class="row">
+				<div class="col-md-2 col-xs-12">
+					<button type="submit" class="btn btn-success btn-block">Upload</button>
+				</div>
+			</div>
+		</div>
 	{!! Form::close() !!}	
+	</div>
 
 
 	<script>

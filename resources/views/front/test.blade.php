@@ -63,6 +63,16 @@
 					</ul>
 				</div>
 				<div class="col-md-10">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							Login 
+						</div>
+						<div class="panel-body">
+							ezae
+						</div>
+					</div>
+
+					{{-- 
 					@for($i = 0; $i < 30; $i++)
 						<div class="videoOvw">
 							<a href="/video/14/le-meilleur-basketteur-le-show-jaune-6">
@@ -72,6 +82,7 @@
 							<p class="owwNbViews">2</p>
 						</div>
 					@endfor
+					 --}}
 				</div>
 			</div>
 		</div>

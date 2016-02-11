@@ -1,25 +1,22 @@
-<div id="logo">
+<div class="col-md-2" id="logo">
 	<a href="/"><img src="/assets/img/logo.jpg" alt="logo" width="160" height="90"></a>
 </div>
-
-	<form method="GET" action="/search" id="search_bar">
-		<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
-		<input type="search" placeholder="Search a video here" class="input" id="search-zone" name="search-zone">
-		
-		<button type="submit" class="button grey" id="search_btn">Search</button>
+<div class="col-md-6">
+	<form method="GET" action="/search" id="">
+		<div class="input-group">
+			<input type="text" class="form-control" placeholder="Search video" aria-describedby="basic-addon1">
+			<span class="input-group-addon" id="basic-addon1">Go</span>
+		</div>
 	</form>
-
-
-<div id="btn-space">
+</div>
+<div class="col-md-4">
 	@if(Auth::guest())
-		<div class="button green"><a href="/new-account">Upload videos now</a></div>
-		<div class="button red"><a href="/login">Register</a></div>
-		<div class="button blue"><a href="/login">Login</a></div>
+		<a class="btn btn-success">Upload video</a>
+		<a href="/new-account" class="btn btn-info">New account</a>
+		<a href="/login" class="btn btn-link">Login</a>
 	@else
-		<div class="button"><a href="/user">{{ Auth::user()->name }}</a></div>
-		<div class="button"><a href="/logout">Logout</a></div>
+		<a class="btn btn-success">Upload video</a>
+		<a href="/user" class="btn btn-info">{{ Auth::user()->name }}</a>
+		<a href="/logout" class="btn btn-danger">logout</a>
 	@endif
 </div>
-
-
-

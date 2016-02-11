@@ -557,11 +557,17 @@ class PublicController extends Controller {
 
 	public function getTest() {
 
-		return view('front.test');	
 
-	
+		$client = ClientBuilder::create()->build();
+		$params = [
+		    'index' => 'my_index',
+		    'type' => 'my_type',
+		    'id' => '12',
+		
+		];
 
-
+		$response = $client->get($params);
+		dd($response);
 	}
 
 	public function postTest() {

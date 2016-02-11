@@ -77,6 +77,7 @@ class UserController extends Controller {
 				$extension = $file->getClientOriginalExtension(); // return extension
 				$random_string = str_random(10);
 				$filename = "$random_string.$extension"; 
+
 				
 				$uploadSuccess = $file->move($destination, $filename);
 				if ($uploadSuccess) {
@@ -86,6 +87,7 @@ class UserController extends Controller {
 				else {
 					return 'erreur dans le transfert du fichier';
 				}
+
 
 				// change dir
 				chdir($destination);
@@ -101,6 +103,7 @@ class UserController extends Controller {
 
 
 				# ES
+		
 				$client = ClientBuilder::create()->build();
 				$params = [
 					'index' => 'bdd',
@@ -114,6 +117,7 @@ class UserController extends Controller {
 						'stars' => []
 					]
 				];
+
 
 				if (Request::has('description')) {
 					$description = Request::input('description');
@@ -129,23 +133,12 @@ class UserController extends Controller {
 					$stars = explode(' ', $stars);
 					$params['body']['stars'] = $stars;
 				}
+
 				$client->index($params);
+		
 
 				# mysql
 				$video->save();
-				# /ES
-
-				/*
-				$total_frames = shell_exec("ffprobe -show_streams '$filename' 2> /dev/null | grep nb_frames | head -n1 | sed 's/.*=//'");
-				$numbers = range(10, $total_frames);
-				shuffle($numbers);
-				$numbers = array_slice($numbers, 0, 16);Ô
-				sort($numbers);
-
-				foreach ($numbers as $key => $val) {
-					exec("ffmpeg -i $filename -vf 'select=gte(n\,$val)' -vframes 1 $random_string-$key.jpg");
-				}
-				*/
 
 				return redirect()->back()->with('message_success', 'Your video has been successfully uploaded and is waiting for admin validation');
 				
