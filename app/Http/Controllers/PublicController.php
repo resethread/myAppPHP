@@ -560,14 +560,18 @@ class PublicController extends Controller {
 
 		$client = ClientBuilder::create()->build();
 		$params = [
-		    'index' => 'my_index',
-		    'type' => 'my_type',
-		    'id' => '12',
-		
+			'index' => 'bdd',
+			'type' => 'video',
+			'id' => 17,
+			'body' => [
+				'doc' => [
+					'tags' => ['a', 'b', 'c']
+				]
+			]
 		];
-
-		$response = $client->get($params);
+		$response = $client->update($params);
 		dd($response);
+
 	}
 
 	public function postTest() {

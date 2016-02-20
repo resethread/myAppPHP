@@ -201,12 +201,38 @@ class AdminController extends Controller {
 		$video = Video::find($id);
 		$video->tags = $response['_source']['tags'];
 		$video->stars = $response['_source']['stars'];
+		 dd($video->tags);
 
 		return view('dashboards.admin.videos.video_edit', compact('video'));
 	}
 
 	public function postVideoEdit($id, Request $request) {
-		dd($request->all());
+		$client = ClientBuilder::create()->build();
+		$params = [
+			'index' => 'bdd',
+			'type' => 'video',
+			'id' => $id,
+			'body' => [
+				'doc' => []
+			]
+		];
+
+		if ($request->has('tags')) {
+			$tags = $request->input('tags');
+			$tags = explode(' ', $tags);
+			$params['body']['doc']['tags'] = $tags;
+		}
+
+		if ($request->has('stars')) {
+			$stars = $request->input('stars');
+			$stars = explode(' ', $stars);
+			$params['body']['doc']['stars'] = $stars;
+		}
+
+		$response = $client->update($params);
+
+
+		return redirect()->back()->with('message_success', 'successfull update');
 	}
 
 	public function getVideosSearch(Request $request) {

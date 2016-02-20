@@ -12,7 +12,7 @@
 					</div>
 					<div class="form-group">
 						<label for="">Tags</label>
-						<textarea rows="3" class="form-control" name="tags"></textarea>
+						<textarea rows="3" class="form-control" name="tags" value=""></textarea>
 					</div>
 					<div class="form-group">
 						<label for="">Stars</label>

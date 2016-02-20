@@ -100,10 +100,7 @@ class UserController extends Controller {
 				}
 				$video->duration = getDuration(File::files($destination)[0]);
 				
-
-
 				# ES
-		
 				$client = ClientBuilder::create()->build();
 				$params = [
 					'index' => 'bdd',
@@ -117,7 +114,6 @@ class UserController extends Controller {
 						'stars' => []
 					]
 				];
-
 
 				if (Request::has('description')) {
 					$description = Request::input('description');

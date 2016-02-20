@@ -7,7 +7,7 @@
 		<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
 		
 		<div class="form-group">
-			<input type="text" class="form-control" name="login" placeholder="Login">
+			<input type="text" class="form-control" name="login" placeholder="Login" autofocus>
 		</div>
 
 		<div class="form-group">
