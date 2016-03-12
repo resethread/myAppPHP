@@ -45,6 +45,11 @@ class UserController extends Controller {
 
 	public function postAddVideo() {
 
+		ini_set('upload_max_filesize', '100M');
+		ini_set('post_max_size', '100M');
+		ini_set('max_input_time', 30000);
+		ini_set('max_execution_time', 30000);
+
 		$file = Request::file('file');
 
 		$rules = [
@@ -131,7 +136,6 @@ class UserController extends Controller {
 				}
 
 				$client->index($params);
-		
 
 				# mysql
 				$video->save();

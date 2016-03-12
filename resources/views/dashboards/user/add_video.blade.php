@@ -84,6 +84,7 @@
 	@endif
 	<div class="well">
 	{!! Form::open(['method' => 'POST', 'files' => true, 'id' => 'cl', 'class' => '']) !!}
+	{{ csrf_field() }}
 		<div class="input-file-container">
 		  	<input class="input-file" id="my-file" type="file" name="file">
 			<label for="my-file" class="input-file-trigger" tabindex="0">Select a video...</label>

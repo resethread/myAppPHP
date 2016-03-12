@@ -557,25 +557,20 @@ class PublicController extends Controller {
 
 	public function getTest() {
 
+		chdir(public_path('users_content/videos/5'));
 
-		$client = ClientBuilder::create()->build();
-		$params = [
-			'index' => 'bdd',
-			'type' => 'video',
-			'id' => 17,
-			'body' => [
-				'doc' => [
-					'tags' => ['a', 'b', 'c']
-				]
-			]
-		];
-		$response = $client->update($params);
-		dd($response);
+		echo shell_exec("ffmpeg -i OGPQkagOBw.mp4 2>&1 | grep Duration | awk '{print $2}' | tr -d ,");
+
+		exec("ffmpeg -i OGPQkagOBw.mp4 toto.webm");
+		
+		//return view('front.test');
 
 	}
 
-	public function postTest() {
+	public function postTest(Request $request) {
 
+		$test = $request->input('toto');
+		echo $test;
 
 	}
 }

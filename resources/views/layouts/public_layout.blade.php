@@ -58,12 +58,12 @@
 			</div>
 			<div class="row">
 				<div class="col-md-1">
-					<div class="row">
+					<div class="row" id="categories_side">
 						<ul class="list-group">
 							@for($i = 0; $i < 30; $i++)
 								<li class="list-group-item"><a href="/tag/test">Cras justo odio</a></li>
 							@endfor
-					</ul>
+						</ul>
 					</div>
 				</div>
 				<main class="col-md-11" style="min-height: 75vh;">
