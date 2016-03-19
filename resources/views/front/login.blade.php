@@ -11,11 +11,11 @@
 		</div>
 
 		<div class="form-group">
-			<input type="password" class="form-control" name="password" placeholder="Password">
+			<input type="password" class="form-control" name="password" placeholder="Password" tabindex="2">
 		</div>
 
 		<div class="form-group">
-			<button type="submit" class="btn btn-default btn-block btn-lg">Send</button>
+			<button type="submit" class="btn btn-default btn-block btn-lg" tabindex="3">Send</button>
 		</div>
 	</form>
 </div>

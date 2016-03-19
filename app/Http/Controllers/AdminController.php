@@ -122,11 +122,9 @@ class AdminController extends Controller {
 		$destination = public_path("/users_content/videos/$id");
 	
 		$file = File::files($destination)[0];
-		$file = substr($file, strrpos($file, '/'));
-		$file = ltrim($file, '/');
-		$only_name = substr($file, 0, strrpos($file, '.'));
-
-		$extension = substr($file, -3);
+		$name = File::name($file);
+		$extension = File::extension($file);
+		$complete_name = basename($file);
 
 		if ($extension == 'mp4' || $extension == 'webm' || $extension == 'avi') {
 			chdir($destination);
@@ -136,25 +134,27 @@ class AdminController extends Controller {
 
 			$fps = $total_seconds / $nb_thumbnails;
 			$fps = floor($fps);
-			
-			$command = "ffmpeg -i $file -vf fps=1/$fps z_img__$only_name%03d.jpg;";
 
+			//$command = "ffmpeg -i $name.$extension -vf fps=1/$fps z_img__$name%03d.jpg;";
+			$command = "ffmpeg -i $complete_name -vf fps=1/$fps thumb-$name-%d.jpg";
 			exec($command);
 
 			// resize images with Intervention.io
 			$images = File::files($destination);
 			array_shift($images);
+			
 			foreach ($images as $image) {
 				$img = Image::make($image);
-				$img->resize(180, 75);
+				$img->resize(220, 170);
 				$img->save($image);
 			}
-		
+			
 			return redirect()->back()->with('message_success', 'Thumbnails created');
 		}
 		else {
 			return redirect()->back()->with('message_error', 'this is not a video file');
 		}
+		
 	}
 
 	public function postConvertFormats($id) {

@@ -62,11 +62,11 @@
 
 			<div id="commentZone">
 				<h3>Post a comment</h3>	
-				<form action="/video/{{ $video->id }}/{{ $video->slug }}" method="POST" id="form_comment" class="">
+				 {!! Form::open(['id' => 'form_comment']) !!}
 					<textarea name="content" id="content" cols="30" rows="4" class="input"></textarea>
 					<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
 					<button type="submit" class="button m1_0 olive">Send</button>
-				</form>
+				{!! Form::close() !!}
 				<div class="message" v-for="comment in comments">
 					<a href="#" v-text="comment.user_name"></a>
 					<small v-text="comment.created_at"></small> <br>

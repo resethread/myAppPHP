@@ -11,9 +11,9 @@
 						$random_name = substr($random_name, strrpos($random_name, '/')); 	
 						$random_name = ltrim($random_name, '/');
 
-						$real_path = "$path/z_img__$random_name"."001.jpg";
+						$real_path = "$path/thumb-$random_name-1.jpg";
 					?>
-					<img src="{{ $real_path }}" alt="" width="200" height="100" title="{{ $video->name }}">
+					<img src="{{ $real_path }}" alt="" class="thumb" width="220" height="100" title="{{ $video->name }}">
 				</a>
 				<p class="ovwTitle"><a href="/video/{{ $video->id.'/'.$video->slug }}" title="{{ $video->name }}">{{ $video->name }}</a></p>
 				<p class="owwNbViews">{{ $video->nb_views }}</p>

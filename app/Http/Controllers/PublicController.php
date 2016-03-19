@@ -559,9 +559,7 @@ class PublicController extends Controller {
 
 		chdir(public_path('users_content/videos/5'));
 
-		echo shell_exec("ffmpeg -i OGPQkagOBw.mp4 2>&1 | grep Duration | awk '{print $2}' | tr -d ,");
-
-		exec("ffmpeg -i OGPQkagOBw.mp4 toto.webm");
+		
 		
 		//return view('front.test');
 
