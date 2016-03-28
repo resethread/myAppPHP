@@ -4,9 +4,15 @@
 		<meta charset="UTF-8">
 		<link rel="stylesheet" href="/assets/css/site.css">
 		<link rel="stylesheet" href="/assets/css/bootstrap.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 		<title>Admin</title>
 	</head>
 	<body>
+		<style>
+		i {
+			margin-right: 0.9em;
+		}
+		</style>
 		<div class="navbar navbar-default navbar-fixed-top">
 			<div class="container-fluid">
 				<div class="navbar-header">
@@ -29,17 +35,21 @@
 				<div class="col-md-2">
 					<div class="row">
 						<div class="list-group">
-							<a href="/admin/videos-to-validate" class="list-group-item">Videos to validate<span class="badge">30 today</span></a>
-							<a href="/admin/videos-online" class="list-group-item">Videos online</a>
-							<a href="/admin/users" class="list-group-item">Users</a>
-							<a href="/admin/comments" class="list-group-item">Comments</a>
+							<a href="/admin" class="list-group-item"><i class="fa fa-dashboard"></i> Home</a>
+							<a href="/admin/videos-to-validate" class="list-group-item"><i class="fa fa-check-square"></i> Videos to validate<span class="badge">30 today</span></a>
+							<a href="/admin/videos-online" class="list-group-item"><i class="fa fa-video-camera"></i> Videos online</a>
+							<a href="/admin/users" class="list-group-item"><i class="fa fa-users"></i> Users</a>
+							<a href="/admin/comments" class="list-group-item"><i class="fa fa-comments"></i> Comments</a>
+							<a href="/admin/stars" class="list-group-item"><i class="fa fa-female"></i> Stars</a>
+							<a href="/admin/tags" class="list-group-item"><i class="fa fa-tags"></i> Tags</a>
+							<a href="/admin/banners" class="list-group-item"><i class="fa fa-photo"></i> Banners</a>
 							<br>
-							<a href="/admin/comments-reported" class="list-group-item">Comments reported</a>
-							<a href="/admin/fast-delete" class="list-group-item">Fast delete</a>
-							<a href="/admin/messages" class="list-group-item">Messages</a>
-							<a href="/admin/logs" class="list-group-item">Logs</a>
+							<a href="/admin/comments-reported" class="list-group-item"><i class="fa fa-warning"></i> Comments reported</a>
+							<a href="/admin/fast-delete" class="list-group-item"><i class="fa fa-exclamation-circle"></i> Fast delete</a>
+							<a href="/admin/messages" class="list-group-item"><i class="fa fa-envelope"></i> Messages</a>
+							<a href="/admin/logs" class="list-group-item"><i class="fa fa-terminal"></i> Logs</a>
 							<br>
-							<a href="/admin/banners" class="list-group-item">Banners</a>
+							
 						</div>
 					</div>
 				</div>

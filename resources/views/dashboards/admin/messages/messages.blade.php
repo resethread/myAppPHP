@@ -16,7 +16,7 @@
 			<tbody>
 				@foreach($messages as $message)
 					<tr>
-						<td><a href="/admin/message/{{ $message->id }}">{{ $message->id }}</a></td>
+						<td><a href="/admin/messages/message/{{ $message->id }}">{{ $message->id }}</a></td>
 						<td>{{ Crypt::decrypt($message->name) }}</td>
 						<td>{{ Crypt::decrypt($message->email) }}</td>
 						<td>{{ Crypt::decrypt($message->subject) }}</td>

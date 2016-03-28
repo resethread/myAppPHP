@@ -243,12 +243,7 @@ class AdminController extends Controller {
 		return view('dashboards.admin.videos.videos_online')->with(compact('videos', 'searchZone'));
 	}
 
-	public function getUsers() {
 
-		$users = DB::table('users')->paginate(10);
-
-		return view('dashboards.admin.users.users', compact('users'));
-	}
 
 	public function getUsersSearch(Request $request) {
 		$searchZone = $request->input('search-zone');
@@ -256,13 +251,6 @@ class AdminController extends Controller {
 		$users = User::where('name', 'LIKE', '%'.$searchZone.'%')->get();
 
 		return view('dashboards.admin.users.users', compact('users'));
-	}
-
-	public function getUser($id) {
-
-		$user = DB::table('users')->where('id', $id)->first();
-
-		return view('dashboards.admin.users.user', compact('user'));
 	}
 
 	public function  getComments() {
@@ -336,36 +324,5 @@ class AdminController extends Controller {
 				return redirect()->back()->with('message_success', 'Elements have been deleted');	
 			break;
 		}
-	}
-
-	public function getMessages() {
-
-		$messages = DB::table('messages')->get();
-
-		return view('dashboards.admin.messages.messages')->with(compact('messages'));
-	}
-
-	public function getMessage($id) {
-
-		$message = DB::table('messages')->where('id', $id)->first();
-
-		return view('dashboards.admin.messages.message')->with(compact('message'));
-	}
-
-	public function postMessage($id) {
-
-		DB::table('messages')->where('id', $id)->delete();
-
-		return redirect('/admin/messages')->with('message_success', 'Message deleted');
-	}
-
-	public function getLogs() {
-
-		$destination = storage_path('logs');
-		chdir($destination);
-
-		$logs = file_get_contents('laravel.log');
-
-		return view('dashboards.admin.logs')->with(compact('logs'));
 	}
 }

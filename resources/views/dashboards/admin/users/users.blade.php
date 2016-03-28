@@ -21,7 +21,7 @@
 			@foreach($users as $user)
 				<tr>
 					<td>{{ $user->id }}</td>
-					<td><a href="/admin/user/{{ $user->id }}">{{ $user->name }}</a></td>
+					<td><a href="/admin/users/user/{{ $user->id }}">{{ $user->name }}</a></td>
 					<td>{{ $user->email }}</td>			
 					<td>{{ $user->banned }}</td>				
 					<td>{{ $user->created_at }}</td>

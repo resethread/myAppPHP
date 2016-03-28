@@ -471,9 +471,11 @@ class PublicController extends Controller {
 
 	public function getStar($star) {
 
-		$star = DB::table('stars')->where('name', $star)->first();
+		//$star = DB::table('stars')->where('name', $star)->first();
 
-		dd($star);
+		//dd($star);
+
+		return view('front.star');
 	}
 	
 

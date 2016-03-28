@@ -5,9 +5,15 @@
 		<meta name="csrf-token" content="{{ csrf_token() }}">
 		<link rel="stylesheet" href="/assets/css/bootstrap.css">
 		<link rel="stylesheet" href="/assets/css/site.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 		<title>App</title>
 	</head>
 	<body>
+		<style>
+		i {
+			margin-right: 0.9em;
+		}
+		</style>
 		<div class="container-fluid" style="margin-top: 20px;">
 			<div class="row" id="header">
 				@include('includes.header')
@@ -31,10 +37,10 @@
 				<div class="col-md-2">
 					<div class="row">
 						<div class="list-group">
-							<a href="/user" class="list-group-item">{{ Auth::user()->name }}</a>
-							<a href="/user/videos" class="list-group-item">Videos</a>
-							<a href="/user/favorites" class="list-group-item">Favorites</a>
-							<a href="/user/settings" class="list-group-item">Setting</a>
+							<a href="/user" class="list-group-item"><i class="fa fa-user"></i> {{ Auth::user()->name }}</a>
+							<a href="/user/videos" class="list-group-item"><i class="fa fa-video-camera"></i> Videos</a>
+							<a href="/user/favorites" class="list-group-item"><i class="fa fa-heart"></i> Favorites</a>
+							<a href="/user/settings" class="list-group-item"><i class="fa fa-gear"></i> Setting</a>
 						</div>
 					</div>
 				</div>
