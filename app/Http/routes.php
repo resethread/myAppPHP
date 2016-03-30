@@ -29,6 +29,7 @@ Route::post('new-account', 'PublicController@postNewAccount');
 
 Route::get('login', 'PublicController@getLogin');
 Route::post('login', 'PublicController@postLogin');
+Route::get('logout', 'PublicController@getLogout');
 
 Route::get('contact', 'PublicController@getContact');
 Route::post('contact', 'PublicController@postContact');
@@ -45,8 +46,11 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
 	Route::controller('/logs', 'Admin\LogsController');
 	Route::controller('/', 'AdminController');
 	
+	
+});
 
-	Route::controller('user', 'UserController');
+Route::group(['middleware' => 'auth', 'prefix' => 'user'], function() {
+	Route::controller('/', 'UserController');
 });
 
 //Route::controller('/', 'PublicController');

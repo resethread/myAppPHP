@@ -1,6 +1,11 @@
 @extends('layouts.admin_layout')
 @section('content')
 	<h1 class="header-page">User </h1>
+	<form method="GET" action="/admin/users/search" class="form-inline">
+		<input type="search" class="form-control" placeholder="Search users" style="width: 82%;" id="search-zone" name="search-zone"> 
+	
+		<button type="submit" class="btn btn-success">Search</button>
+	</form>
 	@if(isset($user))
 		<table class="table table-striped table-hover ">
 			<thead>

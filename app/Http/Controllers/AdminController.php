@@ -243,16 +243,6 @@ class AdminController extends Controller {
 		return view('dashboards.admin.videos.videos_online')->with(compact('videos', 'searchZone'));
 	}
 
-
-
-	public function getUsersSearch(Request $request) {
-		$searchZone = $request->input('search-zone');
-
-		$users = User::where('name', 'LIKE', '%'.$searchZone.'%')->get();
-
-		return view('dashboards.admin.users.users', compact('users'));
-	}
-
 	public function  getComments() {
 
 		$comments = DB::table('comments')->paginate(10);
