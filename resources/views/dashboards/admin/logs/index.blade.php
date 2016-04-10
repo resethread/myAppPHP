@@ -7,12 +7,14 @@
 			<thead>
 				<tr>
 					<th>Logs</th>
+					<th>Delete</th>
 				</tr>
 			</thead>
 			<tbody>
 				@foreach($files as $file)
 					<tr>
 						<td><a href="/admin/logs/log/{{ $file }}">{{ $file }}</a></td>
+						<td><a href="/admin/logs/delete/{{ $file }}"><i class="fa fa-trash-o"></i></a></td>
 					</tr>
 				@endforeach
 			</tbody>

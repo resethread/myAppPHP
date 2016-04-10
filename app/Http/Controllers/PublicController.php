@@ -314,14 +314,15 @@ class PublicController extends Controller {
 		sleep(4);
 		
 		if ( Auth::attempt($authenticate_user_by_name) || Auth::attempt($authenticate_user_by_email) ) {
+			$user_id = Auth::user()->id;
 			
-			return redirect('/user');
+			return redirect("/account");
 		}
 		else if ( Auth::attempt($authenticate_admin_by_name) || Auth::attempt($authenticate_admin_by_email) ) {
 			return redirect('/admin');
 		}
 		else {
-			return 'pas loged';
+			return redirect()->back()->with('error_message', 'Name or user incorrect');
 		}
 		
 	}
@@ -559,7 +560,7 @@ class PublicController extends Controller {
 
 	public function getTest() {
 
-		chdir(public_path('users_content/videos/5'));
+		dd(Auth::user()->id);
 
 		
 		

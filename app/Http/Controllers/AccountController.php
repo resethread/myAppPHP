@@ -15,7 +15,7 @@ use App\Models\Video;
 use Elasticsearch\ClientBuilder;
 
 
-class UserController extends Controller {
+class AccountController extends Controller {
 	public function __construct() {  
 
 	}

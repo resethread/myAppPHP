@@ -1,6 +1,6 @@
 <?php
 
-// Index
+// Public
 Route::get('/', 'PublicController@getIndex');
 
 Route::get('video/{id}/{slug}', 'PublicController@getVideo');
@@ -36,7 +36,9 @@ Route::post('contact', 'PublicController@postContact');
 
 Route::get('terms-and-conditions', 'PublicController@getTermsAndConditions');
 
+Route::get('test', 'PublicController@getTest');
 
+// Admin
 Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
 	Route::controller('/users', 'Admin\UsersController');
 	Route::controller('/banners', 'Admin\BannersController');
@@ -49,8 +51,10 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
 	
 });
 
-Route::group(['middleware' => 'auth', 'prefix' => 'user'], function() {
-	Route::controller('/', 'UserController');
+
+// Account
+Route::group(['middleware' => 'auth', 'prefix' => 'account'], function() {
+	Route::controller('/', 'AccountController');
 });
 
 //Route::controller('/', 'PublicController');

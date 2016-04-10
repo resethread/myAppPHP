@@ -16,7 +16,7 @@
 		<a href="/login" class="btn btn-link">Login</a>
 	@else
 		<a class="btn btn-success">Upload video</a>
-		<a href="/user" class="btn btn-info">{{ Auth::user()->name }}</a>
+		<a href="/account" class="btn btn-info">{{ Auth::user()->name }}</a>
 		<a href="/logout" class="btn btn-danger">logout</a>
 	@endif
 </div>

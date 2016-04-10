@@ -11,6 +11,7 @@
 					<th>subject</th>
 					<th>text</th>
 					<th>ip</th>
+					<th>Delete</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -20,8 +21,9 @@
 						<td>{{ Crypt::decrypt($message->name) }}</td>
 						<td>{{ Crypt::decrypt($message->email) }}</td>
 						<td>{{ Crypt::decrypt($message->subject) }}</td>
-						<td>{{ Crypt::decrypt($message->text) }}</td>
+						<td><a href="/admin/messages/message/{{ $message->id }}">{{ Crypt::decrypt($message->text) }}</a></td>
 						<td>{{ $message->ip }}</td>
+						<td><i class="fa fa-trash-o"></i></td>
 					</tr>
 				@endforeach
 			</tbody>

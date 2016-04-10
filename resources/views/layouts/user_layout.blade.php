@@ -37,10 +37,10 @@
 				<div class="col-md-2">
 					<div class="row">
 						<div class="list-group">
-							<a href="/user" class="list-group-item"><i class="fa fa-user"></i> {{ Auth::user()->name }}</a>
-							<a href="/user/videos" class="list-group-item"><i class="fa fa-video-camera"></i> Videos</a>
-							<a href="/user/favorites" class="list-group-item"><i class="fa fa-heart"></i> Favorites</a>
-							<a href="/user/settings" class="list-group-item"><i class="fa fa-gear"></i> Setting</a>
+							<a href="/account" class="list-group-item"><i class="fa fa-user"></i> {{ Auth::user()->name }}</a>
+							<a href="/account/videos" class="list-group-item"><i class="fa fa-video-camera"></i> Videos</a>
+							<a href="/account/favorites" class="list-group-item"><i class="fa fa-heart"></i> Favorites</a>
+							<a href="/account/settings" class="list-group-item"><i class="fa fa-gear"></i> Setting</a>
 						</div>
 					</div>
 				</div>

@@ -3,8 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use DB;
-
+use File;
 
 class LogsController extends Controller {
 
@@ -14,9 +13,6 @@ class LogsController extends Controller {
 		chdir($destination);
 		$files = scandir($destination);
 		$files = array_slice($files, 3);
-
-
-		//$logs = file_get_contents('laravel.log');
 
 		return view('dashboards.admin.logs.index')->with(compact('files'));
 	}
@@ -28,5 +24,11 @@ class LogsController extends Controller {
 		$log = file_get_contents($log);
 
 		return view('dashboards.admin.logs.log')->with(compact('log'));
+	}
+
+	public function getDelete($log) {
+		File::delete(storage_path("logs/$log"));
+
+		return redirect()->back();
 	}
 }

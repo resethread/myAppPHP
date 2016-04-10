@@ -12,7 +12,7 @@
 	@endif
 
 	<div class="add">
-		<a href="/user/add-video">Add Video</a>
+		<a href="/account/add-video">Add Video</a>
 	</div>
 	<hr>
 	<h2>Last videos</h2>
@@ -26,22 +26,32 @@
 		<tbody>
 		@forelse($last_videos as $video) 
 			<tr>
-				<td><a href="/video/{{ $video->id }}/{{ $video->slug }}"><img src="{{ $video->path }}-3.jpg" alt="" width="100"></a></td>
+				<td>
+					<a href="/video/{{ $video->id }}/{{ $video->slug }}">
+						<?php 
+							chdir(public_path("users_content/videos/$video->id"));
+							$path = getcwd();
+							$files = scandir($path);
+							$src_img = $files[3];
+						?>
+						<img src="{{ "/users_content/videos/$video->id/$src_img" }}" alt="" width="100">
+					</a>
+				</td>
 				<td>{{ $video->name }} <br>
 					{{ $video->nb_comments }} comments	<br>
 					{{ $video->nb_views }} views
 	
 				</td>
-				<td><a href="/user/edit-video/{{ $video->id }}" class="button mini blue">Edit</a></td>
+				<td><a href="/account/edit-video/{{ $video->id }}" class="btn btn-primary btn-xs">Edit</a></td>
 				<td>
-					{!! Form::open(['url' => '/user/delete-video/'.$video->id, 'method' => 'POST']) !!}
-						<input type="submit" class="button mini red" value="Delete">
+					{!! Form::open(['url' => '/account/delete-video/'.$video->id, 'method' => 'POST']) !!}
+						<input type="submit" class="btn btn-danger btn-xs" value="Delete">
 					{!! Form::close() !!}
 				</td>
 			</tr>
 		@empty
 			<tr>
-				<td>No video yet &nbsp; <a href="/user/add-video">Upload video</a></td>
+				<td>No video yet &nbsp; <a href="/account/add-video">Upload video</a></td>
 			</tr>	
 		@endforelse
 		</tbody>

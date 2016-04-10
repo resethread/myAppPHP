@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use Auth;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
@@ -32,4 +33,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
+
+    public static function pid() {
+        $id = Auth::user()->id;
+        $pid = md5($id);
+        $pid = substr($pid, 6, 10);
+        return $pid;
+    }
 }

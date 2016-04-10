@@ -10,7 +10,15 @@
 		<tbody>
 			@foreach($videos as $video)
 				<tr>
-					<td><img src="/users_content/videos/{{ $video->id }}/thumbs/thumb_1.jpg" alt="" width="100"></td>
+					<td>
+						<?php
+							chdir(public_path("users_content/videos/$video->id"));
+							$path = getcwd();
+							$files = scandir($path);
+							$src_img = $files[3];
+						?>
+						<img src="{{ "/users_content/videos/$video->id/$src_img" }}" alt="" width="100">
+					</td>
 					<td>{{ $video->name }}</td>
 					<td>{{ $video->nb_views }}</td>
 					<td><a href="/user/edit-video/{{ $video->id }}">Edit</a></td>
@@ -23,5 +31,4 @@
 			@endforeach
 		</tbody>
 	</table>
-	{!! $videos->render() !!}
 @stop
