@@ -34,9 +34,12 @@ Route::get('logout', 'PublicController@getLogout');
 Route::get('contact', 'PublicController@getContact');
 Route::post('contact', 'PublicController@postContact');
 
+Route::get('/ip', 'PublicController@getIp');
+
 Route::get('terms-and-conditions', 'PublicController@getTermsAndConditions');
 
 Route::get('test', 'PublicController@getTest');
+Route::get('test2', 'PublicController@getTest2');
 
 // Admin
 Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {

@@ -6,6 +6,7 @@
 		<title>Document</title>
 	</head>
 	<body>
+	<a href="/test2">test</a>
 		{!! Form::open(['files' => true]) !!}
 			
 			<input type="text" name="toto">

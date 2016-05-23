@@ -24,8 +24,8 @@ class AppSeeder extends Seeder {
 
     public function run() {
 
-        //DB::table('users')->delete();
-        /*DB::table('users')->insert(
+        DB::table('users')->delete();
+        DB::table('users')->insert(
             [
                 [
                     'id' => 1,
@@ -43,7 +43,7 @@ class AppSeeder extends Seeder {
                 ]
               
             ]
-        );*/
+        );
     }
 }
 

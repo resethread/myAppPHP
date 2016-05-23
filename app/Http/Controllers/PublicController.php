@@ -560,12 +560,17 @@ class PublicController extends Controller {
 
 	public function getTest() {
 
-		dd(Auth::user()->id);
-
 		
+
+		//return response()->download('assets/css/app.css');
 		
 		//return view('front.test');
 
+	}
+
+	public function getTest2() {
+		echo 'z';
+		return response()->download('assets/css/app.css');
 	}
 
 	public function postTest(Request $request) {
