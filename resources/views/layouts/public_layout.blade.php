@@ -36,11 +36,7 @@
 			<div class="row">
 				<div class="col-md-1 visible-lg visible-md">
 					<div class="row" id="categories_side">
-						<ul class="list-group">
-							@for($i = 0; $i < 30; $i++)
-								<li class="list-group-item"><a href="/tag/test">Cras justo odio</a></li>
-							@endfor
-						</ul>
+						@include('includes.side_tags')
 					</div>
 				</div>
 				<div class="col-sm-12 visible-sm visible-xs">

@@ -559,8 +559,19 @@ class PublicController extends Controller {
 	#----------------------------
 
 	public function getTest() {
+		$client = ClientBuilder::create()->build();
+		$params = [
+			'index' => 'bdd',
+			'body' => [
+				'setting' => [
+					'number_of_shards' => 2,
+					'number_of_replicas' => 0
+				]
+			]
+		];
 
-		
+		$response = $client->indices()->create($params);
+		dd($response);
 
 		//return response()->download('assets/css/app.css');
 		
