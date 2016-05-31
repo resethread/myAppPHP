@@ -1,4 +1,6 @@
-<?php namespace App\Http\Controllers;
+<?php 
+
+namespace App\Http\Controllers;
 
 use DB;
 use Illuminate\Http\Request;
@@ -16,6 +18,7 @@ use Carbon\Carbon;
 use Elasticsearch\ClientBuilder;
 use PHPRedis;
 use Storage;
+use Cache;
 
 
 class PublicController extends Controller {
@@ -559,19 +562,8 @@ class PublicController extends Controller {
 	#----------------------------
 
 	public function getTest() {
-		$client = ClientBuilder::create()->build();
-		$params = [
-			'index' => 'bdd',
-			'body' => [
-				'setting' => [
-					'number_of_shards' => 2,
-					'number_of_replicas' => 0
-				]
-			]
-		];
-
-		$response = $client->indices()->create($params);
-		dd($response);
+		
+		Cache::store('redis')->put('bar', 'baz', 10);
 
 		//return response()->download('assets/css/app.css');
 		

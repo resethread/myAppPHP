@@ -4,22 +4,20 @@
 <div class="container-fluid" style="margin-top: 30px;" id="video_tpl">
 	<div class="row">
 		<div class="col-md-7" id="video_side">
-			
-			<div class="player">
-				<video id="really-cool-video" class="video-js vjs-default-skin" controls preload="auto" width="640" height="480" poster="" data-setup='{}'>
-					<source src="{{ $video->path }}.webm" type="video/webm">
-					<source src="{{ $video->path }}.mp4" type="video/mp4">
+			<div class="well">
+				<div class="player embed-responsive embed-responsive-16by9">
+					<video id="really-cool-video" class="video-js vjs-default-skin" controls preload="auto" width="640" height="480" poster="" data-setup='{}'>
+						<source src="{{ $video->path }}.webm" type="video/webm">
+						<source src="{{ $video->path }}.mp4" type="video/mp4">
+						old browser...
+					</video>
 					
-					
-					old browser...
-				</video>
-				
-				<div id="video_infos">
-					<h2 id="bigTitle">{{ $video->name }}</h2>
-
-					
+					<div id="video_infos">
+						<h2 id="bigTitle">{{ $video->name }}</h2>					
+					</div>
 				</div>
 			</div>
+
 			<p>{{ $video->nb_views }} views</p>
 			@if (Auth::check())
 				<form action="/add-favorite/{{ Auth::user()->id }}/{{ $video->id }}" method="POST">
@@ -38,14 +36,15 @@
 			@if(Auth::check())
 				{!! Form::open(['url' => '/rate-video/'.Auth::user()->id.'/'.$video->id, 'id' => 'rate_form']) !!}
 					<input type="hidden" value="" name="rate" id="rate">
-					@for($i = 1; $i <=5; $i++)
-						<img src="/assets/img/star.png" alt="{{ $i }}" width="20" id="rate_{{ $i }}" class="rate_star">
+					@for($i = 1; $i <=15; $i++)
+					
+						<i class="fa fa-star rate_star" id="rate_{{ $i }}"></i>
 					@endfor
 				{!! Form::close() !!}
 			@else
 				{!! Form::open(['url' => '#', 'id' => 'rate_form']) !!}
 					@for($i = 1; $i <=5; $i++)
-						<img src="/assets/img/star.png" alt="{{ $i }}" width="20" id="rate_{{ $i }}" class="rate_star">
+						<i class="fa fa-star " id="rate_{{ $i }}"></i>
 					@endfor
 				{!! Form::close() !!}
 			@endif
@@ -72,6 +71,7 @@
 					<small v-text="comment.created_at"></small> <br>
 					<span v-text="comment.content"></span>
 				</div>
+				
 				@if(isset($comments))
 					@forelse($comments as $comment)
 						<div class="message"> 

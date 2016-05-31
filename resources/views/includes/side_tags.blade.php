@@ -1,6 +1,6 @@
 <?php 
 	$tags = [
-		'lorem', 'ipsum', 'dolor', 'sit', 'amet'
+		'lorem', 'ipsum', 'anime', 'sit', 'amet'
 	];
 	sort($tags);
 ?>
