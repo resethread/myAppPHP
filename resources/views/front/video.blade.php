@@ -1,6 +1,6 @@
 @extends('layouts.public_layout')
 @section('content')
-
+<meta id="token" value="{{ csrf_token() }}"> 
 <div class="container-fluid" style="margin-top: 30px;" id="video_tpl">
 	<div class="row">
 		<div class="col-md-7" id="video_side">
@@ -19,53 +19,24 @@
 			</div>
 
 			<p>{{ $video->nb_views }} views</p>
-			@if (Auth::check())
-				<form action="/add-favorite/{{ Auth::user()->id }}/{{ $video->id }}" method="POST">
-					<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
-					<button type="submit" class="button orange">Favorite</button>
-				</form>
-			@else
-				<form action="/add-favorite/guest/guest" method="POST">
-					<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
-					<button type="submit" class="button">Favorite</button>
-				</form>
-			@endif
-				
+
+			<div class="message" v-if="message_response.display" v-text="message_response.message" :class="message_response.status">
+			</div>
+
+			<button class="button orange" @click="addFaforite" >Favorite</button>
+
 			<h2>rate this video</h2>	
 			
-			@if(Auth::check())
-				{!! Form::open(['url' => '/rate-video/'.Auth::user()->id.'/'.$video->id, 'id' => 'rate_form']) !!}
-					<input type="hidden" value="" name="rate" id="rate">
-					@for($i = 1; $i <=15; $i++)
-					
-						<i class="fa fa-star rate_star" id="rate_{{ $i }}"></i>
-					@endfor
-				{!! Form::close() !!}
-			@else
-				{!! Form::open(['url' => '#', 'id' => 'rate_form']) !!}
-					@for($i = 1; $i <=5; $i++)
-						<i class="fa fa-star " id="rate_{{ $i }}"></i>
-					@endfor
-				{!! Form::close() !!}
-			@endif
-			
-			@if(Session::has('message_error'))
-				<div class="message red">
-					{{ Session::get('message_error') }}
-				</div>
-			@elseif(Session::has('message_success'))
-				<div class="message green">
-					{{ Session::get('message_success') }}
-				</div>	
-			@endif
-
+			 <i v-for="i in [1,2,3,4,5]" :data-rate="i" class="fa fa-star rate_star" @click="rateVideo(i)"></i>
+ 
 			<div id="commentZone">
 				<h3>Post a comment</h3>	
-				 {!! Form::open(['id' => 'form_comment']) !!}
-					<textarea name="content" id="content" cols="30" rows="4" class="input"></textarea>
-					<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+				
+				<form @submit="sendComment">
+					<textarea rows="4" class="input" v-model="user_comment"></textarea>
 					<button type="submit" class="button m1_0 olive">Send</button>
-				{!! Form::close() !!}
+				</form>
+				
 				<div class="message" v-for="comment in comments">
 					<a href="#" v-text="comment.user_name"></a>
 					<small v-text="comment.created_at"></small> <br>

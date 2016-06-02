@@ -51,6 +51,8 @@ class PublicController extends Controller {
 			$video = Video::find($id);
 		}
 
+		$title = $video->name;
+
 
 		if ($video->slug == $slug) {
 
@@ -102,7 +104,7 @@ class PublicController extends Controller {
 			$videos = DB::table('videos')->whereIn('id', $id)->where('validated', true)->get();
 			// lateral 
 
-			return view('front.video')->with(compact('video', 'fullMain', 'scripts'));	
+			return view('front.video')->with(compact('video', 'fullMain', 'scripts', 'title'));
 		}
 		else {
 			echo "pb dans l'url";
@@ -130,7 +132,10 @@ class PublicController extends Controller {
 		return $comments;
 	}
 
-	public function postVideo($id, Request $request) {
+	public function postComment($video_id, Request $request) {
+
+		return dd($request->all());
+
 		$rules = [
 			'content' => 'required|between:3,128'
 		];
@@ -162,10 +167,14 @@ class PublicController extends Controller {
 		
 	}
 
-	public function postAddFavorite($user_id, $video_id) {
+	public function postAddFavorite($video_id) {
+
 		if (Auth::guest()) {
-			return redirect()->back()->with('message_error', 'You must to be logged to have favorited');
-		}
+			return [
+				'status' => 'red',
+				'message' => 'You have to be logged to add this video in your favorites'
+			];
+		}	
 		else {
 			$favorited = DB::table('favorited')->where('user_id', Auth::user()->id)->where('video_id', $video_id)->first();
 
@@ -175,32 +184,41 @@ class PublicController extends Controller {
 					'video_id' => $video_id
 				]);
 				Video::find($video_id)->increment('nb_favorited');
-				return redirect()->back()->with('message_success', 'This video is in your favorites');
+
+				return [
+					'status' => 'green',
+					'message' => 'This video is in you favorites now'
+				];
 			}
 			else {
-				return redirect()->back()->with('message_error', 'This video is already in your favorites');
+				return [
+					'status' => 'red',
+					'message' => 'This video is already in your favorites'
+				];
 			}
 		}
 	}
 
-	public function postRateVideo($user_id, $video_id, Request $request) {
+	public function postRateVideo($video_id, $rate) {
 		if (Auth::guest()) {
-			return redirect()->back()->with('message_error', 'You must to be logged to rate a video');
+			return [
+				'status' => 'red',
+				'message' => 'You have to be logged to rate this video'
+			];
 		}
 		else {
-			$rated = DB::table('rates')->where('user_id', Auth::user()->id)->where('video_id', $video_id)->first();
+			$rated = DB::table('rates')->where('video_id', $id)->where('user_id', Auth::user()->id)->first();
 
 			if (is_null($rated)) {
-
 				DB::table('rates')->insert([
 					'user_id' => Auth::user()->id,
 					'video_id' => $video_id,
-					'rate' => $request->input('rate')
+					'rate' => $rate
 				]);
 
 				$video = DB::table('videos')->where('id', $video_id);
 
-				$video->increment('nb_total_rate', $request->input('rate'));
+				$video->increment('nb_total_rate', $rate);
 				$video->increment('nb_users_rating');
 
 				$nb_total_rate = $video->first()->nb_total_rate;
@@ -212,11 +230,18 @@ class PublicController extends Controller {
 				$rate = $nb_total_rate / $nb_users_rating;
 				$video->update(['rate' => $rate]);
 
-				return redirect()->back()->with('message_success', 'This has been rated successful');
+				return [
+					'status' => 'green',
+					'message' => 'You have successfully rate this video'
+				];
 			}
 			else {
-				return redirect()->back()->with('message_error', 'You have already rate this video');
+				return [
+					'status' => 'red',
+					'message' => 'You have already rate this video'
+				];
 			}
+
 		}
 	}
 
@@ -232,6 +257,7 @@ class PublicController extends Controller {
 		$videos_by_tag = Video::withAnyTag($searchZoneWords)->get();
 
 		$scripts = ['application'];
+
 
 		return view('front.overviews')
 			->with(compact('videos', 'searchZone', 'videos_by_tag', 'scripts'));
@@ -490,9 +516,11 @@ class PublicController extends Controller {
 	public function getTermsAndConditions() {
 
 		PHPRedis::incr('count_pages');
+
+		$title = 'Therms and conditions';
 		
 		$fullMain = true;
-		return view('front.conditions')->with(compact('fullMain'));
+		return view('front.conditions')->with(compact('fullMain', 'title'));
 	}
 
 	public function getHowTo() {
@@ -515,7 +543,9 @@ class PublicController extends Controller {
 
 		];
 
-		return view('front.contact')->with(compact('fullMain', 'options'));
+		$title = 'Contact';
+
+		return view('front.contact')->with(compact('fullMain', 'options', 'title'));
 	}
 
 	public function postContact(Request $request) {
@@ -563,7 +593,7 @@ class PublicController extends Controller {
 
 	public function getTest() {
 		
-		Cache::store('redis')->put('bar', 'baz', 10);
+		return 'test';
 
 		//return response()->download('assets/css/app.css');
 		
@@ -577,7 +607,7 @@ class PublicController extends Controller {
 	}
 
 	public function postTest(Request $request) {
-
+		return 'ok post';
 		$test = $request->input('toto');
 		echo $test;
 

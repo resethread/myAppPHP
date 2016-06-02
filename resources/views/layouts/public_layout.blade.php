@@ -6,7 +6,7 @@
 		<link rel="stylesheet" href="/assets/css/site.css">
 		<link rel="stylesheet" href="/assets/css/bootstrap.css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-		<title>Project</title>
+		<title>{{ $title or 'project' }}</title>
 		@if(isset($fullMain))
 		<style>
 			#sidebar {display: none;}
@@ -15,7 +15,7 @@
 		@endif
 	</head>
 	<body>
-		<div class="container-fluid" style="margin-top: 20px;">
+		<div class="container-fluid">
 			<div class="row" id="header">
 				@include('includes.header')
 			</div>

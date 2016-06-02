@@ -4,10 +4,10 @@
 Route::get('/', 'PublicController@getIndex');
 
 Route::get('video/{id}/{slug}', 'PublicController@getVideo');
-Route::post('video/{id}/{slug}', 'PublicController@postVideo');
 Route::get('comments/{id}', 'PublicController@getComments');
-Route::post('add-favorite/{user_id}/{video_id}', 'PublicController@postAddFavorite');
-Route::post('rate-video/{user_id}/{video_id}', 'PublicController@postRateVideo');
+Route::post('comment/{id}', 'PublicController@postComment');
+Route::post('add-favorite/{video_id}', 'PublicController@postAddFavorite');
+Route::post('rate-video/{video_id}/{rate}', 'PublicController@postRateVideo');
 
 Route::get('search', 'PublicController@getSearch');
 
@@ -39,6 +39,7 @@ Route::get('/ip', 'PublicController@getIp');
 Route::get('terms-and-conditions', 'PublicController@getTermsAndConditions');
 
 Route::get('test', 'PublicController@getTest');
+Route::post('test', 'PublicController@postTest');
 Route::get('test2', 'PublicController@getTest2');
 
 // Admin
