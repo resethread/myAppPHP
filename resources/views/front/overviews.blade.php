@@ -29,4 +29,4 @@
 			</div>
 		@endforeach
 	@endif
-@stop
+@endsection

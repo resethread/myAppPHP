@@ -46,4 +46,4 @@
 		 --}}
 	@endif
 
-@stop
+@endsection

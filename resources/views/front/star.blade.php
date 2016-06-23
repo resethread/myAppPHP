@@ -29,4 +29,4 @@
 			Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic cum sunt consectetur minus aliquid assumenda iure consequuntur, neque cumque, laboriosam quia libero inventore minima ab id totam eum officia aliquam!
 		</div>
 	@endif
-@stop
+@endsection

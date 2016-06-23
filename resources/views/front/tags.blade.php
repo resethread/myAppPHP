@@ -8,4 +8,4 @@
 			{{ $tag->name }}
 		</div>
 	@endforeach 
-@stop
+@endsection

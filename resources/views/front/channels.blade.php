@@ -5,4 +5,4 @@
 
 		@endforeach
 	@endif
-@stop
+@endsection
