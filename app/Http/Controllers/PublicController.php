@@ -21,6 +21,12 @@ use Storage;
 use Cache;
 
 
+use \ParagonIE\Halite\EncryptionKeyPair;
+use \ParagonIE\Halite\SignatureKeyPair;
+use \ParagonIE\Halite\Symmetric\AuthenticationKey;
+use \ParagonIE\Halite\Symmetric\EncryptionKey;
+
+
 class PublicController extends Controller {
 
 	public function getIndex() {
@@ -127,39 +133,49 @@ class PublicController extends Controller {
 			->where('comments.video_id', '=', $id); 
 		})->get();
 		*/
-		$comments = DB::table('comments')->where('video_id', $id)->get();
+		$comments = DB::table('comments')->where('video_id', $id)->orderBy('id', 'desc')->get();
 		
 		return $comments;
 	}
 
-	public function postComment($video_id, Request $request) {
+	public function postComment($id, Request $request) {
 
-		return dd($request->all());
 
-		$rules = [
-			'content' => 'required|between:3,128'
-		];
-
-		$validator = $validator = Validator::make($request->all(), $rules);
-
-		if($validator->fails()) {
-			return redirect()->back()->with('message_error', 'Your message must to be betwenn 3 and 128 characters');
+		if (Auth::guest()) {
+			return [
+				'status' => 'red',
+				'message' => 'You have to be logged to comment this video'
+			];
 		}
 		else {
-			if (Auth::check()) {
+
+			$rules = [
+				'comment' => 'required|between:3,128'
+			];
+			$validator = $validator = Validator::make($request->all(), $rules);
+
+
+			if($validator->fails()) {
+				return [
+					'status' => 'red',
+					'message' => 'that s wrong'
+				];
+			}
+			else {
+
 				$comment = new Comment;
 				$comment->user_name = Auth::user()->name;
 				$comment->video_id = $id;
-				$comment->content = $request->input('content');
+				$comment->content = $request->input('comment');
 				$comment->save();
 
 				DB::table('videos')->where('id', $id)->increment('nb_comments', 1);
-				return redirect()->back()->with('message_success', 'good comment');
-				
-			} else {
-				return redirect()->back()->with('message_error', 'You must to be logged to post comments');
+
+				return [
+					'status' => 'green',
+					'message' => 'successfully send comment'
+				];
 			}
-			return Redirect::back();
 		}
 	}
 
@@ -592,7 +608,7 @@ class PublicController extends Controller {
 	#----------------------------
 
 	public function getTest() {
-		
+		phpinfo();
 		return 'test';
 
 		//return response()->download('assets/css/app.css');

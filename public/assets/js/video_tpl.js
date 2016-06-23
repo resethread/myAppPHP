@@ -42,7 +42,6 @@ var vm = new Vue({
 			
 			this.$http.get('/comments/' + id, function(comments, status, request) {
 				this.comments = comments;
-				console.log(comments);
 			}).error(function(data, status, request) {
 				console.log('error');
 
@@ -76,10 +75,18 @@ var vm = new Vue({
 
 		sendComment: function(event) {
 			event.preventDefault()
-			this.$http.post('/comment/' + this.id, {comment : this.comment}).then(function(response) {
-				console.log(response)
-			})
-			
+			if (this.comment) {
+				
+				this.$http.post('/comment/' + this.id, {comment : this.comment }).then(function(response) {
+					console.log(response)
+					vm.message_response.display = true
+					vm.message_response.status = response.data.status
+					vm.message_response.message = response.data.message
+					
+				})
+			}
+			this.comment = ''
+
 		}
 	},
 })

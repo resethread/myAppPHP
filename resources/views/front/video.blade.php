@@ -4,18 +4,16 @@
 <div class="container-fluid" style="margin-top: 30px;" id="video_tpl">
 	<div class="row">
 		<div class="col-md-7" id="video_side">
-			<div class="well">
-				<div class="player embed-responsive embed-responsive-16by9">
-					<video id="really-cool-video" class="video-js vjs-default-skin" controls preload="auto" width="640" height="480" poster="" data-setup='{}'>
-						<source src="{{ $video->path }}.webm" type="video/webm">
-						<source src="{{ $video->path }}.mp4" type="video/mp4">
-						old browser...
-					</video>
-					
-					<div id="video_infos">
-						<h2 id="bigTitle">{{ $video->name }}</h2>					
-					</div>
-				</div>
+		
+			<div class="player embed-responsive embed-responsive-16by9">
+				<video id="really-cool-video" class="video-js vjs-default-skin" controls preload="auto" width="640" height="480" poster="" data-setup='{}'>
+					<source src="{{ $video->path }}.webm" type="video/webm">
+					<source src="{{ $video->path }}.mp4" type="video/mp4">
+					old browser...
+				</video>
+			</div>
+			<div id="video_infos">
+				<h2 id="bigTitle">{{ $video->name }}</h2>					
 			</div>
 
 			<p>{{ $video->nb_views }} views</p>
@@ -33,7 +31,7 @@
 				<h3>Post a comment</h3>	
 				
 				<form @submit="sendComment">
-					<textarea rows="4" class="input" v-model="user_comment"></textarea>
+					<textarea rows="4" class="input" v-model="comment"></textarea>
 					<button type="submit" class="button m1_0 olive">Send</button>
 				</form>
 				
@@ -43,20 +41,6 @@
 					<span v-text="comment.content"></span>
 				</div>
 				
-				@if(isset($comments))
-					@forelse($comments as $comment)
-						<div class="message"> 
-							<a href="/channel/{{ str_slug($comment->user_name) }}">{{ $comment->user_name }}</a> <small>{{ date("F j, Y, g:i a",strtotime($comment->created_at)) }}</small> <br>
-							{{ $comment->content }} <br>
-							
-							{!! Form::open(['url' => "/report-comment/$video->id/$comment->id" ,'class' => 'button_report']) !!}
-								<button type="submit" class="button mini red">Report</button>
-							{!! Form::close() !!}
-						</div>
-					@empty
-						No comment yet	
-					@endforelse
-				@endif
 			</div>
 		</div>
 		<div class="col-md-5" id="suggest_videos_zone">
