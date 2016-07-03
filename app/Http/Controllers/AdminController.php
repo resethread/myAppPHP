@@ -11,7 +11,6 @@ use Elasticsearch\ClientBuilder;
 use App\User;
 use App\Models\Video;
 use App\Models\Comment;
-use App\Users;
 
 class AdminController extends Controller {
 
@@ -96,7 +95,7 @@ class AdminController extends Controller {
 				'nb_favorited' => $video->nb_favorited,
 				'nb_comments' => $video->nb_comments,
 			];
-			PHPRedis::hMset($id, $video_cache);
+			PHPRedis::hMset("video:$id", $video_cache);
 
 
 			return redirect('/admin/videos-to-validate')->with('message_success', 'the video has been validated');
@@ -196,12 +195,13 @@ class AdminController extends Controller {
 			'id' => $id
 		];
 		$response = $client->get($params);
+		//dd($response['_source']['tags']);
 
 		# Eloquent
 		$video = Video::find($id);
 		$video->tags = $response['_source']['tags'];
 		$video->stars = $response['_source']['stars'];
-		 dd($video->tags);
+	
 
 		return view('dashboards.admin.videos.video_edit', compact('video'));
 	}

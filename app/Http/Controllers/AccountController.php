@@ -120,10 +120,6 @@ class AccountController extends Controller {
 					]
 				];
 
-				if (Request::has('description')) {
-					$description = Request::input('description');
-					$params['body']['description'] = $description;
-				}
 				if (Request::has('tags')) {
 					$tags = Request::input('tags');
 					$tags = explode(' ', $tags);

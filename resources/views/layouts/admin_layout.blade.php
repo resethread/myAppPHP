@@ -42,6 +42,7 @@
 							<a href="/admin/comments" class="list-group-item"><i class="fa fa-comments"></i> Comments</a>
 							<a href="/admin/stars" class="list-group-item"><i class="fa fa-female"></i> Stars</a>
 							<a href="/admin/tags" class="list-group-item"><i class="fa fa-tags"></i> Tags</a>
+							<a href="/admin/tags/sidebar" class="list-group-item"><i class="fa fa-tags"></i> Tags - sidebar</a>
 							<a href="/admin/banners" class="list-group-item"><i class="fa fa-photo"></i> Banners</a>
 							<br>
 							<a href="/admin/comments-reported" class="list-group-item"><i class="fa fa-warning"></i> Comments reported</a>

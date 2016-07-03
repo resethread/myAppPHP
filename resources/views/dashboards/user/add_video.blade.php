@@ -82,7 +82,7 @@
 			{{ Session::get('message_error') }}
 		</div>
 	@endif
-	<div class="well">
+
 	{!! Form::open(['method' => 'POST', 'files' => true, 'id' => 'cl', 'class' => '']) !!}
 	{{ csrf_field() }}
 		<div class="input-file-container">
@@ -91,15 +91,11 @@
 		</div>
 		<p class="file-return"></p>
 		<br>
-		<h2>Add description</h2>
-		<div class="form-group">
-			<textarea name="description" class="form-control" id="" rows="4" placeholder="Describe your video here"></textarea>
-		</div>
-		<h2>Add tags and keywords</h2>
+		<h4>Add tags and keywords</h4>
 		<div class="form-group">
 			<textarea name="tags" class="form-control" id="" rows="4" placeholder="Add some tags here"></textarea>	
 		</div>
-		<h2>Starring</h2>
+		<h4>Starring</h4>
 		<div class="form-group">
 			<textarea name="stars" class="form-control" id="" rows="2" placeholder="Starring"></textarea>
 		</div>
@@ -110,8 +106,7 @@
 				</div>
 			</div>
 		</div>
-	{!! Form::close() !!}	
-	</div>
+	{!! Form::close() !!}
 
 
 	<script>

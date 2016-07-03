@@ -21,10 +21,6 @@ use Storage;
 use Cache;
 
 
-use \ParagonIE\Halite\EncryptionKeyPair;
-use \ParagonIE\Halite\SignatureKeyPair;
-use \ParagonIE\Halite\Symmetric\AuthenticationKey;
-use \ParagonIE\Halite\Symmetric\EncryptionKey;
 
 
 class PublicController extends Controller {
@@ -608,18 +604,35 @@ class PublicController extends Controller {
 	#----------------------------
 
 	public function getTest() {
-		phpinfo();
-		return 'test';
+		$client = ClientBuilder::create()->build();
+		/*$params = [
+			'index' => 'bdd',
+			'type' => 'video',
+			'body' => [
+				'query' => [
+					'match_all' => []
+				]
+			]
+		];
+		$response = $client->search($params);*/
 
-		//return response()->download('assets/css/app.css');
+		$params = [
+			'index' => 'bdd',
+			'type' => 'video',
+			'id' => 9
+		];
+		$response = $client->delete($params);
+
+		dd($response);
+
 		
 		//return view('front.test');
 
 	}
 
 	public function getTest2() {
-		echo 'z';
-		return response()->download('assets/css/app.css');
+		echo "string";
+		//	return response()->download('assets/css/app.css');
 	}
 
 	public function postTest(Request $request) {

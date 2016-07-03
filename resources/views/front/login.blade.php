@@ -18,10 +18,13 @@
 					<input type="password" class="form-control" name="password" placeholder="Password" tabindex="2">
 				</div>
 
-				<div class="form-group">
-					<button type="submit" class="btn btn-default btn-block btn-lg" tabindex="3">Send</button>
+				<div class="form-group" align="right">
+					<button type="submit" class="btn btn-default btn-success" tabindex="3">Submit</button>
 				</div>
 			</form>
+		</div>
+		<div class="panel-footer">
+			<a href="#">forget password ?</a>
 		</div>
 	</div>
 </div>
