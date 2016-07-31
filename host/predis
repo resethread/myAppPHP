@@ -1,0 +1,43 @@
+vagrant@homestead:~$ sudo apt-get update
+vagrant@homestead:~$ git clone -b php7 https://github.com/phpredis/phpredis.git
+vagrant@homestead:~$ sudo mv phpredis/ /etc/
+vagrant@homestead:~$ cd /etc/phpredis
+vagrant@homestead:/etc/phpredis$  phpize
+vagrant@homestead:/etc/phpredis$ ./configure
+vagrant@homestead:/etc/phpredis$ make && make install
+
+Note This is an Extension You Need to Enable to Make it Work  in Php 7
+This First Command Will Allow You To Call PHPREDIS Facade in Browser
+
+vagrant@homestead:/etc/phpredis$ sudo vim /etc/php/7.0/fpm/conf.d/redis.ini
+
+Inside Vim Paste this
+extension=/etc/phpredis/modules/redis.so
+
+:w!     ->write/save
+:q  ->exit vim
+
+NOTE This Extension needs To be Enable in PHP ini to ENABLE it on your Command Line Interface Such As Artisan.
+The Usual Problem You Will Face If You Wont do this is Get a Redis Class Not Found
+
+vagrant@homestead:/etc/phpredis$ sudo vim /etc/php/7.0/cli/php.ini
+then Look for this Word CLI Server
+Type
+/CLI Server 
+
+Add to the last line of extension
+
+extension=/etc/phpredis/modules/redis.so
+:w!     ->write/save
+:q  ->exit vim
+
+
+vagrant@homestead:/etc/phpredis$ sudo service php7.0-fpm restart
+
+vagrant@homestead:/etc/phpredis$ sudo service nginx restart
+
+
+To Test if PhpRedis Extension is Working
+php -r "if (new Redis() == true){ echo \"\r\n OK \r\n\"; }"
+
+It Should Return OK! 

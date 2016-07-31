@@ -8,10 +8,11 @@
         "php": ">=5.5.9",
         "laravel/framework": "5.1.*",
         "laravelcollective/html": "~5.0",
-        "rtconner/laravel-tagging": "~1.0.7",
+        "rtconner/laravel-tagging": "~2.1",
         "intervention/image": "^2.3",
         "elasticsearch/elasticsearch": "~2.0",
-        "nardev/laravel-5.1-phpredis": "dev-master"
+        "nardev/laravel-5.1-phpredis": "dev-master",
+        "cviebrock/eloquent-taggable": "^2.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

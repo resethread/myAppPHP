@@ -8,7 +8,7 @@
 	@elseif(Session::has('message_error'))
 		<div class="alert alert error">
 			{{ Session::get('message_error') }}
-		</div>	
+		</div>
 	@endif
 
 	<div class="add">
@@ -24,23 +24,23 @@
 			<th>Delete</th>
 		</thead>
 		<tbody>
-		@forelse($last_videos as $video) 
+		@forelse($last_videos as $video)
 			<tr>
 				<td>
 					<a href="/video/{{ $video->id }}/{{ $video->slug }}">
-						<?php 
+						<?php
 							chdir(public_path("users_content/videos/$video->id"));
 							$path = getcwd();
 							$files = scandir($path);
-							$src_img = $files[3];
+							//$src_img = $files[3];
 						?>
-						<img src="{{ "/users_content/videos/$video->id/$src_img" }}" alt="" width="100">
+						<img src="#" alt="" width="100">
 					</a>
 				</td>
 				<td>{{ $video->name }} <br>
 					{{ $video->nb_comments }} comments	<br>
 					{{ $video->nb_views }} views
-	
+
 				</td>
 				<td><a href="/account/edit-video/{{ $video->id }}" class="btn btn-primary btn-xs">Edit</a></td>
 				<td>
@@ -52,7 +52,7 @@
 		@empty
 			<tr>
 				<td>No video yet &nbsp; <a href="/account/add-video">Upload video</a></td>
-			</tr>	
+			</tr>
 		@endforelse
 		</tbody>
 	</table>
@@ -66,12 +66,12 @@
 			</tr>
 		</thead>
 		<tbody>
-			{{-- 
+			{{--
 				<tr>
 					<td><a href="/video/{{ $video->id }}/{{ $video->slug }}"><img src="/users_content/videos/{{ $video->id }}/thumbs/thumb_1.jpg" alt="" width="100"></a></td>
 					<td>{{ $video->name }}</td>
 				</tr>
-	
+
 			 --}}
 		</tbody>
 	</table>

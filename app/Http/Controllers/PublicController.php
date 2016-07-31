@@ -15,10 +15,8 @@ use Log;
 use File;
 use Crypt;
 use Carbon\Carbon;
-use Elasticsearch\ClientBuilder;
 use PHPRedis;
-use Storage;
-use Cache;
+
 
 
 
@@ -604,28 +602,11 @@ class PublicController extends Controller {
 	#----------------------------
 
 	public function getTest() {
-		$client = ClientBuilder::create()->build();
-		/*$params = [
-			'index' => 'bdd',
-			'type' => 'video',
-			'body' => [
-				'query' => [
-					'match_all' => []
-				]
-			]
-		];
-		$response = $client->search($params);*/
 
-		$params = [
-			'index' => 'bdd',
-			'type' => 'video',
-			'id' => 9
-		];
-		$response = $client->delete($params);
+	    $v = Video::find(1);
+        dd($v->allTags());
 
-		dd($response);
 
-		
 		//return view('front.test');
 
 	}

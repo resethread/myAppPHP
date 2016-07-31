@@ -104,31 +104,18 @@ class AccountController extends Controller {
 					return number_format($duration, '1', ':', ',');
 				}
 				$video->duration = getDuration(File::files($destination)[0]);
-				
-				# ES
-				$client = ClientBuilder::create()->build();
-				$params = [
-					'index' => 'bdd',
-					'type' => 'video',
-					'id' => $video->id,
-					'body' => [
-						'name' => $video->name,
-						'user' => Auth::user()->name,
-						'description' => '',
-						'tags' => [],
-						'stars' => []
-					]
-				];
+
 
 				if (Request::has('tags')) {
 					$tags = Request::input('tags');
 					$tags = explode(' ', $tags);
-					$params['body']['tags'] = $tags;
+                    $video->tags($tags);
+
 				}
 				if (Request::has('stars')) {
 					$stars = Request::input('stars');
 					$stars = explode(' ', $stars);
-					$params['body']['stars'] = $stars;
+					//$params['body']['stars'] = $stars;
 				}
 
 				$client->index($params);
