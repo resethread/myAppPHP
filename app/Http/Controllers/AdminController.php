@@ -315,4 +315,13 @@ class AdminController extends Controller {
 			break;
 		}
 	}
+
+	public function getInfos() {
+
+
+	    $ffmpeg = shell_exec('which ffmpeg');
+        $redis = shell_exec('which redis-server');
+
+
+    }
 }

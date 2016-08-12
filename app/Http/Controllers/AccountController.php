@@ -118,7 +118,6 @@ class AccountController extends Controller {
 					//$params['body']['stars'] = $stars;
 				}
 
-				$client->index($params);
 
 				# mysql
 				$video->save();
@@ -167,15 +166,7 @@ class AccountController extends Controller {
 		# Mysql
 		DB::table('favorited')->where('user_id', $user_id)->where('video_id', $id)->delete();
 
-		#Elastic
-		$client = ClientBuilder::create()->build();
-		$params = [
-		    'index' => 'bdd',
-		    'type' => 'video',
-		    'id' => $id
-		];
 
-		$response = $client->delete($params);
 
 		return redirect()->back()->with('message_success', 'the favoried has been deleted');
 	}
@@ -297,7 +288,6 @@ class AccountController extends Controller {
 	public function postEditVideo($id) {
 
 		$video = Video::find($id);
-		$client = ClientBuilder::create()->build();
 
 		// manage keywords
 		if (Request::has('keywords')) {

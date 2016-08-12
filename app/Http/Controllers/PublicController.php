@@ -74,36 +74,6 @@ class PublicController extends Controller {
 				}
 			}
 
-
-			/*
-				lateral suggested
-			*/
-			$nb_suggested = 12;
-
-			$client = ClientBuilder::create()->build();
-
-			$params = [
-				'index' => 'bdd',
-				'type' => 'video',
-				'body' => [
-					'query' => [
-						'match' => [
-							'tags' => ''
-						]
-					]
-				]
-			];
-			$response = $client->search($params);
-			
-			$id = [];
-
-			foreach ($response['hits']['hits'] as $hit) {
-				array_push($id, $hit['_id']);
-			}
-
-			$videos = DB::table('videos')->whereIn('id', $id)->where('validated', true)->get();
-			// lateral 
-
 			return view('front.video')->with(compact('video', 'fullMain', 'scripts', 'title'));
 		}
 		else {
@@ -370,31 +340,9 @@ class PublicController extends Controller {
 	public function getTag($tag) {
 
 		PHPRedis::incr('count_pages');
-		
-		//$videos = Video::withAnyTag($name)->where('validated', true)->get();
 
-		$client = ClientBuilder::create()->build();
-		$params = [
-			'index' => 'bdd',
-			'type' => 'video',
-			'body' => [
-				'query' => [
-					'match' => [
-						'tags' => $tag
-					]
-				]
-			]
-		];
-		$response = $client->search($params);
+		$videos = Video::withAnyTags($tag)->where('validated', true)->get();
 
-		$id = [];
-
-		foreach ($response['hits']['hits'] as $hit) {
-			array_push($id, $hit['_id']);
-		}
-
-		$videos = DB::table('videos')->whereIn('id', $id)->where('validated', true)->get();
-	
 		return view('front.overviews')->with(compact('videos'));
 	}
 
@@ -603,18 +551,10 @@ class PublicController extends Controller {
 
 	public function getTest() {
 
-	    $v = Video::find(1);
-        dd($v->allTags());
-
-
-		//return view('front.test');
-
+	    $info =  PHPRedis::lSet('key1', 'foo', 'bar', 'toto');
+        dd($info);
 	}
 
-	public function getTest2() {
-		echo "string";
-		//	return response()->download('assets/css/app.css');
-	}
 
 	public function postTest(Request $request) {
 		return 'ok post';

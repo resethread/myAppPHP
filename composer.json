@@ -12,7 +12,8 @@
         "intervention/image": "^2.3",
         "elasticsearch/elasticsearch": "~2.0",
         "nardev/laravel-5.1-phpredis": "dev-master",
-        "cviebrock/eloquent-taggable": "^2.0"
+        "cviebrock/eloquent-taggable": "^2.0",
+        "barryvdh/laravel-debugbar": "^2.2"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

@@ -34,7 +34,7 @@
 				</nav>
 			</div>
 			<div class="row">
-				<div class="col-md-2">
+				<div class="col-md-2" style="background: #32383e; min-height: 100vh;">
 					<div class="row">
 						<div class="list-group">
 							<a href="/account" class="list-group-item"><i class="fa fa-user"></i> {{ Auth::user()->name }}</a>

@@ -1,0 +1,303 @@
+#header {
+  margin-top: 16px;
+  position: relative;
+  display: flex;
+
+  #logo {
+
+    img {
+
+    }
+  }
+
+  #search_bar {
+
+    margin-right: 2em;
+    margin-left: 6%;
+    position: relative;
+
+    #search-zone {
+      width: 460px;
+      padding: 0.68em 1.5em;
+    }
+
+    #search_btn {
+      position: absolute;
+      margin: 0;
+      right: 0px;
+      top: 1px;
+
+    }
+  }
+
+  #btn-space {
+    position: absolute;
+    top: 0;
+    right: 12px;
+  }
+}
+
+#navTop {
+  background: #212121;
+
+  ul {
+    font-size: 0;
+    text-align: center;
+
+    li {
+      margin: 0;
+      display: inline-block;
+    }
+
+    a {
+      font-size: 16px;
+      color: #ddd;
+      display: block;
+      padding: 10px;
+      width: 100%;
+      height: 100%;
+      font-size: arial;
+      text-decoration: none;
+      font-weight: 300;
+    }
+    a:hover {
+      color: #fff;
+    }
+  }
+}
+
+#categories_side {
+  font-size: 12px;
+}
+
+/* #central {
+	display: flex;
+} */
+
+#sidebar {
+  background: #2a2a2a;
+  width: 14%;
+
+  margin: 0;
+
+  #tagsList {
+    margin: 0;
+    padding: 0;
+    background: #000;
+
+    li {
+      list-style-type: none;
+
+      a {
+        font-size: 0.8em;
+        display: block;
+        background: linear-gradient(to bottom, #4b4746 0%,#3b3736 100%);
+        padding: 12px 0 12px 10px;
+        box-sising: border-box;
+        color: #fff;
+        border-bottom: 1px solid #777;
+        text-decoration: none;
+      }
+
+      a:hover {
+        background: linear-gradient(to bottom, #5A5756 0%,#4B4847 100%);
+        text-decoration: none;
+      }
+    }
+  }
+
+  #videosLinked {
+    background: #f00;
+  }
+}
+
+
+#user_sidebar {
+  background: #2a2a2a;
+  min-height: 600px;
+  padding: 0;
+
+  ul {
+    margin: 0;
+    padding-left: 15px;
+
+    li {
+      list-style-type: none;
+
+      a {
+        font-size: 0.8em;
+        display: block;
+        background: linear-gradient(to bottom, #4b4746 0%,#3b3736 100%);
+        padding: 15px 0 15px 10px;
+        box-sising: border-box;
+        color: #fff;
+        border-bottom: 1px solid #777;
+        text-decoration: none;
+      }
+      a:hover {
+        background: linear-gradient(to bottom, #5A5756 0%,#4B4847 100%);
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+
+#main {
+  width: 86%;
+  margin: 0;
+
+}
+
+/*	------------------------------------------
+	TEMPLATE : Overview: ;
+--------------------------------------------*/
+
+.videoOvw {
+  display: inline-block;
+  width: 220px;
+  height: 170px;
+  margin: 10px;
+  border: 1px solid #ccc;
+  font-size: 0;
+  overflow: hidden;
+  text-transform: lowercase;
+  border: 1px solid #42373c;
+
+  .ovwTitle {
+    font-size: 13px;
+    margin: 0 0 0 8px;
+    padding: 0;
+  }
+
+  .owwNbViews {
+    font-size: 11px;
+    margin: 0 0 0 8px;
+  }
+}
+
+
+
+/*	------------------------------------------
+	TEMPLATE : Video: ;
+--------------------------------------------*/
+
+.message {
+  .button_report {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    opacity: 0.4;
+    text-shadow: none;
+  }
+}
+
+#suggest_videos_zone {
+  background: #f3f6f9;
+  min-height: 100%;
+  max-height: 100%;
+
+  .suggested {
+    margin: 10px 0;
+
+    display: flex;
+    align-items: stretch;
+
+    .suggested_image {
+
+    }
+
+    .suggested_description {
+      span {
+        display: block;
+        padding-left: 10px;
+      }
+    }
+  }
+}
+
+.rate_star {
+  color: #fff;
+  cursor: pointer;
+}
+
+
+/*	------------------------------------------
+	stars
+--------------------------------------------*/
+
+.star_thumb {
+  display: inline-block;
+  width: 180px;
+  height: 170px;
+  margin: 10px;
+  border: 1px solid #ccc;
+  font-size: 0;
+  overflow: hidden;
+  text-transform: lowercase;
+  border: 1px solid #42373c;
+  text-align: center;
+
+  a {
+    font-size: 12px;
+  }
+}
+
+/*	------------------------------------------
+	Star id
+--------------------------------------------*/
+
+dl {
+
+  dt, dd {
+    display: inline-block;
+    font-weight: lighter;
+  }
+}
+
+.star_last_videos {
+  border: 1px solid #000;
+  width: 100%;
+  height: 80px;
+}
+/*	------------------------------------------
+	Footer
+--------------------------------------------*/
+
+#footer {
+  background: #000;
+  margin-top: 3rem;
+  color: #fff;
+  height: 50px;
+  line-height: 3;
+  position: relative;
+  width: 100%;
+  bottom: 0;
+  font-size: 12px;
+  text-align: center;
+
+  a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 1rem;
+  }
+}
+
+/*	------------------------------------------
+	Media queries
+--------------------------------------------*/
+
+@media screen and (max-width: 640px) {
+
+  #header {
+    flex-direction: column;
+
+    #btn-space {
+      position: relative;
+    }
+  }
+}
+
+#toto {
+  color: red;
+}

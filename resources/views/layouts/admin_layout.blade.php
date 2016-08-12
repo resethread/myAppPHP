@@ -32,7 +32,7 @@
 		</div>
 		<div class="container-fluid" style="margin-top: 60px;">
 			<div class="row">
-				<div class="col-md-2">
+				<div class="col-md-2" style="background: #32383e; min-height: 100vh;">
 					<div class="row">
 						<div class="list-group">
 							<a href="/admin" class="list-group-item"><i class="fa fa-dashboard"></i> Home</a>
@@ -44,12 +44,12 @@
 							<a href="/admin/tags" class="list-group-item"><i class="fa fa-tags"></i> Tags</a>
 							<a href="/admin/tags/sidebar" class="list-group-item"><i class="fa fa-tags"></i> Tags - sidebar</a>
 							<a href="/admin/banners" class="list-group-item"><i class="fa fa-photo"></i> Banners</a>
-							<br>
+
 							<a href="/admin/comments-reported" class="list-group-item"><i class="fa fa-warning"></i> Comments reported</a>
 							<a href="/admin/fast-delete" class="list-group-item"><i class="fa fa-exclamation-circle"></i> Fast delete</a>
 							<a href="/admin/messages" class="list-group-item"><i class="fa fa-envelope"></i> Messages</a>
 							<a href="/admin/logs" class="list-group-item"><i class="fa fa-terminal"></i> Logs</a>
-							<br>
+
 							
 						</div>
 					</div>

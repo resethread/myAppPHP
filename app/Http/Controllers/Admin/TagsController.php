@@ -3,8 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use DB;
-use Elasticsearch\ClientBuilder;
+use Illuminate\Http\Request;
 
 class TagsController extends Controller {
 
@@ -16,6 +15,13 @@ class TagsController extends Controller {
 	public function getSidebar() {
 		return view('dashboards.admin.tags.sidebar');
 	}
+
+	public function postSidebar(Request $request) {
+
+        $list = $request->input('list');
+        $list = json_decode($list, true);
+        dd($list);
+    }
 
 
 }

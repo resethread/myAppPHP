@@ -86,7 +86,7 @@
 	{!! Form::open(['method' => 'POST', 'files' => true, 'id' => 'cl', 'class' => '']) !!}
 	{{ csrf_field() }}
 		<div class="input-file-container">
-		  	<input class="input-file" id="my-file" type="file" name="file">
+		  	<input class="input-file" id="my-file" type="file" name="file" value="52428800">
 			<label for="my-file" class="input-file-trigger" tabindex="0">Select a video...</label>
 		</div>
 		<p class="file-return"></p>
@@ -135,6 +135,14 @@
 		fileInput.addEventListener( "change", function( event ) {  
 		    the_return.innerHTML = this.value;  
 		});
+
+		// check size file
+		document.getElementById('my-file').onchange = function () {
+			var limit = 52428800
+			var filesize = document.getElementById('my-file').files[0].size()
+
+		}
+
 	</script>
 
 	
