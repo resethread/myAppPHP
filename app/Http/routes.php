@@ -42,6 +42,11 @@ Route::get('test', 'PublicController@getTest');
 Route::post('test', 'PublicController@postTest');
 Route::get('test2', 'PublicController@getTest2');
 
+Route::group(['prefix' => 'api'], function() {
+    Route::get('side-tags', 'ApiController@getSideTags');
+});
+
+
 // Admin
 Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
 	Route::controller('/users', 'Admin\UsersController');

@@ -16,7 +16,7 @@
 						<i class="pull-right"  @click="removeTag(tag)">REMOVE</i>
 					</li>
 				</ul>
-				<input type="hidden" name="list" :value="stringifyTags">
+				<input type="hidden" name="side_tags" :value="stringifyTags">
 				<div class="form-group">
 					<button type="submit" class="btn btn-success">Save</button>
 				</div>
@@ -24,12 +24,17 @@
 		</div>
 	</div>
 	<script src="/assets/js/vue.js"></script>
+	<script src="/assets/js/vue-resource.js"></script>
 	<script>
 		var SidebarCtrl = new Vue({
 			el: '#sidebar_menu',
 
+			ready: function() {
+				this.fetchSideTags()
+			},
+
 			data: {
-				tags: ['toto', 'bob', 'max']
+				tags: []
 			},
 
 			methods: {
@@ -49,6 +54,17 @@
 				confirm: function(event) {
 					//event.preventDefault()
 					//alert('message \n test \n test')
+				},
+
+				fetchSideTags: function() {
+
+					this.$http.get('/api/side-tags', function(tags, status, request) {
+						this.tags = tags;
+					}).error(function(data, status, request) {
+						console.log('error');
+					})
+
+
 				}
 			},
 

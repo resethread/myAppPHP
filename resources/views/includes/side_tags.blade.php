@@ -1,7 +1,6 @@
-<?php 
-	$tags = [
-		'lorem', 'ipsum', 'anime', 'sit', 'amet', 'dolor'
-	];
+<?php
+	use Illuminate\Support\Facades\Cache;
+	$tags = Cache::get('side_tags');
 	sort($tags);
 ?>
 

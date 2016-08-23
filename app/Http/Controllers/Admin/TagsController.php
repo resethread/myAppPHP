@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Cache;
 
 class TagsController extends Controller {
 
@@ -18,9 +19,11 @@ class TagsController extends Controller {
 
 	public function postSidebar(Request $request) {
 
-        $list = $request->input('list');
-        $list = json_decode($list, true);
-        dd($list);
+        $side_tags = $request->input('side_tags');
+        $side_tags = json_decode($side_tags, true);
+        Cache::forever('side_tags', $side_tags);
+
+        return redirect()->back()->with('message_success', 'Tags updated');
     }
 
 

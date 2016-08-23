@@ -2,10 +2,13 @@
 <html lang="en">
 	<head>
 		<meta charset="UTF-8">
+		<link rel="stylesheet" href="/assets/css/test.css">
+		{{--
 		<link rel="stylesheet" href="/assets/css/app.css">
 		<link rel="stylesheet" href="/assets/css/site.css">
 		<link rel="stylesheet" href="/assets/css/bootstrap.css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+		--}}
 		<title>{{ $title or 'project' }}</title>
 		@if(isset($fullMain))
 		<style>

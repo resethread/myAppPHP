@@ -16,8 +16,7 @@ use File;
 use Crypt;
 use Carbon\Carbon;
 use PHPRedis;
-
-
+use Cache;
 
 
 
@@ -551,8 +550,10 @@ class PublicController extends Controller {
 
 	public function getTest() {
 
-	    $info =  PHPRedis::lSet('key1', 'foo', 'bar', 'toto');
-        dd($info);
+	   // $array = ['foo', 'bar', 'toto'];
+       // Cache::put('tags', $array, 3);
+        $tags = Cache::get('tags');
+        dd($tags);
 	}
 
 
